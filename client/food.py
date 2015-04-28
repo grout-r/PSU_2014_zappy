@@ -1,6 +1,5 @@
-#/usr/bin/python
+#!/usr/bin/python2
 
 def food():
-
-
+    
 def takeFood():

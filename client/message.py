@@ -1,5 +1,6 @@
-#/usr/bin/python
+#!/usr/bin/python2
 
-def receptMessage():
-
-def sendMessage():
+def rcvMsg():
+    
+def sndMsg():
+    

@@ -1,9 +1,10 @@
-#/usr/bin/python
+#!/usr/bin/python2
 
-def levelup():
+def levelUp():
     
 def stone():
-
+    
 def takeStone():
-
+    
 def enoughPeople():
+    
