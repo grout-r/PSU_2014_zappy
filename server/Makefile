@@ -1,36 +1,45 @@
 ##
-## Makefile for server_zappy in /home/gazzol_j/rendu/PSU_2014_zappy/server
+## Makefile for zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ## 
-## Made by julien gazzola
-## Login   <gazzol_j@epitech.net>
+## Made by Oscar Morizet
+## Login   <oscar@epitech.net>
 ## 
-## Started on  Mon Apr 27 11:34:37 2015 julien gazzola
-## Last update Mon Apr 27 11:43:06 2015 julien gazzola
+## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
+## Last update Tue Apr 28 21:25:08 2015 Oscar Morizet
 ##
 
-CC	=	gcc
+CC		= 	gcc
 
-RM	=	rm -f
+INCLUDES	=	-I includes/
 
-NAME	=	serveur
+RM		= 	rm -f
 
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS		=	-W -Wall -Wextra -Werror
 
-SRC	=	main.c
+NAME 		= 	server
 
-OBJ	=	$(SRC:.c=.o)
+SRC		=	main.c \
+			init.c \
+			argument_parser.c \
+			tools.c \
+			launch_tools.c \
+			server.c
 
-all:		$(NAME)
+OBJ 		= 	$(SRC:.c=.o)
 
-$(NAME):	$(OBJ)
-		$(CC) $(OBJ) -o $(NAME)
+all: 	     		$(NAME)
 
-clean:
-		$(RM) $(OBJ)
+$(NAME):		$(OBJ)
+			$(CC) $(OBJ) -o $(NAME)
 
-fclean:		clean
-		$(RM) $(NAME)
+%.o:			%.c
+			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+clean:	     	
+			$(RM) $(OBJ)
 
-re:		fclean all
+fclean:			clean
+			$(RM) $(NAME)
 
-.PHONY:		all clean fclean re
+re:			fclean all
+
+.PHONY:			all clean fclean re
