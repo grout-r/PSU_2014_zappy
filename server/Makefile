@@ -5,10 +5,10 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Tue Apr 28 21:25:08 2015 Oscar Morizet
+## Last update Wed Apr 29 11:01:40 2015 Oscar Morizet
 ##
 
-CC		= 	gcc
+CC		= 	gcc -g3
 
 INCLUDES	=	-I includes/
 

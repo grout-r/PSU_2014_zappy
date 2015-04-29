@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 19:42:16 2015 Oscar Morizet
-** Last update Wed Apr 29 10:54:35 2015 Oscar Morizet
+** Last update Wed Apr 29 11:08:50 2015 Oscar Morizet
 */
 
 #include	<string.h>
@@ -82,11 +82,11 @@ int		parse_parameters(int parameters_nb, char **parameters,
     return (error_print_usage());
   while (*parameters)
     {
-      if ((p = what_parameter(*parameters)) == 0 || !*++parameters)
+      if ((p = what_parameter(*parameters)) == 0 || !(*++parameters))
 	return (error_print_usage());
       if (p == 'n')
 	{
-	  while (!what_parameter(*parameters))
+	  while (*parameters && !what_parameter(*parameters))
 	    {
 	      printf("add team %s\n", *parameters);
 	      ++parameters;
