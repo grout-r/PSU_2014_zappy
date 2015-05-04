@@ -5,14 +5,46 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
-** Last update Tue Apr 28 21:27:06 2015 Oscar Morizet
+** Last update Mon May  4 23:07:46 2015 Oscar Morizet
 */
 
+#include	<stdlib.h>
+#include	<unistd.h>
+#include	<netinet/in.h>
+#include	<arpa/inet.h>
+#include        <netdb.h>
 #include	"server.h"
 
 int		init(t_game *game_data, t_server_info *server_info)
 {
-  (void) game_data;
-  (void) server_info;
+  game_data->players = NULL;
+  if ((server_info->fd_reads = malloc(sizeof(fd_set))) == NULL)
+    return (-1);
+  if (init_server(server_info) == -1)
+    return (-1);
   return (1);
 }
+
+int		init_server(t_server_info *server)
+{
+  struct protoent	*pe;
+  struct sockaddr_in	s_in;
+
+  pe = getprotobyname("TCP");
+  s_in.sin_family = AF_INET;
+  s_in.sin_port = htons(server->running_port);
+  s_in.sin_addr.s_addr = INADDR_ANY;
+  if ((server->server_fd = socket(AF_INET, SOCK_STREAM,
+			  pe->p_proto)) == -1)
+    return (-1);
+  if (bind(server->server_fd, (const struct sockaddr *)&(s_in),
+	   sizeof(s_in)) == -1)
+    {
+      close(server->server_fd);
+      return (-1);
+    }
+  if (listen(server->server_fd, MAX_CONNECTIONS) == -1)
+    return (-1);
+  return (0);
+}
+

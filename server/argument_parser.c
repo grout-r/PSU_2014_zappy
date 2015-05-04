@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 19:42:16 2015 Oscar Morizet
-** Last update Mon May  4 09:48:38 2015 Jordan Verove
+** Last update Mon May  4 15:19:26 2015 Oscar Morizet
 */
 
 #include	<string.h>
@@ -78,7 +78,7 @@ int		parse_parameters(int parameters_nb, char **parameters,
   char		p;
 
   bzero(&tmp, sizeof(t_parse_arg));
-  if (parameters_nb < 13)
+  if (parameters_nb < 12)
     return (error_print_usage());
   while (*parameters)
     {

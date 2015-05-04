@@ -5,15 +5,45 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Mon May  4 14:19:53 2015 Jordan Verove
-** Last update Mon May  4 14:41:25 2015 Jordan Verove
+** Last update Tue May  5 00:29:08 2015 Oscar Morizet
 */
 
-void		handle_connection(t_server_info *server)
+#include	<sys/select.h>
+#include	<stdio.h>
+#include	"server.h"
+
+void		reset_sets(t_server_info *server, t_game *game_data)
 {
-  fd_set	read_fds;
+  t_player	*tmp;
+
+  tmp = game_data->players;	
+  FD_ZERO(server->fd_reads);
+  FD_SET(server->server_fd, server->fd_reads);
+  server->fd_max = server->server_fd;
+  while (tmp != NULL)
+    {
+      FD_SET(tmp->player_fd, server->fd_reads);
+      if (tmp->player_fd > server->fd_max)
+	server->fd_max = tmp->player_fd;
+      tmp = tmp->next;
+    }
+}
+
+int		handle_connection(t_game *game_data, t_server_info *server)
+{
+  (void) game_data;
 
   while (42)
     {
-      select();
+      reset_sets(server, game_data);
+      if (select(server->fd_max + 1,
+		 server->fd_reads, NULL, NULL, NULL) == -1)
+	{
+	  perror("Select error: ");
+	  return (-1);
+	}
+      handle_server_interactions(server, game_data);
+      sleep(1);
     }
+  return (0);
 }
