@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
-** Last update Tue Apr 28 21:35:08 2015 Oscar Morizet
+** Last update Mon May  4 10:05:56 2015 Jordan Verove
 */
 
 #include		<stdio.h>
@@ -32,6 +32,9 @@ int			main(int ac, char **av)
   printf("action delay = %d\n", game_data.action_delay);
 
   /*********/
+
+  if (init_server(&server_info, server_info.running_port) == -1)
+    return (-1);
 
   return (0);
 }
