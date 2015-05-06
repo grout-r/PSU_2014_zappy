@@ -5,23 +5,24 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:30 2015 grout_r
-// Last update Tue Apr 28 15:39:35 2015 grout_r
+// Last update Tue May  5 14:50:07 2015 grout_r
 //
 
 #ifndef CAMERA
 # define CAMERA
 
 # include "Graphics.hh"
-# include "Network.cpp"
+# include "Network.hh"
 
 class				Camera
 {
-  Graphics			graph;
-  Network			net;
+  Graphics			*graph;
+  Network			*net;
   
 public:
   Camera();
   ~Camera();
+  void				start();
 };
 
 #endif

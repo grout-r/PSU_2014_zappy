@@ -5,18 +5,15 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Mon Apr 27 11:21:41 2015 grout_r
-// Last update Tue Apr 28 15:32:30 2015 grout_r
+// Last update Wed Apr 29 11:03:08 2015 grout_r
 //
 
 #include "Camera.hh"
 
-int				main(int ac, char **av)
+int				main()
 {
   Camera			cam;
 
-  while (true);
-
-  (void)ac;
-  (void)av;
+  cam.start();
   return (0);
 }

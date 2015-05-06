@@ -5,10 +5,10 @@
 ## Login   <roman@epitech.net>
 ## 
 ## Started on  Mon Apr 27 11:34:18 2015 grout_r
-## Last update Tue Apr 28 15:38:04 2015 grout_r
+## Last update Wed May  6 10:02:29 2015 grout_r
 ##
 
-CC		= 	g++
+CC		= 	g++ -g3
 
 INCLUDES	=	-I includes/
 
@@ -24,7 +24,9 @@ SRC		=	src/main.cpp \
 			src/Graphics.cpp \
 			src/Event.cpp \
 			src/Camera.cpp \
-			src/Network.cpp
+			src/Network.cpp \
+			src/Player.cpp \
+			src/Exception.cpp
 
 OBJ 		= 	$(SRC:.cpp=.o)
 
