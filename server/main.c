@@ -5,10 +5,22 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
-** Last update Tue Apr 28 18:48:24 2015 Oscar Morizet
+** Last update Mon May  4 16:47:47 2015 Oscar Morizet
 */
 
-int			main()
+#include		<stdio.h>
+#include		"server.h"
+
+int			main(int ac, char **av)
 {
+  t_game		game_data;
+  t_server_info		server_info;
+
+  if (!parse_parameters(--ac, ++av, &game_data, &server_info))
+    return (-1);
+  if (init(&game_data, &server_info) == -1)
+    return (-1);
+  if (handle_connection(&game_data, &server_info) == -1)
+    return (-1);
   return (0);
 }

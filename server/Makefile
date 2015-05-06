@@ -5,21 +5,28 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Tue Apr 28 18:47:53 2015 Oscar Morizet
+## Last update Mon May  4 23:44:21 2015 Oscar Morizet
 ##
 
-CC		= 	gcc
+CC		= 	gcc -g3
 
 INCLUDES	=	-I includes/
 
 RM		= 	rm -f
 
-CFLAGS		=	-W -Wall -Wextra -Werror
+#CFLAGS		=	-W -Wall -Wextra -Werror
 
 NAME 		= 	server
 
 SRC		=	main.c \
-			server.c
+			init.c \
+			argument_parser.c \
+			tools.c \
+			launch_tools.c \
+			server_interactions.c \
+			server.c \
+			execute.c \
+			manage_clients.c \
 
 OBJ 		= 	$(SRC:.c=.o)
 
@@ -28,7 +35,7 @@ all: 	     		$(NAME)
 $(NAME):		$(OBJ)
 			$(CC) $(OBJ) -o $(NAME)
 
-%.o:			%.cpp
+%.o:			%.c
 			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
 clean:	     	
 			$(RM) $(OBJ)
