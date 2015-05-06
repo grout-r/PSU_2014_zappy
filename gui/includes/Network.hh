@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:36:18 2015 grout_r
-// Last update Wed May  6 09:51:31 2015 grout_r
+// Last update Wed May  6 10:42:03 2015 grout_r
 //
 
 #ifndef NETWORK
@@ -14,12 +14,15 @@
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <netdb.h>
+# include <sys/select.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
 # include <iostream>
 # include <string.h>
+# include <stdio.h>
+# include <errno.h>
 # include "Graphics.hh"
-
+# include "Exception.hh"
 class				Network
 {
 private:
