@@ -5,14 +5,35 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Mon May  4 23:44:36 2015 Oscar Morizet
+** Last update Mon May 11 16:52:45 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
 #include	"server.h"
 
+t_player	*get_player_data(t_game *game_data, int fd)
+{
+  t_player	*tmp;
+
+  tmp = game_data->players;
+  while (tmp != NULL)
+    {
+      if (tmp->player_fd == fd)
+	return (tmp);
+      tmp = tmp->next;
+    }
+  return (NULL);
+}
+
 int		execute(t_game *game_data, int req_fd, char *buffer)
 {
-  // TODO PARSER
+  t_command	cm;
+  t_player	*player_data;
+  char		*extra;
+
+  if ((cm = get_command(game_data, buffer)) == INVALID)
+    return (1);
+  player_data = get_player_data(game_data, req_fd);
+  game_data->command_action[cm](game_data, player_data, extra);
   return (0);
 }

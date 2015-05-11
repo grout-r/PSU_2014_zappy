@@ -5,18 +5,21 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
-** Last update Mon May  4 23:07:46 2015 Oscar Morizet
+** Last update Mon May 11 16:41:33 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
 #include	<netinet/in.h>
+#include	<string.h>
 #include	<arpa/inet.h>
 #include        <netdb.h>
 #include	"server.h"
 
 int		init(t_game *game_data, t_server_info *server_info)
 {
+  init_command_names(game_data);
+  init_command_action(game_data);
   game_data->players = NULL;
   if ((server_info->fd_reads = malloc(sizeof(fd_set))) == NULL)
     return (-1);

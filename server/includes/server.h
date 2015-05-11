@@ -5,13 +5,14 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Mon May  4 23:08:37 2015 Oscar Morizet
+** Last update Mon May 11 17:18:28 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
 # define		SERVER_H_
 
 # define		MAX_CONNECTIONS 50
+# define		COMMAND_NB	12
 # define		BUFFER_R_SIZE	56
 # define		PARAMETERS_BASE	"pxynct"
 # define		USAGE "\n\tUsage : ./server [-p (port)] [-x (map width)] \
@@ -24,11 +25,28 @@
 
 typedef enum		e_orientation
   {
-    LEFT,
+    LEFT = 0,
+    UP, 
     RIGHT,
-    UP,
     DOWN
   }			t_orientation;
+
+typedef enum		e_command
+  {
+    AVANCE = 0,
+    DROITE,
+    GAUCHE,
+    VOIR,
+    INVENTAIRE,
+    PREND_OBJET,
+    POSE_OBJET,
+    EXPULSE,
+    BROADCAST,
+    INCANTATION,
+    FORK,
+    CONNECT_NBR,
+    INVALID
+  }			t_command;
 
 typedef struct		s_parse_arg
 {
@@ -71,9 +89,13 @@ typedef struct		s_server_info
   fd_set		*fd_reads;
 }			t_server_info;
 
+typedef			struct s_game t_game;
+typedef			int (*action_fptr)(t_game *, t_player *, char *);
+
 typedef struct		s_game
 {
-  char			**team_names;
+  char			*command_names[COMMAND_NB + 1];
+  action_fptr		command_action[COMMAND_NB + 1];
   int			map_size_x;
   int			map_size_y;
   int			players_per_team;
@@ -82,12 +104,27 @@ typedef struct		s_game
 }			t_game;
 
 int			handle_connection(t_game *game_data, t_server_info *server);
-
 int			parse_parameters(int, char **, t_game *, t_server_info *);
 int			check_if_num(char *);
 int			error_print_usage();
 int			init(t_game *, t_server_info *);
 int			init_server(t_server_info *server);
 int			handle_server_interactions(t_server_info *server, t_game *game_data);
+
+int			action_avance(t_game *data, t_player *player_data, char *arg);
+int			action_droite(t_game *data, t_player *player_data, char *arg);
+int			action_gauche(t_game *data, t_player *player_data, char *arg);
+int			action_voir(t_game *data, t_player *player_data, char *arg);
+int			action_inventaire(t_game *data, t_player *player_data, char *arg);
+int			action_prend_objet(t_game *data, t_player *player_data, char *arg);
+int			action_pose_objet(t_game *data, t_player *player_data, char *arg);
+int			action_expulse(t_game *data, t_player *player_data, char *arg);
+int			action_broadcast(t_game *data, t_player *player_data, char *arg);
+int			action_incantation(t_game *data, t_player *player_data, char *arg);
+int			action_gauche(t_game *data, t_player *player_data, char *arg);
+int			action_fork(t_game *data, t_player *player_data, char *arg);
+int			action_connect_nbr(t_game *data, t_player *player_data, char *arg);
+
+void			init_command_names(t_game *game_data);
 
 #endif			/* !SERVER_H_ */

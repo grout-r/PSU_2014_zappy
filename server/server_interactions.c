@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Tue May  5 00:27:18 2015 Oscar Morizet
+** Last update Mon May 11 16:50:54 2015 Oscar Morizet
 */
 
 #include		<sys/select.h>
@@ -22,10 +22,7 @@ int			handle_req(t_server_info *server, t_game *game_data, int req_fd)
   bzero(buffer, BUFFER_R_SIZE);
   ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
   if (ret == -1)
-    {
-      perror("Recv error : ");
-      return (-1);
-    }
+    return (-1);
   if (ret == 0)
     {
       FD_CLR(req_fd, server->fd_reads);

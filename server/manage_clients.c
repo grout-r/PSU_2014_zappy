@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 16:20:47 2015 Oscar Morizet
-** Last update Tue May  5 00:28:29 2015 Oscar Morizet
+** Last update Mon May 11 17:09:01 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -20,6 +20,7 @@ int		add_client_to_players(t_game *game, int player_fd)
     return (-1);
   new->player_fd = player_fd;
   new->next = NULL;
+  init_client(new);
   if (!game->players)
     game->players = new;
   else
