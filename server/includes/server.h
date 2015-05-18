@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Mon May 11 17:18:28 2015 Oscar Morizet
+** Last update Mon May 18 18:04:18 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -22,6 +22,7 @@
 # include		<stdio.h>
 # include		<sys/select.h>
 # include		<arpa/inet.h>
+# include		"map.h"
 
 typedef enum		e_orientation
   {
@@ -101,6 +102,7 @@ typedef struct		s_game
   int			players_per_team;
   int			action_delay;
   t_player		*players;
+  t_map_case		***map;
 }			t_game;
 
 int			handle_connection(t_game *game_data, t_server_info *server);

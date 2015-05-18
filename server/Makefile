@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Mon May 11 17:09:37 2015 Oscar Morizet
+## Last update Mon May 18 17:25:52 2015 Oscar Morizet
 ##
 
 CC		= 	gcc -g3
@@ -31,6 +31,7 @@ SRC		=	main.c \
 			execute.c \
 			player_init.c \
 			manage_clients.c \
+			map.c \
 			$(SERVER_ACTIONS)/action_avance.c \
 			$(SERVER_ACTIONS)/action_gauche.c \
 			$(SERVER_ACTIONS)/action_droite.c \
