@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 19:42:16 2015 Oscar Morizet
-** Last update Mon May  4 15:19:26 2015 Oscar Morizet
+** Last update Wed May 20 15:41:21 2015 Oscar Morizet
 */
 
 #include	<string.h>
@@ -88,7 +88,7 @@ int		parse_parameters(int parameters_nb, char **parameters,
 	{
 	  while (*parameters && !what_parameter(*parameters))
 	    {
-	      printf("add team %s\n", *parameters);
+	      create_team(game_properties, *parameters);
 	      ++parameters;
 	    }
 	}

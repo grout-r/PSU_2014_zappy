@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Mon May 18 18:04:18 2015 Oscar Morizet
+** Last update Wed May 20 15:36:22 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -76,11 +76,19 @@ typedef struct		s_player
   int			food;
   int			vision;
   int			player_fd;
+  int			team_id;
   char			*team;
   t_orientation		orientation;
   t_item		inventory;
   struct s_player	*next;
 }			t_player;
+
+typedef struct		s_team
+{
+  char			name[56];
+  int			id;
+  int			players_nb;
+}			t_team;
 
 typedef struct		s_server_info
 {
@@ -101,6 +109,7 @@ typedef struct		s_game
   int			map_size_y;
   int			players_per_team;
   int			action_delay;
+  t_team		*teams;
   t_player		*players;
   t_map_case		***map;
 }			t_game;
