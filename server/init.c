@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
-** Last update Mon May 18 17:29:02 2015 Oscar Morizet
+** Last update Wed May 20 14:46:58 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -18,6 +18,7 @@
 
 int		init(t_game *game_data, t_server_info *server_info)
 {
+  srand(time(NULL));
   init_command_names(game_data);
   init_command_action(game_data);
   game_data->players = NULL;

@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Mon May 18 17:25:52 2015 Oscar Morizet
+## Last update Wed May 20 14:11:38 2015 Oscar Morizet
 ##
 
 CC		= 	gcc -g3
@@ -44,6 +44,7 @@ SRC		=	main.c \
 			$(SERVER_ACTIONS)/action_expulse.c \
 			$(SERVER_ACTIONS)/action_broadcast.c \
 			$(SERVER_ACTIONS)/action_incantation.c \
+			dump_tools.c \
 
 OBJ 		= 	$(SRC:.c=.o)
 

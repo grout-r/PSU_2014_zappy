@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:15:46 2015 Oscar Morizet
-** Last update Mon May 18 18:07:12 2015 Oscar Morizet
+** Last update Wed May 20 15:05:56 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -18,7 +18,7 @@ int		init_map_case(t_map_case ***map, int x, int y)
  
   if ((new_case = malloc(sizeof(t_map_case))) == NULL)
     return (-1);
-  new_case->val = 0;
+  new_case->val = 5555;
   new_case->next = NULL;
   map[y][x] = new_case;
   return (0);
@@ -41,8 +41,8 @@ int		init_map(t_game *game)
 	return (-1);
       while (x != game->map_size_x)
 	{
-	  if (init_map_case(game->map, x, y) == -1)
-	    return (-1);
+	  game->map[y][x] = NULL;
+	  ++x;
 	}
       ++y;
     }
@@ -57,8 +57,8 @@ void		remove_map_case_element(t_map_case **list, int val)
   tmp = *list;
   if (tmp->val == val)
     {
-      free(tmp);
       *list = (*list)->next;
+      free(tmp);
       return ;
     }
   while (tmp->next && tmp->next->val != val)
@@ -91,14 +91,10 @@ int		add_map_case_element(t_map_case **list, int val)
   return (0);
 }
 
-int		move_player_to(t_game *game, t_player *player)
+int		move_player_to(t_game *game, t_player *player, int new_x, int new_y)
 {
-  t_map_case	**map_case;
-
-  map_case = &game->map[player->y][player->x];
-  remove_map_case_element(map_case, 0);
-  if (add_map_case_element(map_case, 0) == -1)
+  remove_map_case_element(&(game->map[player->y][player->x]), player->player_fd);
+  if (add_map_case_element(&(game->map[new_y][new_x]), player->player_fd) == -1)
     return (-1);
   return (0);
 }
-

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
-** Last update Mon May  4 16:47:47 2015 Oscar Morizet
+** Last update Wed May 20 15:06:46 2015 Oscar Morizet
 */
 
 #include		<stdio.h>
@@ -20,7 +20,14 @@ int			main(int ac, char **av)
     return (-1);
   if (init(&game_data, &server_info) == -1)
     return (-1);
+
+  add_client_to_players(&game_data, 5555);
+  move_player_to(&game_data, game_data.players, 3, 2);
+  dump_map(&game_data);
+
+  /*
   if (handle_connection(&game_data, &server_info) == -1)
     return (-1);
+  */
   return (0);
 }
