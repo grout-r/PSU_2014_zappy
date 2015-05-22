@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Wed May 20 15:36:22 2015 Oscar Morizet
+** Last update Fri May 22 19:21:22 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -88,6 +88,7 @@ typedef struct		s_team
   char			name[56];
   int			id;
   int			players_nb;
+  struct s_team		*next;
 }			t_team;
 
 typedef struct		s_server_info
@@ -135,7 +136,23 @@ int			action_incantation(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
 int			action_fork(t_game *data, t_player *player_data, char *arg);
 int			action_connect_nbr(t_game *data, t_player *player_data, char *arg);
+int			init_map(t_game *game_data);
+int			create_team(t_game *game, char *team_name);
+int			add_client_to_players(t_game *game, int player_fd);
+int			remove_client_from_players(t_game *game, int player_fd);
+int			execute(t_game *game_data, int req_fd, char *buffer);
+int			init_map_case(t_map_case ***map, int x, int y);
+int			add_map_case_element(t_map_case **list, int val);
+int			move_player_to(t_game *game, t_player *player, int new_x, int new_y);
 
 void			init_command_names(t_game *game_data);
+void			dump_teams(t_game *game);
+void			init_command_action(t_game *game_data);
+void			clean_out_buffer(char *str);
+void			init_player(t_game *game_data, t_player *player);
+void			gen_position(t_game *game_data, int *x, int *y);
+
+
+t_command		get_command(t_game *game_data, char *cmd);
 
 #endif			/* !SERVER_H_ */

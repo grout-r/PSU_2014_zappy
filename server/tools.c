@@ -5,12 +5,12 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 21:22:41 2015 Oscar Morizet
-** Last update Mon May  4 23:24:10 2015 Oscar Morizet
+** Last update Fri May 22 19:15:12 2015 Oscar Morizet
 */
 
 #include	<string.h>
 
-void			clean_out_buffer(char *str)
+void		clean_out_buffer(char *str)
 {
   int		size;
 

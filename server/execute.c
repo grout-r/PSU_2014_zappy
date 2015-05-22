@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Mon May 11 16:52:45 2015 Oscar Morizet
+** Last update Fri May 22 19:16:31 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -31,6 +31,7 @@ int		execute(t_game *game_data, int req_fd, char *buffer)
   t_player	*player_data;
   char		*extra;
 
+  extra = NULL;
   if ((cm = get_command(game_data, buffer)) == INVALID)
     return (1);
   player_data = get_player_data(game_data, req_fd);

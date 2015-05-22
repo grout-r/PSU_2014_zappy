@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Mon May 11 16:50:54 2015 Oscar Morizet
+** Last update Fri May 22 19:10:29 2015 Oscar Morizet
 */
 
 #include		<sys/select.h>
@@ -51,7 +51,8 @@ int			add_new_client(t_server_info *server, t_game *game_data)
   return (0);
 }
 
-int			handle_server_interactions(t_server_info *server, t_game *game_data)
+int			handle_server_interactions(t_server_info *server,
+						   t_game *game_data)
 {
   t_player		*tmp;
 

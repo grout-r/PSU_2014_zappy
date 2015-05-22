@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 16:20:47 2015 Oscar Morizet
-** Last update Wed May 20 15:03:32 2015 Oscar Morizet
+** Last update Fri May 22 19:19:44 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -53,4 +53,5 @@ int		remove_client_from_players(t_game *game, int player_fd)
   tofree = tmp->next;
   tmp->next = tofree->next;
   free(tofree);
+  return (0);
 }

@@ -5,18 +5,19 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Mon May  4 14:19:53 2015 Jordan Verove
-** Last update Tue May  5 00:29:08 2015 Oscar Morizet
+** Last update Fri May 22 19:15:42 2015 Oscar Morizet
 */
 
 #include	<sys/select.h>
 #include	<stdio.h>
+#include	<unistd.h>
 #include	"server.h"
 
 void		reset_sets(t_server_info *server, t_game *game_data)
 {
   t_player	*tmp;
 
-  tmp = game_data->players;	
+  tmp = game_data->players;
   FD_ZERO(server->fd_reads);
   FD_SET(server->server_fd, server->fd_reads);
   server->fd_max = server->server_fd;
