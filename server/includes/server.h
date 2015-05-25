@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Mon May 25 15:36:42 2015 Oscar Morizet
+** Last update Mon May 25 16:50:03 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -67,6 +67,7 @@ typedef struct		s_item
 
 typedef struct		s_player
 {
+  int			introduced;
   int			x;
   int			y;
   int			level;
@@ -121,6 +122,7 @@ int			error_print_usage();
 int			init(t_game *, t_server_info *);
 int			init_server(t_server_info *server);
 int			handle_server_interactions(t_server_info *server, t_game *game_data);
+int			introduce(t_game *data, t_player *player_data, char *arg);
 int			action_avance(t_game *data, t_player *player_data, char *arg);
 int			action_droite(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
@@ -150,7 +152,6 @@ void			init_command_names(t_game *game_data);
 void			dump_teams(t_game *game);
 void			init_command_action(t_game *game_data);
 void			clean_out_buffer(char *str);
-void			gen_position(t_game *game_data, int *x, int *y);
 void			change_item_qt(t_player *player, char *item_name, char evo);
 void			change_item_qt(t_player *player, char *item_name, char evo);
 

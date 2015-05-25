@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Mon May 25 15:39:05 2015 Oscar Morizet
+** Last update Mon May 25 16:55:08 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -32,9 +32,18 @@ int		execute(t_game *game_data, int req_fd, char *buffer)
   char		*extra;
 
   extra = NULL;
-  if ((cm = get_command(game_data, buffer)) == INVALID)
-    return (1);
   player_data = get_player_data(game_data, req_fd);
-  game_data->command_action[cm](game_data, player_data, extra);
+  if (player_data->introduced == 1)
+    {
+      if ((cm = get_command(game_data, buffer)) == INVALID)
+	return (1);
+      if (game_data->command_action[cm](game_data, player_data, extra) == -1)
+	return (-1);
+    }
+  else
+    {
+      if (introduce(game_data, player_data, buffer) == -1)
+	return (-1);
+    }
   return (0);
 }

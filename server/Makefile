@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Mon May 25 15:19:23 2015 Oscar Morizet
+## Last update Mon May 25 16:51:23 2015 Oscar Morizet
 ##
 
 CC		= 	gcc -g3
@@ -36,6 +36,7 @@ SRC		=	main.c \
 			map.c \
 			teams.c \
 			inventory.c \
+			$(SERVER_ACTIONS)/introduce.c \
 			$(SERVER_ACTIONS)/action_avance.c \
 			$(SERVER_ACTIONS)/action_gauche.c \
 			$(SERVER_ACTIONS)/action_droite.c \
@@ -48,6 +49,7 @@ SRC		=	main.c \
 			$(SERVER_ACTIONS)/action_expulse.c \
 			$(SERVER_ACTIONS)/action_broadcast.c \
 			$(SERVER_ACTIONS)/action_incantation.c \
+			$(SERVER_ACTIONS)/err_handling.c \
 			$(TEST)/dump_tools.c \
 
 OBJ 		= 	$(SRC:.c=.o)

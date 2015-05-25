@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 16:20:47 2015 Oscar Morizet
-** Last update Mon May 25 15:41:11 2015 Oscar Morizet
+** Last update Mon May 25 17:11:30 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -31,8 +31,6 @@ int		add_client_to_players(t_game *game, int player_fd)
         tmp = tmp->next;
       tmp->next = new;
     }
-  if (add_map_case_element(&(game->map[new->y][new->x]), new->fd) == -1)
-  move_player_to(game, new, new->x, new->y);
   return (0);
 }
 

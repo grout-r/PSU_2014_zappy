@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Mon May 25 15:38:37 2015 Oscar Morizet
+** Last update Mon May 25 16:12:43 2015 Oscar Morizet
 */
 
 #include		<sys/select.h>
@@ -28,6 +28,7 @@ int			handle_req(t_server_info *server, t_game *game_data, int req_fd)
       FD_CLR(req_fd, server->fd_reads);
       if (remove_client_from_players(game_data, req_fd) == -1)
 	return (-1);
+      return (0);
     }
   clean_out_buffer(buffer);
   if (execute(game_data, req_fd, buffer) == -1)

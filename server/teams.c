@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 15:35:10 2015 Oscar Morizet
-** Last update Fri May 22 19:08:34 2015 Oscar Morizet
+** Last update Mon May 25 17:05:12 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -71,4 +71,36 @@ void		team_add_slot(t_game *game, int team_id)
 	}
       tmp = tmp->next;
     }
+}
+
+int		get_team_id(t_game *game, char *team_name)
+{
+  t_team	*tmp;
+
+  if (game->teams == NULL)
+    return (0);
+  tmp = game->teams;
+  while (tmp != NULL)
+    {
+      if (strcmp(tmp->name, team_name) == 0)
+	return (tmp->id);
+      tmp = tmp->next;
+    }
+  return (0);
+}
+
+int		team_get_free_slots(t_game *game, int team_id)
+{
+  t_team	*tmp;
+
+  if (game->teams == NULL)
+    return (0);
+  tmp = game->teams;
+  while (tmp != NULL)
+    {
+      if (tmp->id == team_id)
+	return (game->players_per_team - tmp->players_nb);
+      tmp = tmp->next;
+    }
+  return (0);
 }
