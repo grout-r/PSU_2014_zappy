@@ -5,32 +5,47 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 16:10:14 2015 Oscar Morizet
-** Last update Mon May 25 17:12:07 2015 Oscar Morizet
+** Last update Mon May 25 17:22:41 2015 Oscar Morizet
 */
 
+#include	<string.h>
+#include	<stdlib.h>
 #include	<strings.h>
 #include	"server.h"
 
-void		print_map_dimensions(t_game *data)
+void		return_map_dimensions(t_game *data, t_player *player)
 {
-  char		dim[56];
+  char		msg[56];
 
-  bzero(dim, sizeof(char) * 56);
-  sprintf(dim, "%d %d\n", data->map_size_x, data->map_size_y);
+  bzero(msg, sizeof(char) * 56);
+  sprintf(msg, "%d %d\n", data->map_size_x, data->map_size_y);
+  write(player->fd, msg, strlen(msg));
+}
+
+void		return_free_slots(int slots, t_player *player)
+{
+  char		msg[56];
+
+  bzero(msg, sizeof(char) * 56);
+  sprintf(msg, "%d\n", slots);
+  write(player->fd, msg, strlen(msg));
 }
 
 int		introduce(t_game *data, t_player *player_data, char *arg)
 {
   int		team_id;
-  int		tmp;
+  int	        free_slots;
 
   if ((team_id = get_team_id(data, arg)) == 0)
       return (err_no_team(player_data));
-  if ((tmp = team_get_free_slots(data, team_id)) == 0)
+  if ((free_slots = team_get_free_slots(data, team_id)) == 0)
     return (err_no_slots_in_team(player_data));
   player_data->team_id = team_id;
   team_add_slot(data, player_data->team_id);
-  print_map_dimensions(data);
+  if ((free_slots = team_get_free_slots(data, team_id)) == 0)
+    return (err_no_slots_in_team(player_data));
+  return_free_slots(free_slots, player_data);
+  return_map_dimensions(data, player_data);
   player_data->introduced = 1;
   return (0);
 }
