@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 15:19:38 2015 Oscar Morizet
-** Last update Mon May 25 15:51:11 2015 Oscar Morizet
+** Last update Mon May 25 17:25:59 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -88,7 +88,7 @@ char		*list_inventory(t_player *player)
       sprintf(item, "%s %d", tmp->name, tmp->qt);
       strcat(dump, item);
       if (tmp->next != NULL)
-	strcat(dump, " ");
+	strcat(dump, ", ");
       else
 	strcat(dump, "}\n");
       tmp = tmp->next;
