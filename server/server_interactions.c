@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Fri May 22 19:10:29 2015 Oscar Morizet
+** Last update Mon May 25 15:38:37 2015 Oscar Morizet
 */
 
 #include		<sys/select.h>
@@ -64,9 +64,9 @@ int			handle_server_interactions(t_server_info *server,
     }
   while (tmp != NULL)
     {
-      if (FD_ISSET(tmp->player_fd, server->fd_reads))
+      if (FD_ISSET(tmp->fd, server->fd_reads))
 	{
-	  if (handle_req(server, game_data, tmp->player_fd) == -1)
+	  if (handle_req(server, game_data, tmp->fd) == -1)
 	    return (-1);
 	}
       if ((tmp = tmp->next) == NULL)

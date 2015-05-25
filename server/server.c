@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Mon May  4 14:19:53 2015 Jordan Verove
-** Last update Fri May 22 19:15:42 2015 Oscar Morizet
+** Last update Mon May 25 15:38:56 2015 Oscar Morizet
 */
 
 #include	<sys/select.h>
@@ -23,9 +23,9 @@ void		reset_sets(t_server_info *server, t_game *game_data)
   server->fd_max = server->server_fd;
   while (tmp != NULL)
     {
-      FD_SET(tmp->player_fd, server->fd_reads);
-      if (tmp->player_fd > server->fd_max)
-	server->fd_max = tmp->player_fd;
+      FD_SET(tmp->fd, server->fd_reads);
+      if (tmp->fd > server->fd_max)
+	server->fd_max = tmp->fd;
       tmp = tmp->next;
     }
 }
@@ -43,7 +43,8 @@ int		handle_connection(t_game *game_data, t_server_info *server)
 	  perror("Select error: ");
 	  return (-1);
 	}
-      handle_server_interactions(server, game_data);
+      if (handle_server_interactions(server, game_data) == -1)
+	return (-1);
       sleep(1);
     }
   return (0);

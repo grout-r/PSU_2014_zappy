@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Fri May 22 19:16:31 2015 Oscar Morizet
+** Last update Mon May 25 15:39:05 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -18,7 +18,7 @@ t_player	*get_player_data(t_game *game_data, int fd)
   tmp = game_data->players;
   while (tmp != NULL)
     {
-      if (tmp->player_fd == fd)
+      if (tmp->fd == fd)
 	return (tmp);
       tmp = tmp->next;
     }

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
-** Last update Fri May 22 19:15:45 2015 Oscar Morizet
+** Last update Mon May 25 15:55:32 2015 Oscar Morizet
 */
 
 #include		<stdio.h>
@@ -30,7 +30,6 @@ int			main(int ac, char **av)
     return (-1);
   if (init(&game_data, &server_info) == -1)
     return (-1);
-  dump_teams(&game_data);
   if (handle_connection(&game_data, &server_info) == -1)
     return (-1);
   return (0);

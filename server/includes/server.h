@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Fri May 22 19:21:22 2015 Oscar Morizet
+** Last update Mon May 25 15:36:42 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -60,12 +60,9 @@ typedef struct		s_parse_arg
 
 typedef struct		s_item
 {
-  int			linemate;
-  int			deraumere;
-  int			sibur;
-  int			mendiane;
-  int			phiras;
-  int			thystame;
+  char			name[32];
+  int			qt;
+  struct s_item		*next;
 }			t_item;
 
 typedef struct		s_player
@@ -75,11 +72,11 @@ typedef struct		s_player
   int			level;
   int			food;
   int			vision;
-  int			player_fd;
+  int		        fd;
   int			team_id;
   char			*team;
   t_orientation		orientation;
-  t_item		inventory;
+  t_item		*inventory;
   struct s_player	*next;
 }			t_player;
 
@@ -115,6 +112,8 @@ typedef struct		s_game
   t_map_case		***map;
 }			t_game;
 
+char			*list_inventory(t_player *player);
+
 int			handle_connection(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
 int			check_if_num(char *);
@@ -122,7 +121,6 @@ int			error_print_usage();
 int			init(t_game *, t_server_info *);
 int			init_server(t_server_info *server);
 int			handle_server_interactions(t_server_info *server, t_game *game_data);
-
 int			action_avance(t_game *data, t_player *player_data, char *arg);
 int			action_droite(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
@@ -144,14 +142,17 @@ int			execute(t_game *game_data, int req_fd, char *buffer);
 int			init_map_case(t_map_case ***map, int x, int y);
 int			add_map_case_element(t_map_case **list, int val);
 int			move_player_to(t_game *game, t_player *player, int new_x, int new_y);
+int			init_inventory(t_player *player);
+int			add_item_class_to_inventory(t_player *player, char *item_name);
+int			init_player(t_game *game_data, t_player *player);
 
 void			init_command_names(t_game *game_data);
 void			dump_teams(t_game *game);
 void			init_command_action(t_game *game_data);
 void			clean_out_buffer(char *str);
-void			init_player(t_game *game_data, t_player *player);
 void			gen_position(t_game *game_data, int *x, int *y);
-
+void			change_item_qt(t_player *player, char *item_name, char evo);
+void			change_item_qt(t_player *player, char *item_name, char evo);
 
 t_command		get_command(t_game *game_data, char *cmd);
 

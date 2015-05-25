@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:15:46 2015 Oscar Morizet
-** Last update Fri May 22 19:09:39 2015 Oscar Morizet
+** Last update Mon May 25 15:41:22 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -94,9 +94,9 @@ int		add_map_case_element(t_map_case **list, int val)
 int		move_player_to(t_game *game, t_player *player, int new_x, int new_y)
 {
   remove_map_case_element(&(game->map[player->y][player->x]),
-			  player->player_fd);
+			  player->fd);
   if (add_map_case_element(&(game->map[new_y][new_x]),
-			   player->player_fd) == -1)
+			   player->fd) == -1)
     return (-1);
   return (0);
 }

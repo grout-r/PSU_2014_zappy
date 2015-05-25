@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 16:20:47 2015 Oscar Morizet
-** Last update Fri May 22 19:19:44 2015 Oscar Morizet
+** Last update Mon May 25 15:41:11 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -18,9 +18,10 @@ int		add_client_to_players(t_game *game, int player_fd)
 
   if ((new = malloc(sizeof(t_player))) == NULL)
     return (-1);
-  new->player_fd = player_fd;
+  new->fd = player_fd;
   new->next = NULL;
-  init_player(game, new);
+  if (init_player(game, new) == -1)
+    return (-1);
   if (!game->players)
     game->players = new;
   else
@@ -30,7 +31,7 @@ int		add_client_to_players(t_game *game, int player_fd)
         tmp = tmp->next;
       tmp->next = new;
     }
-  if (add_map_case_element(&(game->map[new->y][new->x]), new->player_fd) == -1)
+  if (add_map_case_element(&(game->map[new->y][new->x]), new->fd) == -1)
   move_player_to(game, new, new->x, new->y);
   return (0);
 }
@@ -41,12 +42,12 @@ int		remove_client_from_players(t_game *game, int player_fd)
   t_player	*tmp;
 
   tmp = game->players;
-  if (game->players->player_fd == player_fd)
+  if (game->players->fd == player_fd)
     {
       game->players = game->players->next;
       return (0);
     }
-  while (tmp->next && tmp->next->player_fd != player_fd)
+  while (tmp->next && tmp->next->fd != player_fd)
     tmp = tmp->next;
   if (tmp->next == NULL)
     return (0);
