@@ -1,6 +1,9 @@
 #!/usr/bin/python2
 
-def rcvMsg():
+from tantorian import Tantorian
+
+def rcvMsg(tantorian):
     
-def sndMsg():
-    
+
+def sndMsg(tantorian, msg):
+    tantorian.message(msg)
