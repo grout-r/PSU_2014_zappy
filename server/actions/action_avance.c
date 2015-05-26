@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:15:14 2015 Oscar Morizet
-** Last update Mon May 11 17:15:08 2015 Oscar Morizet
+** Last update Tue May 26 14:45:33 2015 Oscar Morizet
 */
 
 #include		<stdlib.h>
@@ -14,17 +14,21 @@
 int			action_avance(t_game *data, t_player *player_data, char *arg)
 {
   t_orientation		orient;
+  int			new_x;
+  int			new_y;
 
+  new_x = player_data->x;
+  new_y = player_data->y;
   orient = player_data->orientation;
-  printf("position %d %d\n", player_data->x, player_data->y);
   if (orient == LEFT)
-    --player_data->x;
+    --new_x;
   else if (orient == UP)
-    ++player_data->y;
+    --new_y;
   else if (orient == RIGHT)
-    ++player_data->x;
+    ++new_x;
   else if (orient == DOWN)
-    --player_data->y;
-  printf("position %d %d\n", player_data->x, player_data->y);
+    ++new_y;
+  if (move_player_to(data, player_data, new_x, new_y) == -1)
+    return (-1);
   return (0);
 }

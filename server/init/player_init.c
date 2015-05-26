@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 17:08:21 2015 Oscar Morizet
-** Last update Mon May 25 17:12:21 2015 Oscar Morizet
+** Last update Tue May 26 15:15:56 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -27,8 +27,9 @@ int		finish_player_init(t_game *game_data, t_player *player)
   player->x = x;
   player->y = y;
   if (add_map_case_element(&(game_data->map[player->y][player->x]),
-			   player->fd) == -1)
-  move_player_to(game_data, player, player->x, player->y);
+			   PLAYER) == -1)
+    return (-1);
+  return (0);
 }
 
 int		init_player(t_game *game_data, t_player *player)

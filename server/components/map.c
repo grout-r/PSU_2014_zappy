@@ -5,63 +5,26 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:15:46 2015 Oscar Morizet
-** Last update Mon May 25 15:41:22 2015 Oscar Morizet
+** Last update Tue May 26 15:08:48 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
 #include	"server.h"
 #include	"map.h"
 
-int		init_map_case(t_map_case ***map, int x, int y)
-{
-  t_map_case	*new_case;
-
-  if ((new_case = malloc(sizeof(t_map_case))) == NULL)
-    return (-1);
-  new_case->val = 5555;
-  new_case->next = NULL;
-  map[y][x] = new_case;
-  return (0);
-}
-
-int		init_map(t_game *game)
-{
-  int		x;
-  int		y;
-  size_t	xsize;
-
-  y = 0;
-  if ((game->map = malloc(sizeof(t_map_case *) * game->map_size_y)) == NULL)
-    return (-1);
-  xsize = sizeof(t_map_case) * game->map_size_x;
-  while (y != game->map_size_y)
-    {
-      x = 0;
-      if ((game->map[y] = malloc(xsize)) == NULL)
-	return (-1);
-      while (x != game->map_size_x)
-	{
-	  game->map[y][x] = NULL;
-	  ++x;
-	}
-      ++y;
-    }
-  return (0);
-}
-
-void		remove_map_case_element(t_map_case **list, int val)
+void		remove_map_case_element(t_map_case **list, t_object obj)
 {
   t_map_case	*tofree;
   t_map_case	*tmp;
 
   tmp = *list;
-  if (tmp->val == val)
+  if (tmp->obj == obj)
     {
       *list = (*list)->next;
       free(tmp);
       return ;
     }
-  while (tmp->next && tmp->next->val != val)
+  while (tmp->next && tmp->next->obj != obj)
     tmp = tmp->next;
   if (tmp->next == NULL)
     return ;
@@ -70,7 +33,7 @@ void		remove_map_case_element(t_map_case **list, int val)
   free(tofree);
 }
 
-int		add_map_case_element(t_map_case **list, int val)
+int		add_map_case_element(t_map_case **list, t_object obj)
 {
   t_map_case	*new;
   t_map_case	*tmp;
@@ -78,7 +41,7 @@ int		add_map_case_element(t_map_case **list, int val)
   tmp = *list;
   if ((new = malloc(sizeof(t_map_case))) == NULL)
     return (-1);
-  new->val = val;
+  new->obj = obj;
   new->next = NULL;
   if (*list == NULL)
     *list = new;
@@ -98,5 +61,7 @@ int		move_player_to(t_game *game, t_player *player, int new_x, int new_y)
   if (add_map_case_element(&(game->map[new_y][new_x]),
 			   player->fd) == -1)
     return (-1);
+  player->x = new_x;
+  player->y = new_y;
   return (0);
 }

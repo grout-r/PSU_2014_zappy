@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 14:06:43 2015 Oscar Morizet
-** Last update Fri May 22 19:10:10 2015 Oscar Morizet
+** Last update Tue May 26 15:11:20 2015 Oscar Morizet
 */
 
 #include	<stdio.h>
@@ -25,7 +25,7 @@ void		dump_map(t_game *game)
 	  printf("X[%d] Y[%d] : ", x, y);
 	  while (map[y][x] != NULL)
 	    {
-	      printf("| val %d", map[y][x]->val);
+	      printf("| val %d", (int) map[y][x]->obj);
 	      map[y][x] = map[y][x]->next;
 	    }
 	  ++x;

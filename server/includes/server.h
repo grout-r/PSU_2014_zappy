@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Mon May 25 16:50:03 2015 Oscar Morizet
+** Last update Tue May 26 15:11:02 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -48,6 +48,12 @@ typedef enum		e_command
     CONNECT_NBR,
     INVALID
   }			t_command;
+
+typedef struct		s_coords
+{
+  int			x;
+  int			y;
+}			t_coords;
 
 typedef struct		s_parse_arg
 {
@@ -142,7 +148,6 @@ int			add_client_to_players(t_game *game, int player_fd);
 int			remove_client_from_players(t_game *game, int player_fd);
 int			execute(t_game *game_data, int req_fd, char *buffer);
 int			init_map_case(t_map_case ***map, int x, int y);
-int			add_map_case_element(t_map_case **list, int val);
 int			move_player_to(t_game *game, t_player *player, int new_x, int new_y);
 int			init_inventory(t_player *player);
 int			add_item_class_to_inventory(t_player *player, char *item_name);
