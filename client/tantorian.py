@@ -17,6 +17,8 @@ class Tantorian:
         self.__sock.close()
 
     def introduce(self):
+        """Return true if the client can discuss with the server.
+        Return false otherwise"""
         resp = self.__sock.recv(4096)
         if not resp:
             return False
@@ -47,7 +49,7 @@ class Tantorian:
     def getHunger(self):
         return 0
 
-    def getServMsg(self):
+    def __getServMsg(self):
         resp = self.__sock.recv(4096)
         if not resp:
             sys.exit(1)
@@ -74,11 +76,9 @@ class Tantorian:
 
     def __inventory(self):
         isInventaire = False
-        if self.__inventaire != []:
-            return
         self.__sock.send("inventaire\n")
         while isInventaire != True :
-            self.getServMsg()
+            self.__getServMsg()
             for msg in self.__msgStack:
                 if msg and msg[0] == '{' and msg[-1] == '}':
                     isInventaire = True
@@ -106,7 +106,7 @@ class Tantorian:
         isVision = False
         self.__sock.send("voir\n")
         while isVision != True:
-            self.getServMsg()
+            self.__getServMsg()
             for msg in self.__msgStack:
                 if msg and msg[0] == '{' and msg[-1] == '}':
                     isVision = True
@@ -126,7 +126,7 @@ class Tantorian:
         isTaken = False
         self.__sock.send("prend {0}\n".format(item))
         while isTaken != True:
-            self.getServMsg()
+            self.__getServMsg()
             for msg in self.__msgStack:
                 if msg == "ok" or msg == "ko":
                     isTaken = True

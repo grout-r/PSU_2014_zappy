@@ -9,12 +9,9 @@ from tantorian import Tantorian
 def IA(player):
     while player.isAlive():
         player.flush()
-        if not player.haveEnough("phiras", 3):
-            print "Recherche de phiras"
-            player.search("phiras")
-        else:
-            print "Recherche de sibur"
-            player.search("sibur")
+        if player.haveEnough("phiras", 3):
+            print "Y a assez de phiras dans mon sac"
+        player.take("sibur")
 
 def main(argv):
     client = init.getArgs(argv)
