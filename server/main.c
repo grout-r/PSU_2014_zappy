@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
-** Last update Tue May 26 11:35:25 2015 Oscar Morizet
+** Last update Fri Jun  5 01:31:36 2015 Oscar
 */
 
 #include		<stdio.h>
@@ -27,6 +27,8 @@ int			main(int ac, char **av)
 
   pre_init(&game_data);
   if (!parse_parameters(--ac, ++av, &game_data, &server_info))
+    return (-1);
+  if (!check_args(&game_data, &server_info))
     return (-1);
   if (init(&game_data, &server_info) == -1)
     return (-1);

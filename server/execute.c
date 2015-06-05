@@ -1,11 +1,11 @@
 /*
-** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Mon May 25 16:55:08 2015 Oscar Morizet
+** Last update Fri Jun  5 15:44:38 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -37,7 +37,7 @@ int		execute(t_game *game_data, int req_fd, char *buffer)
     {
       if ((cm = get_command(game_data, buffer)) == INVALID)
 	return (1);
-      if (game_data->command_action[cm](game_data, player_data, extra) == -1)
+      if (add_new_task_to_queue(game_data, player_data, cm) == -1)
 	return (-1);
     }
   else

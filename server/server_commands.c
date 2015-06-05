@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:00:41 2015 Oscar Morizet
-** Last update Mon May 11 16:40:55 2015 Oscar Morizet
+** Last update Fri Jun  5 00:58:48 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -46,6 +46,23 @@ void		init_command_action(t_game *game_data)
   game_data->command_action[CONNECT_NBR] = &action_connect_nbr;
   game_data->command_action[INVALID] = NULL;
 }
+
+void		init_command_duration(t_game *game_data)
+{
+  game_data->command_duration[AVANCE] = 7;
+  game_data->command_duration[DROITE] = 7;
+  game_data->command_duration[GAUCHE] = 7;
+  game_data->command_duration[VOIR] = 7;
+  game_data->command_duration[INVENTAIRE] = 1;
+  game_data->command_duration[PREND_OBJET] = 7;
+  game_data->command_duration[POSE_OBJET] = 7;
+  game_data->command_duration[EXPULSE] = 7;
+  game_data->command_duration[BROADCAST] = 7;
+  game_data->command_duration[INCANTATION] = 300;
+  game_data->command_duration[FORK] = 42;
+  game_data->command_duration[CONNECT_NBR] = 0;
+}
+
 
 t_command	get_command(t_game *game_data, char *cmd)
 {

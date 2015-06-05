@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue May 26 14:46:28 2015 Oscar Morizet
-** Last update Tue May 26 15:22:23 2015 Oscar Morizet
+** Last update Fri Jun  5 01:07:42 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -47,6 +47,5 @@ int		init_map(t_game *game)
       ++y;
     }
   map_spawn_items(game);
-  dump_map(game);
   return (0);
 }

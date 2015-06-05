@@ -1,11 +1,11 @@
 /*
-** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
+1;2802;0c1;2802;0c1;2802;0c** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Jordan Verove
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Tue May 26 15:11:02 2015 Oscar Morizet
+** Last update Fri Jun  5 16:59:06 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -71,6 +71,8 @@ typedef struct		s_item
   struct s_item		*next;
 }			t_item;
 
+typedef struct		s_exec_line t_exec_line;
+
 typedef struct		s_player
 {
   int			introduced;
@@ -81,6 +83,7 @@ typedef struct		s_player
   int			vision;
   int		        fd;
   int			team_id;
+  t_exec_line		*exec_queue;
   char			*team;
   t_orientation		orientation;
   t_item		*inventory;
@@ -97,6 +100,8 @@ typedef struct		s_team
 
 typedef struct		s_server_info
 {
+  struct timeval      	*base_cycle_time;
+  struct timeval	*cycle_end;
   int			fd_max;
   int			running_port;
   int			server_fd;
@@ -106,14 +111,22 @@ typedef struct		s_server_info
 typedef			struct s_game t_game;
 typedef			int (*action_fptr)(t_game *, t_player *, char *);
 
+typedef struct		s_exec_line
+{
+  action_fptr		action;
+  int			cycles_before_exec;
+  struct s_exec_line	*next;
+}			t_exec_line;
+
 typedef struct		s_game
 {
   char			*command_names[COMMAND_NB + 1];
+  int			command_duration[COMMAND_NB];
   action_fptr		command_action[COMMAND_NB + 1];
   int			map_size_x;
   int			map_size_y;
   int			players_per_team;
-  int			action_delay;
+  float			action_delay;
   t_team		*teams;
   t_player		*players;
   t_map_case		***map;
