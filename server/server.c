@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Fri Jun  5 17:44:19 2015 Oscar
+** Last update Sat Jun  6 11:00:12 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -66,32 +66,29 @@ int			cyclify(int cycle_nb, t_game *game, t_server_info *server)
 
 int			handle_connection(t_game *game_data, t_server_info *server)
 {
-  struct timeval	timing[2];
-
-  gettimeofday(&timing[START_TIMER], NULL);
-  printf("start %ld\n", timing[START_TIMER].tv_usec);
+  struct timeval	cycle_start;
+  struct timeval	cycle_finish;
+  
+  gettimeofday(&cycle_start, NULL);
   while (42)
     {
-      gettimeofday(&timing[END_TIMER], NULL);
-      printf("end %ld\n", timing[END_TIMER].tv_usec);
-      update_timer(game_data, server, timing);
+      gettimeofday(&cycle_finish, NULL);
+      update_timer(game_data, server, &cycle_start, &cycle_finish);
       reset_sets(server, game_data);
-      gettimeofday(&timing[START_TIMER], NULL);
-      printf("start %ld\n", timing[START_TIMER].tv_usec);
       if (select(server->fd_max + 1,
 		 server->fd_reads, NULL, NULL, server->cycle_end) == -1)
 	{
 	  perror("Select error: ");
 	  return (-1);
 	}
+      gettimeofday(&cycle_start, NULL);
       if (server->cycle_end->tv_usec == 0)
 	{
-	  usleep(9999);
-	  //if (cyclify(1, game_data, server) == -1)
-	  //return (-1);
+	  if (cyclify(1, game_data, server) == -1)
+	    return (-1);
 	}
-      //else if (handle_server_interactions(server, game_data) == -1)
-      //return (-1);
+      else if (handle_server_interactions(server, game_data) == -1)
+	return (-1);
     }
   return (0);
 }
