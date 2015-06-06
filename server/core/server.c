@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Sat Jun  6 11:00:12 2015 Oscar
+** Last update Sat Jun  6 11:30:14 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -14,23 +14,6 @@
 #include		<unistd.h>
 #include		"server.h"
 #include		"timer.h"
-
-void			reset_sets(t_server_info *server, t_game *game_data)
-{
-  t_player		*tmp;
-
-  tmp = game_data->players;
-  FD_ZERO(server->fd_reads);
-  FD_SET(server->server_fd, server->fd_reads);
-  server->fd_max = server->server_fd;
-  while (tmp != NULL)
-    {
-      FD_SET(tmp->fd, server->fd_reads);
-      if (tmp->fd > server->fd_max)
-	server->fd_max = tmp->fd;
-      tmp = tmp->next;
-    }
-}
 
 int			make_cycle(t_game *game, t_server_info *server)
 {
@@ -53,8 +36,7 @@ int			cyclify(int cycle_nb, t_game *game, t_server_info *server)
   int			i;
 
   i = 0;
-  usleep(5500);
-  return (0);
+  usleep(5000);
   while (i != cycle_nb)
     {
       if (make_cycle(game, server) == -1)
@@ -64,7 +46,7 @@ int			cyclify(int cycle_nb, t_game *game, t_server_info *server)
   return (0);
 }
 
-int			handle_connection(t_game *game_data, t_server_info *server)
+int		        run(t_game *game_data, t_server_info *server)
 {
   struct timeval	cycle_start;
   struct timeval	cycle_finish;
@@ -87,8 +69,8 @@ int			handle_connection(t_game *game_data, t_server_info *server)
 	  if (cyclify(1, game_data, server) == -1)
 	    return (-1);
 	}
-      else if (handle_server_interactions(server, game_data) == -1)
-	return (-1);
+      //else if (handle_server_interactions(server, game_data) == -1)
+      //return (-1);
     }
   return (0);
 }

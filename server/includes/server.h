@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Fri Jun  5 16:59:06 2015 Oscar
+** Last update Sat Jun  6 11:21:20 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -134,7 +134,7 @@ typedef struct		s_game
 
 char			*list_inventory(t_player *player);
 
-int			handle_connection(t_game *game_data, t_server_info *server);
+int			run(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
 int			check_if_num(char *);
 int			error_print_usage();
