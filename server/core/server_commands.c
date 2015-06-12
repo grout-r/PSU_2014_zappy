@@ -1,11 +1,11 @@
 /*
-** server_commands.c for server_commands.c in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c** server_commands.c for server_commands.c in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:00:41 2015 Oscar Morizet
-** Last update Fri Jun  5 00:58:48 2015 Oscar
+** Last update Fri Jun 12 23:19:21 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -20,8 +20,8 @@ void		init_command_names(t_game *game_data)
   game_data->command_names[GAUCHE] = strdup("gauche");
   game_data->command_names[VOIR] = strdup("voir");
   game_data->command_names[INVENTAIRE] = strdup("inventaire");
-  game_data->command_names[PREND_OBJET] = strdup("prend objet");
-  game_data->command_names[POSE_OBJET] = strdup("pose objet");
+  game_data->command_names[PREND_OBJET] = strdup("prend");
+  game_data->command_names[POSE_OBJET] = strdup("pose");
   game_data->command_names[EXPULSE] = strdup("expulse");
   game_data->command_names[BROADCAST] = strdup("broadcast");
   game_data->command_names[INCANTATION] = strdup("incantation");
@@ -70,8 +70,20 @@ t_command	get_command(t_game *game_data, char *cmd)
 
   i = 0;
   while (game_data->command_names[i] &&
-	 strcmp(cmd, game_data->command_names[i]) != 0)
+	 strncmp(cmd, game_data->command_names[i],
+		 strlen(game_data->command_names[i])) != 0)
     ++i;
   return ((t_command) i);
 }
 
+char		*get_command_argument(char *cmd)
+{
+  int		i;
+
+  i = 0;
+  while (*cmd && *cmd != ' ')
+    ++cmd;
+  if (*cmd == ' ')
+    ++cmd;
+  return (cmd);
+}

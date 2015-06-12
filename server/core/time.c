@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c1;2802;0c1;2802;0c1;2802;0c1;2802;0c1;2802;0c1;2802;0c1;2802;0c** time.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
+** time.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
-** Started on  Fri Jun  5 00:24:48 2015 Oscar
-** Last update Sat Jun  6 11:01:10 2015 Oscar
+** Started on  Fri Jun 12 19:55:54 2015 Oscar
+** Last update Fri Jun 12 20:13:38 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -22,7 +22,6 @@ void			update_timer(t_game *game, t_server_info *server,
   struct timeval	timelapse;
   
   timersub(cycle_finish, cycle_start, &timelapse);
-  printf("exec timelapse +%ld.%ld\n", timelapse.tv_sec, timelapse.tv_usec);
   timersub(server->base_cycle_time, &timelapse, server->cycle_end); 
   server->cycle_end->tv_sec = 0;
 }

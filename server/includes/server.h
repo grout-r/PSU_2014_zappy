@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c1;2802;0c** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
+1;2802;0c1;2802;0c1;2802;0c1;2802;0c** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Jordan Verove
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Sat Jun  6 11:21:20 2015 Oscar
+** Last update Fri Jun 12 22:50:57 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -23,6 +23,7 @@
 # include		<sys/select.h>
 # include		<arpa/inet.h>
 # include		"map.h"
+# include		"object.h"
 
 typedef enum		e_orientation
   {
@@ -113,6 +114,7 @@ typedef			int (*action_fptr)(t_game *, t_player *, char *);
 
 typedef struct		s_exec_line
 {
+  char			*parameter;
   action_fptr		action;
   int			cycles_before_exec;
   struct s_exec_line	*next;
@@ -123,6 +125,7 @@ typedef struct		s_game
   char			*command_names[COMMAND_NB + 1];
   int			command_duration[COMMAND_NB];
   action_fptr		command_action[COMMAND_NB + 1];
+  char			*inventory_names[MAX_OBJECTS + 1];
   int			map_size_x;
   int			map_size_y;
   int			players_per_team;
@@ -133,6 +136,7 @@ typedef struct		s_game
 }			t_game;
 
 char			*list_inventory(t_player *player);
+char			*get_command_argument(char *cmd);
 
 int			run(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);

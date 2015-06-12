@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Fri Jun  5 15:44:38 2015 Oscar
+** Last update Fri Jun 12 23:07:00 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -31,13 +31,14 @@ int		execute(t_game *game_data, int req_fd, char *buffer)
   t_player	*player_data;
   char		*extra;
 
-  extra = NULL;
   player_data = get_player_data(game_data, req_fd);
   if (player_data->introduced == 1)
     {
       if ((cm = get_command(game_data, buffer)) == INVALID)
 	return (1);
-      if (add_new_task_to_queue(game_data, player_data, cm) == -1)
+      extra = get_command_argument(buffer);
+      printf("Command %d argument %s\n", cm, extra); 
+      if (add_new_task_to_queue(game_data, player_data, cm, extra) == -1)
 	return (-1);
     }
   else
