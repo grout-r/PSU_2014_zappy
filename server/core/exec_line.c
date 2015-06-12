@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Fri Jun 12 22:50:33 2015 Oscar
+** Last update Fri Jun 12 23:46:35 2015 Oscar
 */
 
 #include	"server.h"
@@ -38,14 +38,22 @@ int		add_new_task_to_queue(t_game *game, t_player *player,
 
 int		player_process_cycle(t_game *game, t_player *player)
 {
-  if (player->exec_queue == NULL)
+  int		ret;
+  t_exec_line	*task;
+
+  task = player->exec_queue;
+  if (task == NULL)
     return (0);
-  if (player->exec_queue->cycles_before_exec > 1)
+  if (task->cycles_before_exec > 1)
     {
-      --player->exec_queue->cycles_before_exec;
+      --task->cycles_before_exec;
       return (0);
     }
-  return (player->exec_queue->action(game, player, player->exec_queue->parameter));
+  if ((ret = task->action(game, player, player->exec_queue->parameter)) == -1)
+    return (-1);
+  player->exec_queue = player->exec_queue->next;
+  free(task);
+  return (0);
 }
 
 int		init_player_exec_line(t_game *game, t_player *player)

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
-** Last update Fri Jun 12 22:36:34 2015 Oscar
+** Last update Sat Jun 13 00:21:16 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -21,6 +21,7 @@ int		init(t_game *game_data, t_server_info *server_info)
   init_command_names(game_data);
   init_command_action(game_data);
   init_inventory_names(game_data);
+  init_command_duration(game_data);
   if ((server_info->fd_reads = malloc(sizeof(fd_set))) == NULL)
     return (-1);
   if (init_server(server_info) == -1)
