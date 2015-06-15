@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Fri Jun  5 01:31:51 2015 Oscar
+## Last update Sat Jun  6 11:29:07 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -30,25 +30,28 @@ TOOLS		=	tools
 
 TEST		=	test
 
+CORE		=	core
+
 SRC		=	main.c \
-			argument_parser.c \
-			server_interactions.c \
-			server_commands.c \
-			server.c \
-			execute.c \
-			manage_clients.c \
 			$(INIT)/init.c \
+			$(INIT)/argument_parser.c \
 			$(INIT)/player_init.c \
 			$(INIT)/map_init.c \
 			$(INIT)/check_args.c \
+			$(CORE)/execute.c \
+			$(CORE)/exec_line.c \
+			$(CORE)/time.c \
+			$(CORE)/server.c \
+			$(CORE)/server_interactions.c \
+			$(CORE)/server_commands.c \
+			$(CORE)/manage_clients.c \
 			$(COMPONENTS)/map.c \
 			$(COMPONENTS)/map_gen.c \
 			$(COMPONENTS)/teams.c \
 			$(COMPONENTS)/inventory.c \
-			$(COMPONENTS)/exec_line.c \
-			$(COMPONENTS)/time.c \
 			$(TOOLS)/launch_tools.c \
 			$(TOOLS)/tools.c \
+			$(TOOLS)/server_run_tools.c \
 			$(SERVER_ACTIONS)/introduce.c \
 			$(SERVER_ACTIONS)/action_avance.c \
 			$(SERVER_ACTIONS)/action_gauche.c \
