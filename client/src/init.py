@@ -26,10 +26,10 @@ def getArgs(argv):
     return client
 
 def connect(info):
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        s.connect((info[2], int(info[1])))
+        sock.connect((info[2], int(info[1])))
     except socket.error:
         print "Can't connect to server {} and port {}".format(info[2], info[1])
         sys.exit(2)
-    return s
+    return sock
