@@ -1,11 +1,15 @@
 /*
-** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
+1;2802;0c1;2802;0c1;2802;0c1;2802;0c** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Jordan Verove
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
+<<<<<<< HEAD
 ** Last update Thu Jun  4 17:04:56 2015 Oscar Morizet
+=======
+** Last update Fri Jun 12 22:50:57 2015 Oscar
+>>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
 */
 
 #ifndef			SERVER_H_
@@ -23,6 +27,7 @@
 # include		<sys/select.h>
 # include		<arpa/inet.h>
 # include		"map.h"
+# include		"object.h"
 
 typedef enum		e_orientation
   {
@@ -71,6 +76,8 @@ typedef struct		s_item
   struct s_item		*next;
 }			t_item;
 
+typedef struct		s_exec_line t_exec_line;
+
 typedef struct		s_player
 {
   int			introduced;
@@ -81,6 +88,7 @@ typedef struct		s_player
   int			vision;
   int		        fd;
   int			team_id;
+  t_exec_line		*exec_queue;
   char			*team;
   t_orientation		orientation;
   t_item		*inventory;
@@ -97,6 +105,8 @@ typedef struct		s_team
 
 typedef struct		s_server_info
 {
+  struct timeval      	*base_cycle_time;
+  struct timeval	*cycle_end;
   int			fd_max;
   int			running_port;
   int			server_fd;
@@ -106,23 +116,37 @@ typedef struct		s_server_info
 typedef			struct s_game t_game;
 typedef			int (*action_fptr)(t_game *, t_player *, char *);
 
+typedef struct		s_exec_line
+{
+  char			*parameter;
+  action_fptr		action;
+  int			cycles_before_exec;
+  struct s_exec_line	*next;
+}			t_exec_line;
+
 typedef struct		s_game
 {
   char			*command_names[COMMAND_NB + 1];
+  int			command_duration[COMMAND_NB];
   action_fptr		command_action[COMMAND_NB + 1];
+  char			*inventory_names[MAX_OBJECTS + 1];
   int			map_size_x;
   int			map_size_y;
   int			players_per_team;
-  int			action_delay;
+  float			action_delay;
   t_team		*teams;
   t_player		*players;
   t_map_case		***map;
 }			t_game;
 
 char			*list_inventory(t_player *player);
+<<<<<<< HEAD
 char			*dump_case(t_map_case *mcase, int index);
+=======
+char			*get_command_argument(char *cmd);
+>>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
 
-int			handle_connection(t_game *game_data, t_server_info *server);
+int			run(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
 int			check_if_num(char *);
 int			error_print_usage();

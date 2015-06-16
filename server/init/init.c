@@ -5,7 +5,11 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
+<<<<<<< HEAD
 ** Last update Mon Jun  1 13:23:11 2015 Oscar Morizet
+=======
+** Last update Sat Jun 13 00:21:16 2015 Oscar
+>>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
 */
 
 #include	<stdlib.h>
@@ -20,11 +24,15 @@ int		init(t_game *game_data, t_server_info *server_info)
 {
   init_command_names(game_data);
   init_command_action(game_data);
+  init_inventory_names(game_data);
+  init_command_duration(game_data);
   if ((server_info->fd_reads = malloc(sizeof(fd_set))) == NULL)
     return (-1);
   if (init_server(server_info) == -1)
     return (-1);
   if (init_map(game_data) == -1)
+    return (-1);
+  if (init_timer(game_data, server_info) == -1)
     return (-1);
   return (1);
 }

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue May 26 15:02:34 2015 Oscar Morizet
-** Last update Tue May 26 15:09:39 2015 Oscar Morizet
+** Last update Fri Jun 12 22:39:22 2015 Oscar
 */
 
 #ifndef	        OBJECT_H_
@@ -23,6 +23,7 @@ typedef enum	e_object
     MENDIANE,
     PHIRAS,
     THYSTAME,
+    NONE
   }		t_object;
 
 #endif		/* !OBJECT_H_ */

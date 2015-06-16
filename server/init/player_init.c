@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 17:08:21 2015 Oscar Morizet
-** Last update Tue May 26 15:15:56 2015 Oscar Morizet
+** Last update Thu Jun  4 23:00:44 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -36,6 +36,8 @@ int		init_player(t_game *game_data, t_player *player)
 {
   player->inventory = NULL;
   if (init_inventory(player) == -1)
+    return (-1);
+  if (init_player_exec_line(game_data, player) == -1)
     return (-1);
   player->orientation = UP;
   print_welcome(player);
