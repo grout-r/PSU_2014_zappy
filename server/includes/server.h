@@ -1,15 +1,11 @@
 /*
-1;2802;0c1;2802;0c1;2802;0c1;2802;0c** server.h for zappy in /home/verove_j/rendu/PSU_2014_zappy/server
+** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
 ** 
-** Made by Jordan Verove
-** Login   <verove_j@epitech.net>
+** Made by Oscar
+** Login   <oscar@epitech.net>
 ** 
-** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-<<<<<<< HEAD
-** Last update Thu Jun  4 17:04:56 2015 Oscar Morizet
-=======
-** Last update Fri Jun 12 22:50:57 2015 Oscar
->>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
+** Started on  Tue Jun 16 22:37:12 2015 Oscar
+** Last update Tue Jun 16 22:37:20 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -140,11 +136,8 @@ typedef struct		s_game
 }			t_game;
 
 char			*list_inventory(t_player *player);
-<<<<<<< HEAD
 char			*dump_case(t_map_case *mcase, int index);
-=======
 char			*get_command_argument(char *cmd);
->>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
 
 int			run(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
