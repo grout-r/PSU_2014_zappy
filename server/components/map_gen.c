@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue May 26 14:53:56 2015 Oscar Morizet
-** Last update Tue May 26 15:21:59 2015 Oscar Morizet
+** Last update Mon Jun  1 13:51:38 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -24,7 +24,7 @@ int		spawn_on_case()
 {
   int		value;
 
-  value = (rand() % 3) + 1;
+  value = (rand() % 2) + 1;
   if (value == 1)
     return (1);
   return (0);
@@ -33,6 +33,7 @@ int		spawn_on_case()
 void		map_spawn_items(t_game *game)
 {
   int		i;
+  int		j;
   int		x;
   int		y;
 
@@ -44,8 +45,9 @@ void		map_spawn_items(t_game *game)
 	{
 	  if (spawn_on_case())
 	    {
-	      i = (rand() % 5);
-	      while (i != 5)
+	      i = 0;
+	      j = (rand() % 4);
+	      while (i != j)
 		{
 		  add_map_case_element(&(game->map[y][x]),
 				       get_random_item());

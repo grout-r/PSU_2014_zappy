@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Tue May 26 15:16:52 2015 Oscar Morizet
+## Last update Mon Jun  1 13:43:37 2015 Oscar Morizet
 ##
 
 CC		= 	gcc -g3
@@ -44,6 +44,7 @@ SRC		=	main.c \
 			$(COMPONENTS)/map_gen.c \
 			$(COMPONENTS)/teams.c \
 			$(COMPONENTS)/inventory.c \
+			$(COMPONENTS)/dump_case.c \
 			$(TOOLS)/launch_tools.c \
 			$(TOOLS)/tools.c \
 			$(SERVER_ACTIONS)/introduce.c \

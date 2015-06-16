@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
-** Last update Fri May 22 19:07:16 2015 Oscar Morizet
+** Last update Mon Jun  1 13:23:11 2015 Oscar Morizet
 */
 
 #include	<stdlib.h>
@@ -49,6 +49,7 @@ int		init_server(t_server_info *server)
     }
   if (listen(server->server_fd, MAX_CONNECTIONS) == -1)
     return (-1);
+  printf("Server running on port %d...\n", server->running_port);
   return (0);
 }
 

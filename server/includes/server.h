@@ -5,7 +5,7 @@
 ** Login   <verove_j@epitech.net>
 ** 
 ** Started on  Tue Apr 28 12:55:29 2015 Jordan Verove
-** Last update Tue May 26 15:11:02 2015 Oscar Morizet
+** Last update Thu Jun  4 17:04:56 2015 Oscar Morizet
 */
 
 #ifndef			SERVER_H_
@@ -120,6 +120,7 @@ typedef struct		s_game
 }			t_game;
 
 char			*list_inventory(t_player *player);
+char			*dump_case(t_map_case *mcase, int index);
 
 int			handle_connection(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
