@@ -3,16 +3,18 @@
 
 # include <SFML/Graphics.hpp>
 # include <vector>
+# include <map>
 # include <iostream>
 # include "Event.hh"
 # include "Player.hh"
 # include "Case.hh"
+# include "Definition.hh"
 
 class							Map
 {
 private:
   std::vector<Player*>					players;
-  std::vector<Case*>					cases;
+  std::vector<Case*>					_cases;
   std::pair<int, int>					_size;
   
 public:
@@ -34,6 +36,8 @@ public:
 								  int level,
 								  std::string teamName);
   void							resizeMap(std::pair<int ,int>);
+  void							updateCase(std::pair<int, int>,
+								   std::map<t_ressource, int>);
 };
 
 #endif

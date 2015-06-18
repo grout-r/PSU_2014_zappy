@@ -58,3 +58,17 @@ void				Map::resizeMap(std::pair<int ,int> newSize)
 {
   _size = newSize;
 }
+
+void			        Map::updateCase(std::pair<int, int> pos,
+						std::map<t_ressource, int> res)
+{
+  (void)pos;
+  (void)res;
+  for(size_t i = 0; i != _cases.size(); i++)
+    {
+      if (pos == _cases[i]->getPos())
+      	{
+	  _cases[i]->setRessources(res);
+      	}
+    }
+}
