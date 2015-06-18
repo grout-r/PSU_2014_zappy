@@ -6,12 +6,15 @@
 # include <iostream>
 # include "Event.hh"
 # include "Player.hh"
+# include "Case.hh"
 
 class							Map
 {
 private:
   std::vector<Player*>					players;
+  std::vector<Case*>					cases;
   std::pair<int, int>					_size;
+  
 public:
   Map(std::pair<int, int>);
   ~Map();

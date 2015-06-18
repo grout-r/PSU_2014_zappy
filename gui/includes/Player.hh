@@ -23,8 +23,10 @@ private:
   t_orientation					orientation;
   int						level;
   std::string					teamName;
+
 private:
   std::map<t_orientation, sf::IntRect>		IntRectFromOrientation;
+
 public:
   Player(int pid, std::pair<int, int> pos, t_orientation orientation,
 	 int level, std::string teamName);
