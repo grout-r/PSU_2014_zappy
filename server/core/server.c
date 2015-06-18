@@ -68,11 +68,9 @@ int		        run(t_game *game_data, t_server_info *server)
 	}
       gettimeofday(&cycle_start, NULL);
       timersub(&cycle_start, &cycle_start_tmp, &timelapse);
-      printf("TIMELAPSE %ld s / %ld microseconds\n", timelapse.tv_sec, timelapse.tv_usec);
       cycle_start_tmp = cycle_start;
       if (server->cycle_end->tv_usec == 0 && server->cycle_end->tv_sec == 0)
 	{
-	  printf("%d cycle(s)\n", cycles);
 	  if (cyclify(cycles, game_data, server) == -1)
 	    return (-1);
 	}

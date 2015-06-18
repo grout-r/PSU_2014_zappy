@@ -15,5 +15,6 @@ int			action_gauche(t_game *data, t_player *player_data, char *arg)
 {
   player_data->orientation = (player_data->orientation + 3) % 4;
   printf("P%d turned <-- o = %d\n", player_data->fd, player_data->orientation);
+  write(player_data->fd, "ok\n", 3);
   return (0);
 }

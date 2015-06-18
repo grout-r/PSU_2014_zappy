@@ -19,9 +19,11 @@ int		action_pose_objet(t_game *data, t_player *player_data, char *arg)
       if (strcmp(player_data->inventory->name, arg) == 0)
         {
           change_item_qt(player_data, arg, '-');
+	  write(player_data->fd, "ok\n", 3);
           return (0);
         }
       player_data->inventory->next++;
     }
+  write(player_data->fd, "ko\n", 3);
   return (0);
 }
