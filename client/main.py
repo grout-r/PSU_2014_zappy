@@ -4,13 +4,13 @@ import sys
 
 from src.init import connect
 from src.init import getArgs
-from src.tantorian import Tantorian
+from src.trantorian import Trantorian
 from src.IA import IA
 
 def main(argv):
     client = getArgs(argv)
     sock = connect(client)
-    player = Tantorian(client, sock)
+    player = Trantorian(client, sock)
     if not player.introduce():
         return
     IA(player)

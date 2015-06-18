@@ -30,5 +30,6 @@ int			action_avance(t_game *data, t_player *player_data, char *arg)
     ++new_y;
   if (move_player_to(data, player_data, new_x, new_y) == -1)
     return (-1);
+  write(player_data->fd, "ok\n", 3);
   return (0);
 }
