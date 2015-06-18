@@ -15,6 +15,7 @@
 # include <errno.h>
 # include <sstream>
 # include <vector>
+# include <unistd.h>
 # include "Graphics.hh"
 # include "Exception.hh"
 

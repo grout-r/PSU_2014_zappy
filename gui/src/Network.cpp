@@ -8,6 +8,7 @@ Network::Network()
   this->pe = getprotobyname("TCP");
   this->s_in.sin_family = AF_INET;
   _commandMapping["msz"] = &Network::fillMSZ;
+  _commandMapping["bct"] = &Network::fillBCT;
 }
 
 Network::~Network()
@@ -79,9 +80,26 @@ Event					Network::fillMSZ(std::string command)
   std::string				sub;
   Event					event;
   
-  event.eventName = MSZ;
   iss >> sub;
   iss >> event.posX;
+  if (event.posX <= 0)
+    return event;
   iss >> event.posY;
+  if (event.posY <= 0)
+    return event;
+  std::cout << "after return" << std::endl;
+  event.eventName = MSZ;
+  return event;
+}
+
+Event					Network::fillBCT(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  iss >> sub;
+  iss >> 
+  event.eventName = BCT;
   return event;
 }
