@@ -1,11 +1,11 @@
 ##
-## Makefile for zappy in /home/oscar/rendu/PSU_2014_zappy/server
+## Makefile for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ## 
 ## Made by Oscar Morizet
 ## Login   <oscar@epitech.net>
 ## 
-## Started on  Tue Apr 28 18:45:07 2015 Oscar Morizet
-## Last update Sat Jun  6 11:29:07 2015 Oscar
+## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
+## Last update Tue Jun 16 22:28:13 2015 Oscar Morizet
 ##
 
 CC		= 	gcc -g3
@@ -49,6 +49,8 @@ SRC		=	main.c \
 			$(COMPONENTS)/map_gen.c \
 			$(COMPONENTS)/teams.c \
 			$(COMPONENTS)/inventory.c \
+			$(COMPONENTS)/dump_case.c \
+			$(COMPONENTS)/inventory_2.c \
 			$(TOOLS)/launch_tools.c \
 			$(TOOLS)/tools.c \
 			$(TOOLS)/server_run_tools.c \

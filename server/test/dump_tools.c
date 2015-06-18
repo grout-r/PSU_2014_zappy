@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 14:06:43 2015 Oscar Morizet
-** Last update Tue May 26 15:11:20 2015 Oscar Morizet
+** Last update Mon Jun  1 14:45:33 2015 Oscar Morizet
 */
 
 #include	<stdio.h>
@@ -22,14 +22,8 @@ void		dump_map(t_game *game)
       x = 0;
       while (x != game->map_size_x)
 	{
-	  printf("X[%d] Y[%d] : ", x, y);
-	  while (map[y][x] != NULL)
-	    {
-	      printf("| val %d", (int) map[y][x]->obj);
-	      map[y][x] = map[y][x]->next;
-	    }
+	  printf("X[%d] Y[%d] : %s\n", x, y, dump_case(map[y][x], 0));
 	  ++x;
-	  printf("\n");
 	}
       ++y;
     }

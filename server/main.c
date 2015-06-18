@@ -5,7 +5,11 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
+<<<<<<< HEAD
+** Last update Mon Jun  1 14:22:50 2015 Oscar Morizet
+=======
 ** Last update Sat Jun  6 11:21:07 2015 Oscar
+>>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
 */
 
 #include		<stdio.h>

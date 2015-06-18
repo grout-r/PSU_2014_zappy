@@ -5,14 +5,15 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Fri Jun  5 15:45:32 2015 Oscar
+** Last update Fri Jun 12 23:46:35 2015 Oscar
 */
 
 #include	"server.h"
 #include	"execute_line.h"
 #include	<stdlib.h>
 
-int		add_new_task_to_queue(t_game *game, t_player *player, t_command command)
+int		add_new_task_to_queue(t_game *game, t_player *player,
+				      t_command command, char *argument)
 {
   t_exec_line	*new;
   t_exec_line	*tmp;
@@ -20,6 +21,7 @@ int		add_new_task_to_queue(t_game *game, t_player *player, t_command command)
   if ((new = malloc(sizeof(t_exec_line))) == NULL)
     return (-1);
   new->action = game->command_action[command];
+  new->parameter = argument;
   new->cycles_before_exec = game->command_duration[command];
   new->next = NULL;
   if (player->exec_queue == NULL)
@@ -36,14 +38,22 @@ int		add_new_task_to_queue(t_game *game, t_player *player, t_command command)
 
 int		player_process_cycle(t_game *game, t_player *player)
 {
-  if (player->exec_queue == NULL)
+  int		ret;
+  t_exec_line	*task;
+
+  task = player->exec_queue;
+  if (task == NULL)
     return (0);
-  if (player->exec_queue->cycles_before_exec > 1)
+  if (task->cycles_before_exec > 1)
     {
-      --player->exec_queue->cycles_before_exec;
+      --task->cycles_before_exec;
       return (0);
     }
-  return (player->exec_queue->action(game, player, NULL));
+  if ((ret = task->action(game, player, player->exec_queue->parameter)) == -1)
+    return (-1);
+  player->exec_queue = player->exec_queue->next;
+  free(task);
+  return (0);
 }
 
 int		init_player_exec_line(t_game *game, t_player *player)
