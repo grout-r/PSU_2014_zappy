@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Thu Jun 18 11:00:27 2015 grout_r
+// Last update Thu Jun 18 11:13:16 2015 grout_r
 //
 
 #include "Camera.hh"
@@ -56,5 +56,5 @@ void				Camera::execMSZ(Event event)
 
 void				Camera::execBCT(Event event)
 {
-  (void)event;
+  _map->updateCase(std::make_pair(event.posX, event.posY), event.ressources);
 }

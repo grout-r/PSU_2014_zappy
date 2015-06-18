@@ -59,6 +59,7 @@ private:
   Event				fillSMG(std::string command);
   Event				fillSUC(std::string command);
   Event				fillSBP(std::string command);
+  bool				cptWord(int nb, std::string);
 
 public:
   Network();

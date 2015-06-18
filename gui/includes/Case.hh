@@ -14,6 +14,8 @@ private:
 public:
   Case(std::pair<int, int>);
   ~Case();
+  std::pair<int, int>			getPos();
+  void					setRessources(std::map<t_ressource, int>);
 };
 
 #endif

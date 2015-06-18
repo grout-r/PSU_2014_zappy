@@ -74,6 +74,24 @@ void				Network::handleEvent(std::vector<Event> &eventStack)
   eventStack.push_back(event);
 }
 
+bool					Network::cptWord(int nb, std::string command)
+{
+  int					i;
+  int					cpt;
+
+  i = 0;
+  while (command[i])
+    {
+      if (command[i] == ' ')
+	cpt += 1;
+      i = i + 1;
+    }
+  cpt += 1;
+  if (cpt == nb)
+    return (0);
+  return (1);
+}
+
 Event					Network::fillMSZ(std::string command)
 {
   std::istringstream			iss(command);
@@ -98,8 +116,16 @@ Event					Network::fillBCT(std::string command)
   std::string				sub;
   Event					event;
 
+  if (cptWord(9, command) == 1)
+    return event;
+  std::cout << "after tcheck nb arg" << std::endl;
   iss >> sub;
-  iss >> 
+  iss >> event.posX;
+  iss >> event.posY;
+  if (event.posX < 0 || event.posY < 0)
+    return event;
+  for (int i = 0; i != 7; i++)
+    iss >> event.ressources[(t_ressource)i];
   event.eventName = BCT;
   return event;
 }
