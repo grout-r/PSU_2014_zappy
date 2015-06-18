@@ -80,13 +80,13 @@ bool					Network::cptWord(int nb, std::string command)
   int					cpt;
 
   i = 0;
+  cpt = 0;
   while (command[i])
     {
       if (command[i] == ' ')
 	cpt += 1;
       i = i + 1;
     }
-  cpt += 1;
   if (cpt == nb)
     return (0);
   return (1);
@@ -118,7 +118,6 @@ Event					Network::fillBCT(std::string command)
 
   if (cptWord(9, command) == 1)
     return event;
-  std::cout << "after tcheck nb arg" << std::endl;
   iss >> sub;
   iss >> event.posX;
   iss >> event.posY;
@@ -126,6 +125,12 @@ Event					Network::fillBCT(std::string command)
     return event;
   for (int i = 0; i != 7; i++)
     iss >> event.ressources[(t_ressource)i];
+  for (int i = 0; i != 7; i++)
+    {
+      if (event.ressources[(t_ressource)i] < 0)
+	return event;
+    }
+  std::cout << event.ressources[FOOD] << std::endl;
   event.eventName = BCT;
   return event;
 }
