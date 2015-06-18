@@ -5,7 +5,7 @@
 ## Login   <roman@epitech.net>
 ## 
 ## Started on  Mon Apr 27 11:34:18 2015 grout_r
-## Last update Wed May  6 10:02:29 2015 grout_r
+## Last update Tue Jun 16 09:38:17 2015 grout_r
 ##
 
 CC		= 	g++ -g3
@@ -26,7 +26,8 @@ SRC		=	src/main.cpp \
 			src/Camera.cpp \
 			src/Network.cpp \
 			src/Player.cpp \
-			src/Exception.cpp
+			src/Exception.cpp \
+			src/Map.cpp
 
 OBJ 		= 	$(SRC:.cpp=.o)
 

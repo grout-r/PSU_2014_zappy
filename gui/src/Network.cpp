@@ -1,12 +1,3 @@
-//
-// Network.cpp for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Tue Apr 28 15:36:25 2015 grout_r
-// Last update Wed May  6 11:07:12 2015 grout_r
-//
 
 #include "Network.hh"
 
@@ -14,10 +5,9 @@ Network::Network()
 {
   this->port = 4242;
   this->server_ip = "127.0.0.1";
-
-
   this->pe = getprotobyname("TCP");
   this->s_in.sin_family = AF_INET;
+  _commandMapping["msz"] = &Network::fillMSZ;
 }
 
 Network::~Network()
@@ -44,15 +34,27 @@ bool				Network::initNetwork()
   return (false);
 }
 
-void				Network::handleEvent(Graphics *graph)
+Event				Network::parseCommand(std::string command)
 {
-  (void)graph;
+  std::istringstream			iss(command);
+  std::string				sub;
+  std::map<std::string, funcptr>::iterator it;
 
+  iss >> sub;
+  it = _commandMapping.find(sub);
+  if (it == _commandMapping.end())
+    return Event();
+  return (this->*_commandMapping[sub])(iss.str());
+}
+
+void				Network::handleEvent(std::vector<Event> &eventStack)
+{
   char				buff[1024];
 
   fd_set rfds;
   struct timeval tv;
   int retval;
+  Event				event;
 
   FD_ZERO(&rfds);
   FD_SET(this->socket_fd, &rfds);
@@ -60,12 +62,26 @@ void				Network::handleEvent(Graphics *graph)
   tv.tv_usec = 500;
   retval = select(this->socket_fd + 1, &rfds, NULL, NULL, &tv);
   if (retval == -1)
-    throw (Error( strerror("select()"));
+    throw (Error("select()"));
   else if (retval)
     {
       printf("Data is available now.\n");
       bzero(buff, 1024);
       read(this->socket_fd, buff, 1024);
-      std::cout << buff << std::endl;
+      event = parseCommand(std::string(buff));
     }
+  eventStack.push_back(event);
+}
+
+Event					Network::fillMSZ(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+  
+  event.eventName = MSZ;
+  iss >> sub;
+  iss >> event.posX;
+  iss >> event.posY;
+  return event;
 }

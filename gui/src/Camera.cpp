@@ -5,33 +5,50 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Wed May  6 10:26:23 2015 grout_r
+// Last update Thu Jun 18 09:52:40 2015 grout_r
 //
 
 #include "Camera.hh"
 
 Camera::Camera()
 {
-  this->graph = new Graphics();
-  this->net = new Network();
+  _graph = new Graphics();
+  _net = new Network();
+  _map = new Map(std::make_pair(100, 100));
+  _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
 }
 
 Camera::~Camera()
 {
 }
 
-void				Camera::start()
+void				Camera::treatEvent()
 {
-  // int i = 0;
+  for (size_t i = 0; i != _eventStack.size(); i++)
+    {
+      if (_eventStack[i].eventName != NOSUCH)
+	{
+	  (this->*_bindExecFuncPtr[_eventStack[i].eventName])(_eventStack[i]);
+	} 
+    }
+  _eventStack.clear();
+}
 
-  this->graph->addPlayer(1, std::make_pair(5, 5), SOUTH, 0, "Les patates en folies");
-  if (this->net->initNetwork() == false)
+void				Camera::loop()
+{
+  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 0, "Les patates en folies");
+  if (_net->initNetwork() == false)
     exit(-1);
   while (true)
     {
-      this->graph->refreshScreen();
-      this->graph->handleEvent();
-      this->net->handleEvent(this->graph);
-      //sleep(1);
+      _graph->refreshScreen(_map);
+      _graph->handleEvent();
+      _net->handleEvent(_eventStack);
+      treatEvent();
     }
+}
+
+void				Camera::execMSZ(Event event)
+{
+  _map->resizeMap(std::make_pair(event.posX, event.posY));
 }

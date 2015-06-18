@@ -1,12 +1,3 @@
-//
-// Network.hh for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Tue Apr 28 15:36:18 2015 grout_r
-// Last update Wed May  6 10:42:03 2015 grout_r
-//
 
 #ifndef NETWORK
 # define NETWORK
@@ -19,10 +10,18 @@
 # include <arpa/inet.h>
 # include <iostream>
 # include <string.h>
+# include <map>
 # include <stdio.h>
 # include <errno.h>
+# include <sstream>
+# include <vector>
 # include "Graphics.hh"
 # include "Exception.hh"
+
+class Network;
+
+typedef Event			(Network::*funcptr)(std::string command);
+
 class				Network
 {
 private:
@@ -31,11 +30,40 @@ private:
   int				port;
   std::string			server_ip;
   struct sockaddr_in		s_in;
+  std::map<std::string, funcptr> _commandMapping;
+  
+private:
+  Event				parseCommand(std::string);
+  Event				fillMSZ(std::string command);
+  Event				fillBCT(std::string command);
+  Event				fillTNA(std::string command);
+  Event				fillPNW(std::string command);
+  Event				fillPPO(std::string command);
+  Event				fillPLV(std::string command);
+  Event				fillPIN(std::string command);
+  Event				fillPEX(std::string command);
+  Event				fillPBC(std::string command);
+  Event				fillPIC(std::string command);
+  Event				fillPIE(std::string command);
+  Event				fillPFK(std::string command);
+  Event				fillPDR(std::string command);
+  Event				fillPGT(std::string command);
+  Event				fillPDI(std::string command);
+  Event				fillENW(std::string command);
+  Event				fillEHT(std::string command);
+  Event				fillEBO(std::string command);
+  Event				fillEDI(std::string command);
+  Event				fillSGT(std::string command);
+  Event				fillSEG(std::string command);
+  Event				fillSMG(std::string command);
+  Event				fillSUC(std::string command);
+  Event				fillSBP(std::string command);
+
 public:
   Network();
   ~Network();
   bool				initNetwork();
-  void				handleEvent(Graphics *graph);
+  void				handleEvent(std::vector<Event> &);
 };
 
 #endif

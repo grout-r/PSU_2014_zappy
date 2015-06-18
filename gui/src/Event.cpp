@@ -5,12 +5,12 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 14:55:02 2015 grout_r
-// Last update Tue Apr 28 14:55:51 2015 grout_r
+// Last update Tue Jun 16 16:17:40 2015 grout_r
 //
 
 #include "Event.hh"
 
-Event::Event()
+Event::Event() : eventName(NOSUCH)
 {}
 
 Event::~Event()

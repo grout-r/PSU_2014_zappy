@@ -1,14 +1,6 @@
 //
-// Player.cpp for zapppy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Thu Apr 30 14:16:26 2015 grout_r
-// Last update Tue May  5 14:18:59 2015 grout_r
-//
 
-# include "Player.hh"
+#include "Player.hh"
 
 Player::Player(int pid, std::pair<int, int> pos, t_orientation orientation,
 	       int level, std::string teamName) : 

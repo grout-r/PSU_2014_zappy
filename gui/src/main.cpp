@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Mon Apr 27 11:21:41 2015 grout_r
-// Last update Wed Apr 29 11:03:08 2015 grout_r
+// Last update Tue Jun 16 10:52:07 2015 grout_r
 //
 
 #include "Camera.hh"
@@ -14,6 +14,6 @@ int				main()
 {
   Camera			cam;
 
-  cam.start();
+  cam.loop();
   return (0);
 }

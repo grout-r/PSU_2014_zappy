@@ -1,12 +1,3 @@
-//
-// Player.hh for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Thu Apr 30 14:15:36 2015 grout_r
-// Last update Mon May  4 16:25:03 2015 grout_r
-//
 
 #ifndef PLAYER
 # define PLAYER
