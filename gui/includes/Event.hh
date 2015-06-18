@@ -5,53 +5,20 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 14:54:51 2015 grout_r
-// Last update Thu Jun 18 09:26:06 2015 grout_r
+// Last update Thu Jun 18 11:00:01 2015 grout_r
 //
 
 #ifndef EVENT
 # define EVENT
 
 # include <string>
-
-typedef enum e_eventName
-{
-  MSZ,
-  BCT,
-  TNA,
-  PNW,
-  PPO,
-  PLV,
-  PIN,
-  PEX,
-  PBC,
-  PIC,
-  PIE,
-  PFK,
-  PDR,
-  PGT,
-  PDI,
-  ENW,
-  EHT,
-  EBO,
-  EDI,
-  SGT,
-  SEG,
-  SMG,
-  SUC,
-  SBP,
-  NOSUCH
-}	     t_eventName;
+# include <map>
+# include "Definition.hh"
 
 class			Event
 {
 public:
-  int			food;
-  int			minemate;
-  int			deraumere;
-  int			sibur;
-  int			mendiane;
-  int			phiras;
-  int			thystame;
+  std::map<t_ressource, int>	ressources;
   int			posX;
   int			posY;
   int			quantity;

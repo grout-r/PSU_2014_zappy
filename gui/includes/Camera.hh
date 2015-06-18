@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:30 2015 grout_r
-// Last update Thu Jun 18 09:45:53 2015 grout_r
+// Last update Thu Jun 18 10:49:48 2015 grout_r
 //
 
 #ifndef CAMERA
@@ -41,6 +41,7 @@ public:
   
 public:
   void				execMSZ(Event);
+  void				execBCT(Event);
 };
 
 #endif

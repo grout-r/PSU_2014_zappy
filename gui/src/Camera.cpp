@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Thu Jun 18 09:52:40 2015 grout_r
+// Last update Thu Jun 18 11:00:27 2015 grout_r
 //
 
 #include "Camera.hh"
@@ -16,6 +16,7 @@ Camera::Camera()
   _net = new Network();
   _map = new Map(std::make_pair(100, 100));
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
+  _bindExecFuncPtr[BCT] = &Camera::execBCT;
 }
 
 Camera::~Camera()
@@ -51,4 +52,9 @@ void				Camera::loop()
 void				Camera::execMSZ(Event event)
 {
   _map->resizeMap(std::make_pair(event.posX, event.posY));
+}
+
+void				Camera::execBCT(Event event)
+{
+  (void)event;
 }
