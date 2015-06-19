@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:15:46 2015 Oscar Morizet
-** Last update Tue May 26 15:08:48 2015 Oscar Morizet
+** Last update Fri Jun 19 18:09:08 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -54,12 +54,24 @@ int		add_map_case_element(t_map_case **list, t_object obj)
   return (0);
 }
 
+int		check_object_presence_in_map_case(t_map_case *list, t_object object)
+{
+  while (list->next != NULL)
+    {
+      if (list->obj == object)
+	return (1);
+      list = list->next;
+    }
+  return (0);
+}
+
 int		move_player_to(t_game *game, t_player *player, int new_x, int new_y)
 {
+  
   remove_map_case_element(&(game->map[player->y][player->x]),
-			  player->fd);
+			  PLAYER);
   if (add_map_case_element(&(game->map[new_y][new_x]),
-			   player->fd) == -1)
+			   PLAYER) == -1)
     return (-1);
   player->x = new_x;
   player->y = new_y;

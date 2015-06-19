@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 16 22:37:20 2015 Oscar
+** Last update Fri Jun 19 16:23:22 2015 Oscar
 */
 
 #ifndef			SERVER_H_

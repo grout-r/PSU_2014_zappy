@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:15 2015 Oscar Morizet
-** Last update Tue Jun 16 22:27:14 2015 Oscar Morizet
+** Last update Fri Jun 19 18:20:16 2015 Oscar
 */
 
 #include		<stdlib.h>

@@ -5,12 +5,13 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Fri Jun 12 23:46:35 2015 Oscar
+** Last update Fri Jun 19 17:40:38 2015 Oscar
 */
 
+#include	<stdlib.h>
+#include	<string.h>
 #include	"server.h"
 #include	"execute_line.h"
-#include	<stdlib.h>
 
 int		add_new_task_to_queue(t_game *game, t_player *player,
 				      t_command command, char *argument)
@@ -21,7 +22,7 @@ int		add_new_task_to_queue(t_game *game, t_player *player,
   if ((new = malloc(sizeof(t_exec_line))) == NULL)
     return (-1);
   new->action = game->command_action[command];
-  new->parameter = argument;
+  new->parameter = strdup(argument);
   new->cycles_before_exec = game->command_duration[command];
   new->next = NULL;
   if (player->exec_queue == NULL)

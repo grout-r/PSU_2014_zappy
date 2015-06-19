@@ -1,11 +1,11 @@
 /*
-** inventory.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c** inventory.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 15:19:38 2015 Oscar Morizet
-** Last update Fri Jun 12 22:36:23 2015 Oscar
+** Last update Fri Jun 19 16:46:32 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -94,4 +94,18 @@ char		*list_inventory(t_player *player)
       tmp = tmp->next;
     }
   return (dump);
+}
+
+int		check_object_presence_in_inventory(t_player *player_data, char *name)
+{
+  t_item	*tmp;
+
+  tmp = player_data->inventory;
+  while (tmp != NULL)
+    {
+      if (strcmp(tmp->name, name) == 0)
+	return (1);
+      tmp = tmp->next;
+    }
+  return (0);
 }

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 14:06:43 2015 Oscar Morizet
-** Last update Mon Jun  1 14:45:33 2015 Oscar Morizet
+** Last update Fri Jun 19 18:18:37 2015 Oscar
 */
 
 #include	<stdio.h>
@@ -17,6 +17,7 @@ void		dump_map(t_game *game)
   int		x;
   int		y = 0;
 
+  printf("-----------------------\n");
   while (y != game->map_size_y)
     {
       x = 0;
@@ -27,6 +28,7 @@ void		dump_map(t_game *game)
 	}
       ++y;
     }
+  printf("-----------------------\n");
 }
 
 void		dump_teams(t_game *game)
