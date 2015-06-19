@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Fri Jun 19 17:40:38 2015 Oscar
+** Last update Fri Jun 19 18:37:10 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -52,6 +52,7 @@ int		player_process_cycle(t_game *game, t_player *player)
     }
   if ((ret = task->action(game, player, player->exec_queue->parameter)) == -1)
     return (-1);
+  print_map(game);
   player->exec_queue = player->exec_queue->next;
   free(task);
   return (0);
