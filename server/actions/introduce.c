@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 16:10:14 2015 Oscar Morizet
-** Last update Sun Jun 21 07:30:16 2015 Oscar
+** Last update Sun Jun 21 14:21:52 2015 Oscar
 */
 
 #include	<string.h>
@@ -14,39 +14,17 @@
 #include	<strings.h>
 #include	"server.h"
 
-void		return_map_dimensions(t_game *data, t_player *player)
+int		introduce(t_game *data, char *message, int client_fd)
 {
-  char		msg[56];
-
-  bzero(msg, sizeof(char) * 56);
-  sprintf(msg, "%d %d\n", data->map_size_x, data->map_size_y);
-  write(player->fd, msg, strlen(msg));
-}
-
-void		return_free_slots(int slots, t_player *player)
-{
-  char		msg[56];
-
-  bzero(msg, sizeof(char) * 56);
-  sprintf(msg, "%d\n", slots);
-  write(player->fd, msg, strlen(msg));
-}
-
-int		introduce(t_game *data, t_player *player_data, char *arg)
-{
-  int		team_id;
-  int	        free_slots;
-
-  if ((team_id = get_team_id(data, arg)) == 0)
-      return (err_no_team(player_data));
-  if ((free_slots = team_get_free_slots(data, team_id)) == 0)
-    return (err_no_slots_in_team(player_data));
-  player_data->team_id = team_id;
-  team_add_slot(data, player_data->team_id);
-  if (finish_player_init(data, player_data) == -1)
-    return (-1);
-  return_free_slots(free_slots, player_data);
-  return_map_dimensions(data, player_data);
-  player_data->introduced = 1;
-  return (0);
+  if (strcmp(message, GRAPHIX_INTRODUCTION) == 0)
+    {
+      if (introduce_as_graphical_client(data, client_fd) == -1)
+	return (-1);
+    }
+  else
+    {
+      if (introduce_as_player(data, message, client_fd) == -1)
+	return (-1);
+    }
+  remove_standby_client(data, client_fd);
 }

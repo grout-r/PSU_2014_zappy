@@ -5,43 +5,21 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Sun Jun 21 08:11:25 2015 Oscar
+** Last update Sun Jun 21 13:37:51 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	"server.h"
 
-t_player	*get_player_data(t_game *game_data, int fd)
-{
-  t_player	*tmp;
-
-  tmp = game_data->players;
-  while (tmp != NULL)
-    {
-      if (tmp->fd == fd)
-	return (tmp);
-      tmp = tmp->next;
-    }
-  return (NULL);
-}
-
-int		execute(t_game *game_data, char *buffer, t_player *player_data)
+int		execute_player_request(t_game *game_data,
+				       char *buffer, t_player *player_data)
 {
   t_command	cm;
   char		*extra;
 
-  if (player_data->introduced == 1)
-    {
-      if ((cm = get_command(game_data, buffer)) == INVALID)
-	return (1);
-      extra = get_command_argument(buffer);
-      if (add_new_task_to_queue(game_data, player_data, cm, extra) == -1)
-	return (-1);
-    }
-  else
-    {
-      if (introduce(game_data, player_data, buffer) == -1)
-	return (-1);
-    }
-  return (0);
+  if ((cm = get_command(game_data, buffer)) == INVALID)
+    return (1);
+  extra = get_command_argument(buffer);
+  if (add_new_task_to_queue(game_data, player_data, cm, extra) == -1)
+    return (-1);
 }

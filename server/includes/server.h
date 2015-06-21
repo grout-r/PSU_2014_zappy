@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
+1;2802;0c1;2802;0c1;2802;0c1;2802;0c** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Sun Jun 21 08:07:46 2015 Oscar
+** Last update Sun Jun 21 14:05:03 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -25,6 +25,7 @@
 # include		<arpa/inet.h>
 # include		"map.h"
 # include		"object.h"
+# include		"graphix.h"
 
 typedef enum		e_orientation
   {
@@ -51,6 +52,12 @@ typedef enum		e_command
     INVALID
   }			t_command;
 
+typedef struct			s_standby_client
+{
+  int				fd;
+  struct s_standby_client	*next;
+}				t_standby_client;
+  
 typedef struct		s_coords
 {
   int			x;
@@ -77,7 +84,6 @@ typedef struct		s_exec_line t_exec_line;
 
 typedef struct		s_player
 {
-  int			introduced;
   int			x;
   int			y;
   int			level;
@@ -133,6 +139,8 @@ typedef struct		s_game
   float			action_delay;
   t_team		*teams;
   t_player		*players;
+  t_graphix		*cameras;
+  t_standby_client	*standby_clients;
   t_map_case		***map;
 }			t_game;
 
@@ -146,8 +154,8 @@ int			check_if_num(char *);
 int			error_print_usage();
 int			init(t_game *, t_server_info *);
 int			init_server(t_server_info *server);
-int			handle_server_interactions(t_server_info *server, t_game *game_data);
-int			introduce(t_game *data, t_player *player_data, char *arg);
+int			handle_server_requests(t_server_info *server, t_game *game_data);
+int			introduce(t_game *data, char *message, int req_fd);
 int			action_avance(t_game *data, t_player *player_data, char *arg);
 int			action_droite(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
@@ -163,7 +171,6 @@ int			action_fork(t_game *data, t_player *player_data, char *arg);
 int			action_connect_nbr(t_game *data, t_player *player_data, char *arg);
 int			init_map(t_game *game_data);
 int			create_team(t_game *game, char *team_name);
-int			add_client_to_players(t_game *game, int player_fd);
 int			remove_client_from_players(t_game *game, int player_fd);
 int			execute(t_game *game_data, char *buffer, t_player *player);
 int			init_map_case(t_map_case ***map, int x, int y);
@@ -172,9 +179,9 @@ int			init_inventory(t_player *player);
 int			add_item_class_to_inventory(t_player *player, char *item_name);
 int			init_player(t_game *game_data, t_player *player);
 int			get_team_id(t_game *game, char *team_name);
-int			err_no_team(t_player *player);
+int			err_no_team(int fd);
 int			team_get_free_slots(t_game *game, int team_id);
-int			err_no_slots_in_team(t_player *player);
+int			err_no_slots_in_team(int fd);
 int			finish_player_init(t_game *game_data, t_player *player);
 int			check_args(t_game *game, t_server_info *server);
 int			init_timer(t_game *game, t_server_info *server);
@@ -203,5 +210,6 @@ void			dump_map(t_game *game);
 
 t_command		get_command(t_game *game_data, char *cmd);
 t_player		*get_player_data(t_game *game_data, int req_fd);
+t_player		*add_client_to_players(t_game *game, int player_fd);
 
 #endif			/* !SERVER_H_ */

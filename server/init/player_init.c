@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 17:08:21 2015 Oscar Morizet
-** Last update Sun Jun 21 07:41:42 2015 Oscar
+** Last update Sun Jun 21 13:12:27 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -14,7 +14,6 @@
 
 void		print_welcome(t_player *player)
 {
-  player->introduced = 0;
   write(player->fd, "BIENVENUE\n", 10);
 }
 

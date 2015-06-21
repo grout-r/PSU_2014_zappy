@@ -1,27 +1,41 @@
 /*
-** manage_client.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** players.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server
 ** 
-** Made by Oscar Morizet
+** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
-** Started on  Mon May  4 16:20:47 2015 Oscar Morizet
-** Last update Sun Jun 21 08:01:53 2015 Oscar
+** Started on  Sun Jun 21 13:24:42 2015 Oscar
+** Last update Sun Jun 21 13:37:50 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	"server.h"
 
-int		add_client_to_players(t_game *game, int player_fd)
+t_player	*get_player_data(t_game *game_data, int fd)
+{
+  t_player	*tmp;
+
+  tmp = game_data->players;
+  while (tmp != NULL)
+    {
+      if (tmp->fd == fd)
+	return (tmp);
+      tmp = tmp->next;
+    }
+  return (NULL);
+}
+
+t_player	*add_client_to_players(t_game *game, int player_fd)
 {
   t_player	*new;
   t_player	*tmp;
 
   if ((new = malloc(sizeof(t_player))) == NULL)
-    return (-1);
+    return (NULL);
   new->fd = player_fd;
   new->next = NULL;
   if (init_player(game, new) == -1)
-    return (-1);
+    return (NULL);
   if (!game->players)
     game->players = new;
   else
@@ -31,7 +45,7 @@ int		add_client_to_players(t_game *game, int player_fd)
         tmp = tmp->next;
       tmp->next = new;
     }
-  return (0);
+  return (new);
 }
 
 int		remove_client_from_players(t_game *game, int player_fd)
