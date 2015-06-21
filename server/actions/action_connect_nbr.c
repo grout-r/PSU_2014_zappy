@@ -5,14 +5,22 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:29:16 2015 Oscar Morizet
-** Last update Mon May 11 17:03:20 2015 Oscar Morizet
+** Last update Sun Jun 21 08:47:07 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
+#include	<string.h>
+#include	<strings.h>
 #include	"server.h"
 
 int		action_connect_nbr(t_game *data, t_player *player_data, char *arg)
 {
-  printf("action connect nbr");
+  char		free_slots[9];
+
+  bzero(free_slots, 9);
+  sprintf(free_slots, "%d\n",
+	  team_get_free_slots(data, player_data->team_id));
+  write(player_data->fd, free_slots, strlen(free_slots)); 
   return (0);
 }

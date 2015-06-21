@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Sun Jun 21 07:50:44 2015 Oscar
+## Last update Sun Jun 21 08:47:36 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -32,7 +32,7 @@ TEST		=	test
 
 CORE		=	core
 
-SRC		=	main.c \
+SRC		=	$(CORE)/main.c \
 			$(INIT)/init.c \
 			$(INIT)/argument_parser.c \
 			$(INIT)/player_init.c \

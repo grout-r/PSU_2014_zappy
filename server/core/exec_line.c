@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Sun Jun 21 07:40:37 2015 Oscar
+** Last update Sun Jun 21 08:54:23 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -13,17 +13,26 @@
 #include	"server.h"
 #include	"execute_line.h"
 
+int		instant_exec(t_game *game, t_player *player,
+			     t_command command, char *argument)
+{
+  return ((game->command_action[command])(game, player, argument));
+}
+
 int		add_new_task_to_queue(t_game *game, t_player *player,
 				      t_command command, char *argument)
 {
   t_exec_line	*new;
   t_exec_line	*tmp;
-  
+  int		command_duration;
+
+  if ((command_duration = game->command_duration[command]) == 0)
+    return (instant_exec(game, player, command, argument));
   if ((new = malloc(sizeof(t_exec_line))) == NULL)
     return (-1);
   new->action = game->command_action[command];
   new->parameter = strdup(argument);
-  new->cycles_before_exec = game->command_duration[command];
+  new->cycles_before_exec = command_duration;
   new->next = NULL;
   if (player->exec_queue == NULL)
     {
