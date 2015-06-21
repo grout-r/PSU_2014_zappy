@@ -5,7 +5,7 @@
 ## Login   <roman@epitech.net>
 ## 
 ## Started on  Mon Apr 27 11:34:18 2015 grout_r
-## Last update Thu Jun 18 10:38:37 2015 grout_r
+## Last update Tue Jun 23 14:34:06 2015 grout_r
 ##
 
 CC		= 	g++ -g3
@@ -28,7 +28,8 @@ SRC		=	src/main.cpp \
 			src/Player.cpp \
 			src/Exception.cpp \
 			src/Map.cpp \
-			src/Case.cpp
+			src/Case.cpp \
+			src/Egg.cpp
 
 OBJ 		= 	$(SRC:.cpp=.o)
 

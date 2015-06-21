@@ -16,6 +16,9 @@ Network::Network()
   _commandMapping["pex"] = &Network::fillPEX;
   _commandMapping["pbc"] = &Network::fillPBC;
   _commandMapping["pie"] = &Network::fillPIE;
+  _commandMapping["pfk"] = &Network::fillPFK;
+  _commandMapping["pdr"] = &Network::fillPDR;
+  _commandMapping["enw"] = &Network::fillENW;
 }
 
 Network::~Network()
@@ -281,7 +284,7 @@ Event					Network::fillPBC(std::string command)
   return event;
 }
 
-Event					Network::fillPIE(str::string command)
+Event					Network::fillPIE(std::string command)
 {
   std::istringstream                    iss(command);
   std::string                           sub;
@@ -296,5 +299,73 @@ Event					Network::fillPIE(str::string command)
   if (event.posX < 0 || event.posY < 0 || event.incantResult < 0)
     return event;
   event.eventName = PIE;
+  return event;
+}
+
+Event					Network::fillPFK(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(1, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  iss >> sub;
+  iss >> event.playerId;
+  if (event.playerId < 0)
+    return event;
+  event.eventName = PFK;
+  return event;
+}
+
+Event					Network::fillPDR(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(2, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  iss >> event.ressourceId;
+  if (event.playerId < 0 || event.ressourceId < 0)
+    return event;
+  event.eventName = PDR;
+  return event;
+}
+
+Event					Network::fillENW(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(4, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.eggId;
+  iss >> event.playerId;
+  iss >> event.posX;
+  iss >> event.posY;
+  if (event.eggId < 0 || event.playerId < 0 || event.posX < 0 || event.posY < 0)
+    return event;
+  event.eventName = ENW;
   return event;
 }

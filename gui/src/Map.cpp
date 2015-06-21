@@ -1,9 +1,18 @@
 # include "Map.hh"
 
-Map::Map(std::pair<int, int> size) : _size(size)
+Map::Map(std::pair<int, int> size) : _size(size), _hudLookAt(-1, -1)
 {
 }
 
+void				Map::setHud(std::pair<int, int> pos)
+{
+  _hudLookAt = pos;
+}
+
+std::pair<int, int>	        Map::getHud()
+{
+  return (_hudLookAt);
+}
 
 sf::Sprite*			Map::getPlayerSprite(size_t i)
 {
@@ -21,6 +30,13 @@ sf::Sprite*			Map::getPlayerSprite(size_t i)
   return (currentCase);
 }
 
+Egg*				Map::getEgg(size_t i)
+{
+  if (i > _eggs.size() - 1 || _eggs.size() == 0)
+    return (NULL);
+  return (_eggs[i]);  
+}
+
 Case*				Map::getCase(size_t i)
 {
   if (i > _cases.size() - 1 || _cases.size() == 0)
@@ -28,11 +44,31 @@ Case*				Map::getCase(size_t i)
   return (_cases[i]);
 }
 
+Case*				Map::getCaseFromPos(std::pair<int, int> pos)
+{
+  for (size_t i = 0; i != _cases.size(); i++)
+    {
+      if (_cases[i]->getPos() == pos)
+	return (_cases[i]);
+    }
+  return (NULL);  
+}
+
 Player*				Map::getPlayerFromId(int id)
 {
   for (size_t i = 0; i != players.size(); i++)
     {
       if (players[i]->getPid() == id)
+	return (players[i]);
+    }
+  return (NULL);
+}
+
+Player*				Map::getPlayerFromPos(std::pair<int, int> pos)
+{
+  for (size_t i = 0; i != players.size(); i++)
+    {
+      if (players[i]->getPos() == pos)
 	return (players[i]);
     }
   return (NULL);
@@ -75,6 +111,11 @@ void				Map::addPlayer(int pid, std::pair<int, int> pos,
   Player			*bob = new Player(pid, pos, orientation, level, teamName);
   
   this->players.push_back(bob);  
+}
+
+void				Map::addEgg(int eggId, int pid, std::pair<int, int> pos)
+{
+  _eggs.push_back(new Egg(eggId, pid, pos));
 }
 
 std::pair<int, int>		Map::getSize()

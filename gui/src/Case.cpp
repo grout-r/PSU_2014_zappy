@@ -24,14 +24,7 @@ std::map<t_ressource, int>			Case::getRessources()
   return (_ressources);
 }
 
-void						Case::dumpRessources()
+int						Case::askInventory(t_ressource res)
 {
-  std::cout << "Case en " << _pos.first << " * " << _pos.second << " " ;   
-  for (int i = 0; i != 7; i++)
-    {
-      std::cout
-	<< " | Rs# : " << i 
-	<< " --  " << _ressources[(t_ressource)i] ;
-    }
-  std::cout << std::endl;
+  return (_ressources[res]);
 }

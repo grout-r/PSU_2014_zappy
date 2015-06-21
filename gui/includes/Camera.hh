@@ -1,12 +1,3 @@
-//
-// Camera.hh for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Tue Apr 28 15:30:30 2015 grout_r
-// Last update Mon Jun 22 14:29:09 2015 grout_r
-//
 
 #ifndef CAMERA
 # define CAMERA
@@ -32,6 +23,7 @@ private:
   std::map<t_eventName, execFuncPtr> _bindExecFuncPtr;
 
 private:
+  void				updateGame();
   void				treatEvent();
 
 public:
@@ -39,13 +31,19 @@ public:
   ~Camera();
   void				loop();
   
-public:
+private:
   void				execMSZ(Event);
   void				execBCT(Event);
   void				execPNW(Event);  
   void				execPPO(Event);  
   void				execPLV(Event);
   void				execPIN(Event);
+  void				execENW(Event);
+  void				execCHFOCUS(Event);
+
+private:
+  void				execKEYMOVE(Event);
+
 };
 
 #endif
