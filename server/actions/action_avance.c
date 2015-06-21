@@ -5,10 +5,11 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:15:14 2015 Oscar Morizet
-** Last update Fri Jun 19 19:09:26 2015 Oscar
+** Last update Sun Jun 21 07:49:11 2015 Oscar
 */
 
 #include		<stdlib.h>
+#include		<unistd.h>
 #include		"server.h"
 
 void			globify(t_game *data, int *x, int *y)
@@ -29,6 +30,7 @@ int			action_avance(t_game *data, t_player *player_data, char *arg)
   int			new_x;
   int			new_y;
 
+  (void) arg;
   new_x = player_data->x;
   new_y = player_data->y;
   orient = player_data->orientation;

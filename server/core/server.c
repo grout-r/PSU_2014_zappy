@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Sat Jun 13 01:45:09 2015 Oscar
+** Last update Sun Jun 21 07:47:44 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -15,7 +15,7 @@
 #include		"server.h"
 #include		"timer.h"
 
-int			make_cycle(t_game *game, t_server_info *server)
+int			make_cycle(t_game *game)
 {
   t_player		*tmp;
 
@@ -31,14 +31,14 @@ int			make_cycle(t_game *game, t_server_info *server)
   return (0);
 }
 
-int			cyclify(int cycle_nb, t_game *game, t_server_info *server)
+int			cyclify(int cycle_nb, t_game *game)
 {
   int			i;
 
   i = 0;
   while (i != cycle_nb)
     {
-      if (make_cycle(game, server) == -1)
+      if (make_cycle(game) == -1)
 	return (-1);
       ++i;
     }
@@ -58,7 +58,7 @@ int		        run(t_game *game_data, t_server_info *server)
   while (42)
     {
       gettimeofday(&cycle_finish, NULL);
-      cycles = update_timer(game_data, server, &cycle_start, &cycle_finish);
+      cycles = update_timer(server, &cycle_start, &cycle_finish);
       reset_sets(server, game_data);
       if (select(server->fd_max + 1,
 		 server->fd_reads, NULL, NULL, server->cycle_end) == -1)
@@ -71,7 +71,7 @@ int		        run(t_game *game_data, t_server_info *server)
       cycle_start_tmp = cycle_start;
       if (server->cycle_end->tv_usec == 0 && server->cycle_end->tv_sec == 0)
 	{
-	  if (cyclify(cycles, game_data, server) == -1)
+	  if (cyclify(cycles, game_data) == -1)
 	    return (-1);
 	}
       else

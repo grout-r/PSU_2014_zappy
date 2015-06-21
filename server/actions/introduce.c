@@ -5,11 +5,12 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 16:10:14 2015 Oscar Morizet
-** Last update Sun Jun 21 06:40:31 2015 Oscar
+** Last update Sun Jun 21 07:30:16 2015 Oscar
 */
 
 #include	<string.h>
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	<strings.h>
 #include	"server.h"
 

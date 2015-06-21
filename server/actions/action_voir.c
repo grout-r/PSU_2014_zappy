@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:15 2015 Oscar Morizet
-** Last update Sun Jun 21 06:26:58 2015 Oscar
+** Last update Sun Jun 21 07:29:27 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -32,8 +32,7 @@ char			*dump_line(int index, t_game *data,
       if (!dump)
 	return (NULL);
       strcat(dump, tmp);
-      //PATCH
-      if (i + 1 != (index * 2) + 1)
+      if ((i + 1 != (index * 2) + 1) || index == 0)
 	strcat(dump, ",");
       if (index)
 	move_perpendicular(coords_tmp, orientation);
@@ -72,9 +71,9 @@ char			*trace_route(t_game *data, t_map_case ***map,
   i = 0;
   coords.x = player_data->x;
   coords.y = player_data->y;
-  if ((vision = malloc(sizeof(char) * 1)) == NULL)
+  if ((vision = malloc(sizeof(char) * 2)) == NULL)
     return (NULL);
-  *vision = 0;
+  bzero(vision, sizeof(char) * 2);
   while (i != player_data->level + 1)
     {
       if ((dumped_line = read_perpendicular(&coords, i,
@@ -97,10 +96,9 @@ int			action_voir(t_game *data, t_player *player_data, char *arg)
   char			*vision;
   char			*final;
 
-  player_data->level = 1;
   if ((vision = trace_route(data, data->map, player_data)) == NULL)
     return (-1);
-  if ((final = malloc(sizeof(char) * (strlen(vision) + 3))) == NULL)
+  if ((final = malloc(sizeof(char) * (strlen(vision) + 4))) == NULL)
     return (-1);
   if (*vision == ' ')
     ++vision;

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun 12 19:55:54 2015 Oscar
-** Last update Sat Jun 13 01:41:08 2015 Oscar
+** Last update Sun Jun 21 07:42:34 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -28,7 +28,7 @@ int			count_extra_cycles(t_server_info *server, struct timeval *timelapse)
   return (cycles);
 }
 
-int			update_timer(t_game *game, t_server_info *server,
+int			update_timer(t_server_info *server,
 				     struct timeval *cycle_start,
 				     struct timeval *cycle_finish)
 {

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:00:41 2015 Oscar Morizet
-** Last update Fri Jun 12 23:19:21 2015 Oscar
+** Last update Sun Jun 21 07:48:25 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -78,9 +78,6 @@ t_command	get_command(t_game *game_data, char *cmd)
 
 char		*get_command_argument(char *cmd)
 {
-  int		i;
-
-  i = 0;
   while (*cmd && *cmd != ' ')
     ++cmd;
   if (*cmd == ' ')

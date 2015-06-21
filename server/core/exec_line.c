@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Fri Jun 19 18:37:10 2015 Oscar
+** Last update Sun Jun 21 07:40:37 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -58,7 +58,7 @@ int		player_process_cycle(t_game *game, t_player *player)
   return (0);
 }
 
-int		init_player_exec_line(t_game *game, t_player *player)
+int		init_player_exec_line(t_player *player)
 {
   player->exec_queue = NULL;
   return (0);

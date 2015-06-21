@@ -1,11 +1,11 @@
 /*
-1;2802;0c** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Fri Jun 19 17:38:27 2015 Oscar
+** Last update Sun Jun 21 08:11:25 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -25,13 +25,11 @@ t_player	*get_player_data(t_game *game_data, int fd)
   return (NULL);
 }
 
-int		execute(t_game *game_data, int req_fd, char *buffer)
+int		execute(t_game *game_data, char *buffer, t_player *player_data)
 {
   t_command	cm;
-  t_player	*player_data;
   char		*extra;
 
-  player_data = get_player_data(game_data, req_fd);
   if (player_data->introduced == 1)
     {
       if ((cm = get_command(game_data, buffer)) == INVALID)

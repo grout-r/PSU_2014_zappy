@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun  1 13:26:03 2015 Oscar Morizet
-** Last update Fri Jun 19 19:47:55 2015 Oscar
+** Last update Sun Jun 21 08:34:12 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -25,7 +25,6 @@ int		do_alloc(char **dump, char *object)
 
 char		*dump_case(t_game *data, t_map_case *mcase, int index)
 {
-  int		add_size;
   int		skip_myself;
   char		*dump;
 
@@ -35,8 +34,10 @@ char		*dump_case(t_game *data, t_map_case *mcase, int index)
   skip_myself = 0;
   while (mcase != NULL)
     {
-      if (mcase->obj == PLAYER && !skip_myself)
-	skip_myself = 1;
+      if ((mcase->obj == PLAYER && !skip_myself) && index == 0)
+	{
+	  skip_myself = 1;
+	}
       else
 	{
 	  if (do_alloc(&dump, data->inventory_names[mcase->obj]) == -1)

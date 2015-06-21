@@ -1,11 +1,11 @@
 /*
-** server_interactions.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c** server_interactions.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Sat Jun 13 01:46:10 2015 Oscar
+** Last update Sun Jun 21 08:13:34 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -16,6 +16,7 @@
 
 int			handle_req(t_server_info *server, t_game *game_data, int req_fd)
 {
+  t_player		*player;
   char			buffer[BUFFER_R_SIZE + 1];
   int			ret;
 
@@ -23,15 +24,17 @@ int			handle_req(t_server_info *server, t_game *game_data, int req_fd)
   ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
   if (ret == -1)
     return (-1);
+  player = get_player_data(game_data, req_fd);
   if (ret == 0)
     {
       FD_CLR(req_fd, server->fd_reads);
+      remove_map_case_element(&(game_data->map[player->y][player->x]), PLAYER);
       if (remove_client_from_players(game_data, req_fd) == -1)
 	return (-1);
       return (0);
     }
   clean_out_buffer(buffer);
-  if (execute(game_data, req_fd, buffer) == -1)
+  if (execute(game_data, buffer, player) == -1)
     return (-1);
   return (0);
 }

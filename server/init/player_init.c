@@ -5,10 +5,11 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 17:08:21 2015 Oscar Morizet
-** Last update Thu Jun  4 23:00:44 2015 Oscar
+** Last update Sun Jun 21 07:41:42 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	"server.h"
 
 void		print_welcome(t_player *player)
@@ -34,10 +35,12 @@ int		finish_player_init(t_game *game_data, t_player *player)
 
 int		init_player(t_game *game_data, t_player *player)
 {
+  (void) game_data;
+  player->level = 1;
   player->inventory = NULL;
   if (init_inventory(player) == -1)
     return (-1);
-  if (init_player_exec_line(game_data, player) == -1)
+  if (init_player_exec_line(player) == -1)
     return (-1);
   player->orientation = UP;
   print_welcome(player);

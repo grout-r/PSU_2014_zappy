@@ -1,21 +1,22 @@
 /*
-** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
+1;2802;0c1;2802;0c** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Fri Jun 19 19:33:41 2015 Oscar
+** Last update Sun Jun 21 08:07:46 2015 Oscar
 */
 
 #ifndef			SERVER_H_
 # define		SERVER_H_
 
-# define		MAX_CONNECTIONS 50
-# define		COMMAND_NB	12
-# define		BUFFER_R_SIZE	56
-# define		PARAMETERS_BASE	"pxynct"
-# define		USAGE "\n\tUsage : ./server [-p (port)] [-x (map width)] \
+# define		MAX_CONNECTIONS		50
+# define		MAX_PLAYERS_PER_TEAM	25
+# define		COMMAND_NB		12
+# define		BUFFER_R_SIZE		56
+# define		PARAMETERS_BASE		"pxynct"
+# define		USAGE			"\n\tUsage : ./server [-p (port)] [-x (map width)] \
 [-y (map length)] [-n (team_name_1 team_name_X)] \
 [-c (players/team)] [-t (temporal delay)]\n\n"
 
@@ -164,12 +165,27 @@ int			init_map(t_game *game_data);
 int			create_team(t_game *game, char *team_name);
 int			add_client_to_players(t_game *game, int player_fd);
 int			remove_client_from_players(t_game *game, int player_fd);
-int			execute(t_game *game_data, int req_fd, char *buffer);
+int			execute(t_game *game_data, char *buffer, t_player *player);
 int			init_map_case(t_map_case ***map, int x, int y);
 int			move_player_to(t_game *game, t_player *player, int new_x, int new_y);
 int			init_inventory(t_player *player);
 int			add_item_class_to_inventory(t_player *player, char *item_name);
 int			init_player(t_game *game_data, t_player *player);
+int			get_team_id(t_game *game, char *team_name);
+int			err_no_team(t_player *player);
+int			team_get_free_slots(t_game *game, int team_id);
+int			err_no_slots_in_team(t_player *player);
+int			finish_player_init(t_game *game_data, t_player *player);
+int			check_args(t_game *game, t_server_info *server);
+int			init_timer(t_game *game, t_server_info *server);
+int			init_player_exec_line(t_player *player);
+int			add_new_task_to_queue(t_game *game, t_player *player,
+					      t_command command, char *argument);
+int			make_cycle(t_game *game);
+int			player_process_cycle(t_game *game, t_player *player);
+int			update_timer(t_server_info *server,
+				     struct timeval *cycle_start,
+				     struct timeval *cycle_finish);
 
 void			init_command_names(t_game *game_data);
 void			dump_teams(t_game *game);
@@ -177,7 +193,15 @@ void			init_command_action(t_game *game_data);
 void			clean_out_buffer(char *str);
 void			change_item_qt(t_player *player, char *item_name, char evo);
 void			change_item_qt(t_player *player, char *item_name, char evo);
+void			team_add_slot(t_game *game, int team_id);
+void			init_inventory_names(t_game *game_data);
+void			init_command_duration(t_game *game_data);
+void			map_spawn_items(t_game *game);
+void			print_map(t_game *game);
+void			reset_sets(t_server_info *server, t_game *game_data);
+void			dump_map(t_game *game);
 
 t_command		get_command(t_game *game_data, char *cmd);
+t_player		*get_player_data(t_game *game_data, int req_fd);
 
 #endif			/* !SERVER_H_ */
