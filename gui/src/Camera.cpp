@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Mon Jun 22 13:14:48 2015 grout_r
+// Last update Mon Jun 22 14:30:06 2015 grout_r
 //
 
 #include "Camera.hh"
@@ -77,4 +77,9 @@ void				Camera::execPPO(Event event)
 void				Camera::execPLV(Event event)
 {
   _map->pexPlayer(event.playerId, event.level);
+}
+
+void				Camera::execPIN(Event event)
+{
+  _map->updateInventory(event.playerId, event.ressources);
 }
