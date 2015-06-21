@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 16:10:14 2015 Oscar Morizet
-** Last update Tue May 26 15:14:53 2015 Oscar Morizet
+** Last update Sun Jun 21 06:40:31 2015 Oscar
 */
 
 #include	<string.h>
@@ -42,8 +42,6 @@ int		introduce(t_game *data, t_player *player_data, char *arg)
     return (err_no_slots_in_team(player_data));
   player_data->team_id = team_id;
   team_add_slot(data, player_data->team_id);
-  if ((free_slots = team_get_free_slots(data, team_id)) == 0)
-    return (err_no_slots_in_team(player_data));
   if (finish_player_init(data, player_data) == -1)
     return (-1);
   return_free_slots(free_slots, player_data);
