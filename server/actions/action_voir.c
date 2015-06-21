@@ -1,11 +1,11 @@
 /*
-** action_voir.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
+1;2802;0c** action_voir.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:15 2015 Oscar Morizet
-** Last update Fri Jun 19 20:07:19 2015 Oscar
+** Last update Sun Jun 21 06:26:58 2015 Oscar
 */
 
 #include		<stdlib.h>
