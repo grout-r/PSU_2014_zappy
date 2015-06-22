@@ -14,7 +14,7 @@ GUI	=	gui/
 
 CLIENT	=	client/
 
-NAME_C	=	zappy_client
+NAME_C	=	zappy_ai
 
 NAME_G	=	zappy_gui
 

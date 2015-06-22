@@ -26,7 +26,7 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[EBO] = &Camera::execNOTHING;
   _bindExecFuncPtr[EDI] = &Camera::execNOTHING;
   _bindExecFuncPtr[SGT] = &Camera::execNOTHING;
-  _bindExecFuncPtr[SEG] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SEG] = &Camera::execSEG;
   _bindExecFuncPtr[SMG] = &Camera::execNOTHING;
 
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
@@ -124,6 +124,11 @@ void				Camera::execPIN(Event event)
 void				Camera::execENW(Event event)
 {
   _map->addEgg(event.eggId, event.playerId, std::make_pair(event.posX, event.posY));
+}
+
+void				Camera::execSEG(Event event)
+{
+  _map->gameOver(event.teamName);
 }
 
 void				Camera::execKEYMOVE(Event event)

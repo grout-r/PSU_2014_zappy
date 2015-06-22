@@ -47,9 +47,10 @@ private:
   void				execPLV(Event);
   void				execPIN(Event);
   void				execENW(Event);
+  void				execSEG(Event);
   void				execNOTHING(Event);
   void				execCHFOCUS(Event);
-  
+ 
 private:
   void				execKEYMOVE(Event);
 

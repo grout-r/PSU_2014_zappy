@@ -1,4 +1,4 @@
-NAME = client_zappy
+NAME = zappy_ai
 
 all: $(NAME)
 
@@ -6,9 +6,9 @@ $(NAME):
 	ln -s $$PWD/client.py ../$(NAME)
 
 clean:
-	rm -f ../$(NAME)
 
 fclean: clean
+	rm -f ../$(NAME)
 
 re:
 	fclean all
