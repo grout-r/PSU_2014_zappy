@@ -24,6 +24,7 @@ public:
 
 public:
   sf::Sprite*						getPlayerSprite(size_t i);
+  Case*							getCase(size_t i);
   Player*						getPlayerFromId(int pid);
 
 public:

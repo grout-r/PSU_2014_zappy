@@ -3,6 +3,7 @@
 
 # include <utility>
 # include <map>
+# include <iostream>
 # include "Definition.hh"
 
 class					Case
@@ -16,6 +17,10 @@ public:
   ~Case();
   std::pair<int, int>			getPos();
   void					setRessources(std::map<t_ressource, int>);
+  std::map<t_ressource, int>		getRessources();
+public:
+  void					dumpRessources();
+
 };
 
 #endif

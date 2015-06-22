@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Thu Jun 18 11:13:16 2015 grout_r
+// Last update Mon Jun 22 12:07:53 2015 grout_r
 //
 
 #include "Camera.hh"

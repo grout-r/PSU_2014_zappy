@@ -130,7 +130,6 @@ Event					Network::fillBCT(std::string command)
       if (event.ressources[(t_ressource)i] < 0)
 	return event;
     }
-  std::cout << event.ressources[FOOD] << std::endl;
   event.eventName = BCT;
   return event;
 }

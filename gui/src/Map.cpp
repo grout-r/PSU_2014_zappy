@@ -21,6 +21,13 @@ sf::Sprite*			Map::getPlayerSprite(size_t i)
   return (currentCase);
 }
 
+Case*				Map::getCase(size_t i)
+{
+  if (i > _cases.size() - 1 || _cases.size() == 0)
+    return (NULL);
+  return (_cases[i]);
+}
+
 Player*				Map::getPlayerFromId(int id)
 {
   for (size_t i = 0; i != players.size(); i++)
@@ -62,13 +69,14 @@ void				Map::resizeMap(std::pair<int ,int> newSize)
 void			        Map::updateCase(std::pair<int, int> pos,
 						std::map<t_ressource, int> res)
 {
-  (void)pos;
-  (void)res;
   for(size_t i = 0; i != _cases.size(); i++)
     {
       if (pos == _cases[i]->getPos())
       	{
 	  _cases[i]->setRessources(res);
+	  return ;
       	}
     }
+  _cases.push_back(new Case(pos));
+  _cases.back()->setRessources(res);
 }
