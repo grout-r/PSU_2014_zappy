@@ -28,6 +28,7 @@ public:
   Player*						getPlayerFromId(int pid);
 
 public:
+  void							pexPlayer(int pid, int level);
   void							movePlayer(int pid, 
 								   std::pair<int ,int> pos,
 								   e_orientation orientation);

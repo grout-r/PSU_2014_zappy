@@ -27,6 +27,16 @@ int				Player::getPid()
   return (this->pid);
 }
 
+int				Player::getLevel()
+{
+  return (level);
+}
+
+void				Player::setLevel(int level)
+{
+  this->level = level;
+}
+
 void				Player::setPos(std::pair<int, int> newPos)
 {
   this->pos = newPos;

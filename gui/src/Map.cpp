@@ -42,9 +42,20 @@ void				Map::movePlayer(int pid, std::pair<int ,int> pos,
 						     t_orientation orientation)
 {
   Player			*tmpPlayer = this->getPlayerFromId(pid);
-  
+
+  if (tmpPlayer == NULL)
+    return ;
   tmpPlayer->setPos(pos);
   tmpPlayer->setOrientation(orientation);
+}
+
+void				Map::pexPlayer(int pid, int level)
+{
+  Player			*tmpPlayer = this->getPlayerFromId(pid);
+
+  if (tmpPlayer == NULL)
+    return ;
+  tmpPlayer->setLevel(level);
 }
 
 void				Map::addPlayer(int pid, std::pair<int, int> pos,

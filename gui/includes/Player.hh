@@ -5,6 +5,7 @@
 # include <SFML/Graphics.hpp>
 # include <utility>
 # include <map>
+# include "Definition.hh"
   
 class						Player
 {
@@ -28,6 +29,8 @@ public:
   void						setPos(std::pair<int, int>);
   sf::Image*					getSkin();
   int						getPid();
+  int						getLevel();
+  void						setLevel(int level);
   void						setOrientation(t_orientation);
   sf::IntRect					getIntRectFromOrientation();
 };

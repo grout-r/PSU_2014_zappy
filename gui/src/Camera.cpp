@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Mon Jun 22 13:00:13 2015 grout_r
+// Last update Mon Jun 22 13:14:48 2015 grout_r
 //
 
 #include "Camera.hh"
@@ -18,6 +18,8 @@ Camera::Camera()
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
   _bindExecFuncPtr[BCT] = &Camera::execBCT;
   _bindExecFuncPtr[PNW] = &Camera::execPNW;
+  _bindExecFuncPtr[PPO] = &Camera::execPPO;
+  _bindExecFuncPtr[PLV] = &Camera::execPLV;
 }
 
 Camera::~Camera()
@@ -64,4 +66,15 @@ void				Camera::execPNW(Event event)
 {
   _map->addPlayer(event.playerId, std::make_pair(event.posX, event.posY), 
 		  (t_orientation)event.orientation, event.level, event.teamName);
+}
+
+void				Camera::execPPO(Event event)
+{
+  _map->movePlayer(event.playerId, std::make_pair(event.posX, event.posY),
+		   (t_orientation)event.orientation);
+}
+
+void				Camera::execPLV(Event event)
+{
+  _map->pexPlayer(event.playerId, event.level);
 }
