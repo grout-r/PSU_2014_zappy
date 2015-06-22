@@ -9,6 +9,7 @@ Network::Network()
   this->s_in.sin_family = AF_INET;
   _commandMapping["msz"] = &Network::fillMSZ;
   _commandMapping["bct"] = &Network::fillBCT;
+  _commandMapping["pnw"] = &Network::fillPNW;
 }
 
 Network::~Network()
@@ -131,5 +132,25 @@ Event					Network::fillBCT(std::string command)
 	return event;
     }
   event.eventName = BCT;
+  return event;
+}
+
+Event					Network::fillPNW(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  if (cptWord(6, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.playerId;
+  std::cout << event.playerId << std::endl;
+  iss >> event.posX;
+  std::cout << event.posX << std::endl;
+  iss >> event.posY;
+  iss >> event.orientation;
+  iss >> event.level;
+  iss >> event.teamName;
   return event;
 }
