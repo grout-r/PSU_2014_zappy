@@ -5,10 +5,11 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 13:24:42 2015 Oscar
-** Last update Mon Jun 22 15:17:41 2015 Oscar
+** Last update Mon Jun 22 19:09:47 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	"server.h"
 
 int		player_dies(t_game *game, t_player *player)

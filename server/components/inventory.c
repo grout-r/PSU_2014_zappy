@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 15:19:38 2015 Oscar Morizet
-** Last update Mon Jun 22 14:14:45 2015 Oscar
+** Last update Mon Jun 22 19:20:42 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -104,7 +104,8 @@ char		*list_inventory(t_player *player)
   return (dump);
 }
 
-int		check_object_presence_in_inventory(t_player *player_data, char *name)
+int		check_object_presence_in_inventory(t_player *player_data,
+						   char *name)
 {
   t_item	*tmp;
 

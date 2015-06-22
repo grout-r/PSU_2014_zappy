@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 14:06:43 2015 Oscar Morizet
-** Last update Mon Jun 22 16:36:15 2015 Oscar
+** Last update Mon Jun 22 19:34:22 2015 Oscar
 */
 
 #include	<stdio.h>
@@ -14,7 +14,6 @@
 void		dump_map(t_game *game)
 {
   t_map_case	***map = game->map;
-  int		i = 0;
   int		x = 0;
   int		y = 0;
 

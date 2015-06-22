@@ -1,15 +1,15 @@
 /*
-
 ** action_pose_objet.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:23:08 2015 Oscar Morizet
-** Last update Mon Jun 22 15:16:23 2015 Oscar
+** Last update Mon Jun 22 19:20:03 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	"server.h"
 
 int		get_less_food_mult(t_game *game, t_player *player)

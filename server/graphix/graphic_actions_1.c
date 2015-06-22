@@ -5,12 +5,13 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:00:18 2015 Oscar
-** Last update Mon Jun 22 19:02:02 2015 Oscar
+** Last update Mon Jun 22 19:27:22 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	<strings.h>
 #include	<string.h>
+#include	<unistd.h>
 #include	"server.h"
 
 int		gfx_msz(t_game *data,
@@ -18,6 +19,7 @@ int		gfx_msz(t_game *data,
 {
   char		res[56];
 
+  (void) arg;
   bzero(res, 56);
   sprintf(res, "msz %d %d\n", data->map_size_x,
 	  data->map_size_y);
@@ -55,6 +57,7 @@ int		gfx_mct(t_game *data,
   char		end[56];
   
   y = 0;
+  (void) arg;
   while (y != data->map_size_y)
     {
       x = 0;
@@ -78,6 +81,7 @@ int		gfx_tna(t_game *data,
   char		end[56];
   t_team	*tmp;
 
+  (void) arg;
   tmp = data->teams;
   while (tmp != NULL)
     {
@@ -93,7 +97,6 @@ int		gfx_pnw(t_game *data,
 			t_graphix *client, int fd)
 {
   char		end[56];
-  int		player_fd;
   t_player	*player;
 
   player = data->players;

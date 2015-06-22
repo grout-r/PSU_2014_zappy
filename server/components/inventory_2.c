@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun 12 22:19:59 2015 Oscar
-** Last update Mon Jun 22 10:18:51 2015 Oscar
+** Last update Mon Jun 22 19:18:47 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -28,7 +28,8 @@ void		init_inventory_names(t_game *game_data)
   game_data->inventory_names[NONE] = NULL;
 }
 
-t_object       	get_inventory_name_enumed(t_game *game_data, char *name)
+t_object       	get_inventory_name_enumed(t_game *game_data,
+					  char *name)
 {
   t_object     	tmp;
 

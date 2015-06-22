@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:29:16 2015 Oscar Morizet
-** Last update Sun Jun 21 08:47:07 2015 Oscar
+** Last update Mon Jun 22 19:21:17 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -14,10 +14,12 @@
 #include	<strings.h>
 #include	"server.h"
 
-int		action_connect_nbr(t_game *data, t_player *player_data, char *arg)
+int		action_connect_nbr(t_game *data, t_player *player_data,
+				   char *arg)
 {
   char		free_slots[9];
 
+  (void) arg;
   bzero(free_slots, 9);
   sprintf(free_slots, "%d\n",
 	  team_get_free_slots(data, player_data->team_id));

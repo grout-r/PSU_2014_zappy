@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:20:58 2015 Oscar Morizet
-** Last update Mon May 11 17:03:48 2015 Oscar Morizet
+** Last update Mon Jun 22 19:21:37 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -13,6 +13,9 @@
 
 int		action_expulse(t_game *data, t_player *player_data, char *arg)
 {
+  (void) data;
+  (void) player_data;
+  (void) arg;
   printf("action expuse\n");
   return (0);
 }

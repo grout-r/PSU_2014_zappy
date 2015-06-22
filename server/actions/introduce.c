@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 16:10:14 2015 Oscar Morizet
-** Last update Mon Jun 22 14:28:17 2015 Oscar
+** Last update Mon Jun 22 19:10:47 2015 Oscar
 */
 
 #include	<string.h>
@@ -27,4 +27,5 @@ int		introduce(t_game *data, char *message, int client_fd)
 	return (-1);
     }
   remove_standby_client(data, client_fd);
+  return (0);
 }

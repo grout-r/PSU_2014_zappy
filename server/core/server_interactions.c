@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Mon Jun 22 16:00:25 2015 Oscar
+** Last update Mon Jun 22 19:07:40 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -17,7 +17,6 @@
 int			manage_standby_client_request(t_server_info *server,
 						      t_game *game_data, int req_fd)
 {
-  t_player		*player;
   char			buffer[BUFFER_R_SIZE + 1];
   int			ret;
 
@@ -92,9 +91,6 @@ int			manage_camera_request(t_server_info *server,
 int			handle_server_requests(t_server_info *server,
 					      t_game *game_data)
 {
-  t_player		*tmp;
-
-  tmp = game_data->players;
   if (FD_ISSET(server->server_fd, server->fd_reads))
     {
       if (accept_new_client(server, game_data) == -1)

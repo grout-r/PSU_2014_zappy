@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c1;2802;0c1;2802;0c** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
+** server.h for Zappy in /home/oscar/PSU_2014_zappy/server
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Mon Jun 22 18:51:33 2015 Oscar
+** Last update Mon Jun 22 19:28:33 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -153,11 +153,17 @@ typedef struct		s_game
 char			*list_inventory(t_player *player);
 char			*dump_case(t_game *data, t_map_case *mcase, int index);
 char			*get_command_argument(char *cmd);
+char			*get_team_by_id(t_game *data, int id);
 
 int			run(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
+int			introduce_as_graphical_client(t_game *data, int fd);
 int			check_if_num(char *);
+int			add_new_standby_client(t_game *game,
+					       int client_fd);
 int			error_print_usage();
+int			check_object_presence_in_map_case(t_map_case *list,
+						  t_object object);
 int			init(t_game *, t_server_info *);
 int			init_server(t_server_info *server);
 int			handle_server_requests(t_server_info *server, t_game *game_data);
@@ -173,6 +179,8 @@ int			action_expulse(t_game *data, t_player *player_data, char *arg);
 int			action_broadcast(t_game *data, t_player *player_data, char *arg);
 int			action_incantation(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
+int			check_object_presence_in_inventory(t_player *player_data,
+						   char *name);
 int			action_fork(t_game *data, t_player *player_data, char *arg);
 int			action_connect_nbr(t_game *data, t_player *player_data, char *arg);
 int			init_map(t_game *game_data);
@@ -186,9 +194,17 @@ int			add_item_class_to_inventory(t_player *player, char *item_name);
 int			init_player(t_game *game_data, t_player *player);
 int			get_team_id(t_game *game, char *team_name);
 int			err_no_team(int fd);
+int			execute_graphical_request(t_game *game_data,
+					  char *buffer, t_graphix *client);
+int			accept_new_client(t_server_info *server, t_game *game_data);
+int			execute_player_request(t_game *game_data,
+				       char *buffer, t_player *player_data);
 int			team_get_free_slots(t_game *game, int team_id);
+int			player_dies(t_game *game, t_player *player);
 int			err_no_slots_in_team(int fd);
 int			finish_player_init(t_game *game_data, t_player *player);
+int			remove_standby_client(t_game *game,
+					      int client_fd);
 int			check_args(t_game *game, t_server_info *server);
 int			init_timer(t_game *game, t_server_info *server);
 int			remove_client_from_cameras(t_game *game, int fd);
@@ -196,32 +212,24 @@ int			init_player_exec_line(t_player *player);
 int			add_new_task_to_queue(t_game *game, t_player *player,
 					      t_command command, char *argument);
 int			make_cycle(t_game *game);
+int			handle_camera_requests(t_server_info *server,
+					       t_game *game_data);
+int			manage_standby_client_request(t_server_info *server,
+						      t_game *game_data, int req_fd);
+int			handle_player_requests(t_server_info *server,
+					       t_game *game_data);
+int			manage_player_request(t_server_info *server,
+					      t_game *game_data, int req_fd);
 int			player_process_cycle(t_game *game, t_player *player);
+int			handle_anonymous_requests(t_server_info *server,
+						  t_game *game_data);
+int			introduce_as_player(t_game *data, char *arg, int fd);
 int			update_timer(t_server_info *server,
 				     struct timeval *cycle_start,
 				     struct timeval *cycle_finish);
-
-void			init_command_names(t_game *game_data);
-void			dump_teams(t_game *game);
-void			init_command_action(t_game *game_data);
-void			clean_out_buffer(char *str);
-void			change_item_qt(t_player *player, char *item_name, char evo);
-void			change_item_qt(t_player *player, char *item_name, char evo);
-void			team_add_slot(t_game *game, int team_id);
-void			init_inventory_names(t_game *game_data);
-void			init_command_duration(t_game *game_data);
-void			map_spawn_items(t_game *game);
-void			print_map(t_game *game);
-void			reset_sets(t_server_info *server, t_game *game_data);
-void			dump_map(t_game *game);
-void			dump_case_for_gfx(t_game *game_data, char *str, int x, int y);
-
-t_command		get_command(t_game *game_data, char *cmd);
-t_player		*get_player_data(t_game *game_data, int req_fd);
-t_player		*add_client_to_players(t_game *game, int player_fd);
-t_graphix		*get_camera_data(t_game *game_data, int fd);
-t_graphix		*add_client_to_cameras(t_game *game, int fd);
-
+int			manage_camera_request(t_server_info *server,
+					      t_game *game_data, int req_fd);
+int			err_ko(int fd);
 int			gfx_msz(t_game *data, t_graphix *client, char *arg);
 int			gfx_bct(t_game *data, t_graphix *client, char *arg);
 int			gfx_mct(t_game *data, t_graphix *client, char *arg);
@@ -247,5 +255,40 @@ int			gfx_seg(t_game *data, t_graphix *client, char *arg);
 int			gfx_smg(t_game *data, t_graphix *client, char *arg);
 int			gfx_suc(t_game *data, t_graphix *client, char *arg);
 int			gfx_sbp(t_game *data, t_graphix *client, char *arg);
+int			check_bct_parameters(char *arg);
+int			get_bct_coords(t_game *data, char *arg, int *x, int *y);
+int			get_orientation(t_player *player);
+
+void			init_command_names(t_game *game_data);
+void			dump_teams(t_game *game);
+void			init_command_action(t_game *game_data);
+void			clean_out_buffer(char *str);
+void			change_item_qt(t_player *player, char *item_name, char evo);
+void			change_item_qt(t_player *player, char *item_name, char evo);
+void			team_add_slot(t_game *game, int team_id);
+void			init_inventory_names(t_game *game_data);
+void			init_command_duration(t_game *game_data);
+void			map_spawn_items(t_game *game);
+void			print_map(t_game *game);
+void			reset_sets(t_server_info *server, t_game *game_data);
+void			dump_map(t_game *game);
+void			dump_case_for_gfx(t_game *game_data, char *str, int x, int y);
+void			init_gfx_command_names(t_game *game);
+void			init_gfx_command_action(t_game *game);
+void			make_round(t_coords *coords, int xmax, int ymax);
+void			trace_move(t_coords *coords, t_orientation orientation);
+void			move_perpendicular(t_coords *coords, t_orientation orientation);
+void			get_perpendicular_begin(t_coords *coords, int index,
+						t_orientation orientation);
+void			init_inventory_names(t_game *game_data);
+t_object		get_inventory_name_enumed(t_game *game_data,
+						  char *name);
+
+t_command		get_command(t_game *game_data, char *cmd);
+t_player		*get_player_data(t_game *game_data, int req_fd);
+t_player		*add_client_to_players(t_game *game, int player_fd);
+t_graphix		*get_camera_data(t_game *game_data, int fd);
+t_graphix		*add_client_to_cameras(t_game *game, int fd);
+t_gfx_command		get_gfx_command(t_game *game_data, char *cmd);
 
 #endif			/* !SERVER_H_ */

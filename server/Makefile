@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Mon Jun 22 18:55:56 2015 Oscar
+## Last update Mon Jun 22 19:34:39 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -14,7 +14,7 @@ INCLUDES	=	-I includes/
 
 RM		= 	rm -f
 
-#CFLAGS		=	-W -Wall -Wextra -Werror
+CFLAGS		=	-W -Wall -Wextra -Werror
 
 NAME 		= 	server
 

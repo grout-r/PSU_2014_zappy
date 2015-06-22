@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:52:56 2015 Oscar
-** Last update Mon Jun 22 07:29:41 2015 Oscar
+** Last update Mon Jun 22 19:08:39 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -57,7 +57,7 @@ int			handle_player_requests(t_server_info *server,
 }
 
 int			handle_camera_requests(t_server_info *server,
-						t_game *game_data)
+					       t_game *game_data)
 {
   t_graphix		*tmp;
 

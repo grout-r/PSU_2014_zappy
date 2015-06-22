@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** introduce_as_graphic.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/actions
+** introduce_as_graphic.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:38:48 2015 Oscar
-** Last update Mon Jun 22 19:03:19 2015 Oscar
+** Last update Mon Jun 22 19:12:12 2015 Oscar
 */
 
 #include	<string.h>
