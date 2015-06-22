@@ -276,6 +276,7 @@ Event					Network::fillPBC(std::string command)
   if (cptWord(2, command) == 1)
     return event;
   iss >> sub;
+  iss >> event.playerId;
   iss >> event.message;
   if (event.message.size() == 0)
     return event;

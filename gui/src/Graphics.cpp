@@ -14,6 +14,7 @@ Graphics::Graphics(std::pair<int, int>)
   _backgroundImage.LoadFromFile("./res/bckgrnd.jpg");
   _gameOverImage.LoadFromFile("./res/gameover.jpg");
   _starImage.LoadFromFile("./res/star.png");
+  _bullImage.LoadFromFile("./res/bull.png");
 
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
@@ -280,7 +281,19 @@ void				Graphics::printPlayers(Map *map)
 	  app->Draw(currentSprite);
 	  x += 15;
 	}
+      if (current->getBroadcast() == true)
+	printBull(tmpPos);
     }
+}
+
+void				Graphics::printBull(std::pair<int, int> pos)
+{
+  sf::Sprite			current;
+  
+  current.SetImage(_bullImage);
+  current.SetScale(sf::Vector2f(0.05, 0.05));
+  current.SetPosition(sf::Vector2f((pos.first * 50) - 15, (pos.second * 50) - 15));
+  app->Draw(current);
 }
 
 void				Graphics::printThisRessourceAtPos(t_ressource res,

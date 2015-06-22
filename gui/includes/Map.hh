@@ -31,18 +31,24 @@ public:
   void							setHud(std::pair<int, int>);
   std::pair<int, int>					getHud();
   Egg*							getEgg(size_t i);
+  void							deleteEgg(int egg);
   Player*						getPlayerSprite(size_t i);
   Case*							getCase(size_t i);
   Case*							getCaseFromPos(std::pair<int, int>);
   Player*						getPlayerFromId(int pid);
   Player*						getPlayerFromPos(std::pair<int, int>);
+
 public:
+  void							updatePlayers();
   void							updateInventory
   (int pid, std::map<t_ressource, int>);
+  void							startBroadcast
+  (int pid, std::string message);
   void							pexPlayer(int pid, int level);
   void							movePlayer(int pid, 
 								   std::pair<int ,int> pos,
 								   e_orientation orientation);
+  void							deletePlayer(int pid);
   void							addPlayer(int pid,
 								  std::pair<int, int>pos,
 								  t_orientation orientation,

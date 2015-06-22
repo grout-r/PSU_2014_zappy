@@ -22,6 +22,17 @@ Player*			Map::getPlayerSprite(size_t i)
   return (players[i]);
 }
 
+void				Map::deleteEgg(int egg)
+{
+  for (std::vector<Egg*>::iterator i = _eggs.begin(); i != _eggs.end();)
+    {
+      if ((*i)->getId() == egg)
+	i = _eggs.erase(i);
+      else
+	i++;
+    }
+}
+
 Egg*				Map::getEgg(size_t i)
 {
   if (i > _eggs.size() - 1 || _eggs.size() == 0)
@@ -66,6 +77,16 @@ Player*				Map::getPlayerFromPos(std::pair<int, int> pos)
   return (NULL);
 }
 
+void				Map::startBroadcast(int pid, std::string)
+{
+  for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); i++)
+    {
+      if ((*i)->getPid() == pid)
+	(*i)->startBroadcast();
+    }
+  
+}
+
 void				Map::movePlayer(int pid, std::pair<int ,int> pos, 
 						     t_orientation orientation)
 {
@@ -75,6 +96,14 @@ void				Map::movePlayer(int pid, std::pair<int ,int> pos,
     return ;
   tmpPlayer->setPos(pos);
   tmpPlayer->setOrientation(orientation);
+}
+
+void				Map::updatePlayers()
+{
+  for (size_t i = 0; i != players.size(); i++)
+    {
+      players[i]->update();
+    }
 }
 
 void				Map::updateInventory(int pid, 
@@ -94,6 +123,18 @@ void				Map::pexPlayer(int pid, int level)
   if (tmpPlayer == NULL)
     return ;
   tmpPlayer->setLevel(level);
+}
+
+
+void				Map::deletePlayer(int pid)
+{
+  for (std::vector<Player*>::iterator i = players.begin(); i != players.end();)
+    {
+      if ((*i)->getPid() == pid)
+	i = players.erase(i);
+      else
+	i++;
+    }
 }
 
 void				Map::addPlayer(int pid, std::pair<int, int> pos,

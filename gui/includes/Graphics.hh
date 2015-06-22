@@ -26,6 +26,7 @@ private:
   sf::Image						_backgroundImage;
   sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
+  sf::Image						_bullImage;
   sf::Image						_gameOverImage;
   sf::Image						_starImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
@@ -47,7 +48,7 @@ private:
   void							printRessources(Map *map);
   void							printEggs(Map *map);
   void							printPlayers(Map *map);
-  
+  void							printBull(std::pair<int, int> pos);
   void							printThisRessourceAtPos
   (t_ressource, std::pair<int, int>);
   
