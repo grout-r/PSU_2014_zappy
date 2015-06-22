@@ -1,11 +1,11 @@
 /*
-1;2802;0c** server_commands.c for server_commands.c in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c1;2802;0c** server_commands.c for server_commands.c in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:00:41 2015 Oscar Morizet
-** Last update Sun Jun 21 07:48:25 2015 Oscar
+** Last update Mon Jun 22 07:42:07 2015 Oscar
 */
 
 #include	<stdlib.h>

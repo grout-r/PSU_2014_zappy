@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Sun Jun 21 14:05:03 2015 Oscar
+** Last update Mon Jun 22 08:17:24 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -14,6 +14,7 @@
 # define		MAX_CONNECTIONS		50
 # define		MAX_PLAYERS_PER_TEAM	25
 # define		COMMAND_NB		12
+# define		GFX_COMMAND_NB		24
 # define		BUFFER_R_SIZE		56
 # define		PARAMETERS_BASE		"pxynct"
 # define		USAGE			"\n\tUsage : ./server [-p (port)] [-x (map width)] \
@@ -117,12 +118,13 @@ typedef struct		s_server_info
 }			t_server_info;
 
 typedef			struct s_game t_game;
-typedef			int (*action_fptr)(t_game *, t_player *, char *);
+typedef			int (*t_action_fptr)(t_game *, t_player *, char *);
+typedef			int (*t_gfx_action_fptr)(t_game *, t_graphix *, char *);
 
 typedef struct		s_exec_line
 {
   char			*parameter;
-  action_fptr		action;
+  t_action_fptr		action;
   int			cycles_before_exec;
   struct s_exec_line	*next;
 }			t_exec_line;
@@ -131,7 +133,9 @@ typedef struct		s_game
 {
   char			*command_names[COMMAND_NB + 1];
   int			command_duration[COMMAND_NB];
-  action_fptr		command_action[COMMAND_NB + 1];
+  t_action_fptr		command_action[COMMAND_NB + 1];
+  char			*gfx_command_names[GFX_COMMAND_NB];
+  t_gfx_action_fptr	gfx_command_action[GFX_COMMAND_NB];
   char			*inventory_names[MAX_OBJECTS + 1];
   int			map_size_x;
   int			map_size_y;
@@ -185,6 +189,7 @@ int			err_no_slots_in_team(int fd);
 int			finish_player_init(t_game *game_data, t_player *player);
 int			check_args(t_game *game, t_server_info *server);
 int			init_timer(t_game *game, t_server_info *server);
+int			remove_client_from_cameras(t_game *game, int fd);
 int			init_player_exec_line(t_player *player);
 int			add_new_task_to_queue(t_game *game, t_player *player,
 					      t_command command, char *argument);
@@ -211,5 +216,32 @@ void			dump_map(t_game *game);
 t_command		get_command(t_game *game_data, char *cmd);
 t_player		*get_player_data(t_game *game_data, int req_fd);
 t_player		*add_client_to_players(t_game *game, int player_fd);
+t_graphix		*get_camera_data(t_game *game_data, int fd);
+t_graphix		*add_client_to_cameras(t_game *game, int fd);
+
+int			gfx_msz(t_game *data, t_graphix *client, char *arg);
+int			gfx_bct(t_game *data, t_graphix *client, char *arg);
+int			gfx_tna(t_game *data, t_graphix *client, char *arg);
+int			gfx_pnw(t_game *data, t_graphix *client, char *arg);
+int			gfx_ppo(t_game *data, t_graphix *client, char *arg);
+int			gfx_plv(t_game *data, t_graphix *client, char *arg);
+int			gfx_pin(t_game *data, t_graphix *client, char *arg);
+int			gfx_pex(t_game *data, t_graphix *client, char *arg);
+int			gfx_pbc(t_game *data, t_graphix *client, char *arg);
+int			gfx_pic(t_game *data, t_graphix *client, char *arg);
+int			gfx_pie(t_game *data, t_graphix *client, char *arg);
+int			gfx_pfk(t_game *data, t_graphix *client, char *arg);
+int			gfx_pdr(t_game *data, t_graphix *client, char *arg);
+int			gfx_pgt(t_game *data, t_graphix *client, char *arg);
+int			gfx_pdi(t_game *data, t_graphix *client, char *arg);
+int			gfx_enw(t_game *data, t_graphix *client, char *arg);
+int			gfx_eht(t_game *data, t_graphix *client, char *arg);
+int			gfx_ebo(t_game *data, t_graphix *client, char *arg);
+int			gfx_edi(t_game *data, t_graphix *client, char *arg);
+int			gfx_sgt(t_game *data, t_graphix *client, char *arg);
+int			gfx_seg(t_game *data, t_graphix *client, char *arg);
+int			gfx_smg(t_game *data, t_graphix *client, char *arg);
+int			gfx_suc(t_game *data, t_graphix *client, char *arg);
+int			gfx_sbp(t_game *data, t_graphix *client, char *arg);
 
 #endif			/* !SERVER_H_ */

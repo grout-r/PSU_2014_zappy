@@ -5,17 +5,12 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 17:08:21 2015 Oscar Morizet
-** Last update Sun Jun 21 13:12:27 2015 Oscar
+** Last update Mon Jun 22 08:28:46 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
 #include	"server.h"
-
-void		print_welcome(t_player *player)
-{
-  write(player->fd, "BIENVENUE\n", 10);
-}
 
 int		finish_player_init(t_game *game_data, t_player *player)
 {
@@ -42,6 +37,5 @@ int		init_player(t_game *game_data, t_player *player)
   if (init_player_exec_line(player) == -1)
     return (-1);
   player->orientation = UP;
-  print_welcome(player);
   return (0);
 }
