@@ -10,6 +10,12 @@ Network::Network()
   _commandMapping["msz"] = &Network::fillMSZ;
   _commandMapping["bct"] = &Network::fillBCT;
   _commandMapping["pnw"] = &Network::fillPNW;
+  _commandMapping["ppo"] = &Network::fillPPO;
+  _commandMapping["plv"] = &Network::fillPLV;
+  _commandMapping["pin"] = &Network::fillPIN;
+  _commandMapping["pex"] = &Network::fillPEX;
+  _commandMapping["pbc"] = &Network::fillPBC;
+  _commandMapping["pie"] = &Network::fillPIE;
 }
 
 Network::~Network()
@@ -137,20 +143,158 @@ Event					Network::fillBCT(std::string command)
 
 Event					Network::fillPNW(std::string command)
 {
-  std::istringstream			iss(command);
+  std::istringstream			iss;
   std::string				sub;
+  std::string::iterator			it;
   Event					event;
 
   if (cptWord(6, command) == 1)
     return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
-  std::cout << event.playerId << std::endl;
   iss >> event.posX;
-  std::cout << event.posX << std::endl;
   iss >> event.posY;
   iss >> event.orientation;
   iss >> event.level;
   iss >> event.teamName;
+  if (event.playerId < 0 || event.posX < 0 || event.posY < 0 || event.orientation < 0 || event.level < 1 || event.teamName.size() == 0)
+    return event;
+  event.eventName = PNW;
+  return event;
+}
+
+Event					Network::fillPPO(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(4, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  iss >> event.posX;
+  iss >> event.posY;
+  iss >> event.orientation;
+  if (event.playerId < 0 || event.posX < 0 || event.posY < 0 || event.orientation < 0)
+    return event;
+  event.eventName = PPO;
+  return event;
+}
+
+Event					Network::fillPLV(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(2, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  iss >> event.level;
+  if (event.playerId < 0 || event.level < 1)
+    return event;
+  event.eventName = PLV;
+  return event;
+}
+
+Event					Network::fillPIN(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(10, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  for (int i = 0; i != 7; i++)
+    iss >> event.ressources[(t_ressource)i];
+  for (int i = 0; i != 7; i++)
+    {
+      if (event.ressources[(t_ressource)i] < 0)
+        return event;
+    }
+  event.eventName = PIN;
+  return event;
+}
+
+Event					Network::fillPEX(std::string command)
+{
+  std::istringstream                    iss;
+  std::string                           sub;
+  std::string::iterator                 it;
+  Event                                 event;
+
+  if (cptWord(1, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  if (event.playerId < 0)
+    return event;
+  event.eventName = PEX;
+  return event;
+}
+
+Event					Network::fillPBC(std::string command)
+{
+  std::istringstream                    iss;
+  std::string                           sub;
+  std::string::iterator                 it;
+  Event                                 event;
+
+  if (cptWord(1, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.message;
+  if (event.message.size() == 0)
+    return event;
+  event.eventName = PBC;
+  return event;
+}
+
+Event					Network::fillPIE(str::string command)
+{
+  std::istringstream                    iss(command);
+  std::string                           sub;
+  Event                                 event;
+
+  if (cptWord(3, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.posX;
+  iss >> event.posY;
+  iss >> event.incantResult;
+  if (event.posX < 0 || event.posY < 0 || event.incantResult < 0)
+    return event;
+  event.eventName = PIE;
   return event;
 }
