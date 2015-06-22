@@ -28,6 +28,8 @@ public:
   Player*						getPlayerFromId(int pid);
 
 public:
+  void							updateInventory
+  (int pid, std::map<t_ressource, int>);
   void							pexPlayer(int pid, int level);
   void							movePlayer(int pid, 
 								   std::pair<int ,int> pos,
