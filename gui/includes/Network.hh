@@ -16,6 +16,7 @@
 # include <sstream>
 # include <vector>
 # include <unistd.h>
+# include <sstream>
 # include "Graphics.hh"
 # include "Exception.hh"
 
@@ -59,13 +60,14 @@ private:
   Event				fillSMG(std::string command);
   Event				fillSUC(std::string command);
   Event				fillSBP(std::string command);
-  bool				cptWord(int nb, std::string);
+  int				cptWord(int nb, std::string);
 
 public:
-  Network();
+  Network(std::string, std::string);
   ~Network();
   bool				initNetwork();
   void				handleEvent(std::vector<Event> &);
+  std::string			getMsg();
 };
 
 #endif

@@ -9,7 +9,10 @@ Graphics::Graphics(std::pair<int, int>)
   _view.SetHalfSize(sf::Vector2f(750, 500));
   app->SetView(_view);
   _grassImage.LoadFromFile("./res/grass.jpg");
+  _hightlightGrassImage.LoadFromFile("./res/grass_highlight.jpg");
   _scrollImage.LoadFromFile("./res/scroll.png");
+  _backgroundImage.LoadFromFile("./res/bckgrnd.jpg");
+
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
   _ressourcesImage[DERAUMERE].LoadFromFile("./res/deraumere.png");
@@ -17,9 +20,11 @@ Graphics::Graphics(std::pair<int, int>)
   _ressourcesImage[MENDIANE].LoadFromFile("./res/mendiane.png");
   _ressourcesImage[PHIRAS].LoadFromFile("./res/phiras.png");
   _ressourcesImage[THYSTAME].LoadFromFile("./res/thystame.png");
-
-  _font.LoadFromFile("./res/font.ttf");
   
+  _font.LoadFromFile("./res/font.ttf");
+  _music.OpenFromFile("./res/bo.ogg");
+  _music.Play();
+
   _ressourcesPadding[FOOD] = sf::Vector2f(0 , 0);
   _ressourcesPadding[LINEMATE] = sf::Vector2f(16.666 , 0);
   _ressourcesPadding[DERAUMERE] = sf::Vector2f(33.333 , 0);
@@ -40,6 +45,17 @@ Graphics::~Graphics()
 {
 }
 
+void				Graphics::printBackground()
+{
+  sf::Sprite			current;
+  
+  current.SetImage(_backgroundImage);
+  current.SetPosition(_offsetCoeff);
+  current.Resize(sf::Vector2f(1500, 1000));
+  app->Draw(current);
+  
+}
+
 void				Graphics::cleanMap(Map *map)
 {
   sf::Sprite			tmp;
@@ -57,7 +73,9 @@ void				Graphics::cleanMap(Map *map)
 void				Graphics::refreshScreen(Map *map)
 {
   app->Clear();
+  printBackground();
   cleanMap(map);
+  highlightCase(map->getHud());
   printRessources(map);
   printEggs(map);
   printPlayers(map);
@@ -83,7 +101,8 @@ void				Graphics::printPlayerOnHud(Player *currentPlayer)
 
   currentString.SetColor(sf::Color(0, 0, 0, 255));
   ss << currentPlayer->getLevel();
-  currentString.SetSize(20);
+  currentString.SetSize(20);  
+  currentString.SetFont(_font);
   currentString.SetText(std::string("Level : " + ss.str()));
   currentString.SetPosition(sf::Vector2f(1325,  y)+ _offsetCoeff);
   app->Draw(currentString);
@@ -121,7 +140,8 @@ void				Graphics::printCaseOnHud(Case *currentCase)
   std::stringstream		ss;
   int				y = 500;
 
-  currentRes.Scale(sf::Vector2f(0.1, 0.1));  
+  currentRes.Scale(sf::Vector2f(0.1, 0.1));
+  currentString.SetFont(_font);
   currentString.SetSize(10);
   currentString.SetColor(sf::Color(0, 0, 0, 255));
   ss << currentCase->getPos().first;
@@ -147,10 +167,40 @@ void				Graphics::printCaseOnHud(Case *currentCase)
     }
 }
 
+void				Graphics::highlightCase(std::pair<int, int> pos)
+{
+  sf::Sprite			current;
+  
+  if (pos.first < 0 || pos.second < 0)
+    return ;
+  current.SetImage(_hightlightGrassImage);
+  current.SetPosition(sf::Vector2f(pos.first * 50, pos.second * 50));
+  app->Draw(current);
+  return ;
+}
+
+Player*				Graphics::getPlayerHightlight(std::pair<int, int> pos,
+							      Map *map)
+{
+  Player			*current;
+
+  if ((current = map->getPlayerFromPos(pos)) != NULL)
+    {
+      _playerHightLightId = current->getPid();
+	return current;
+    }
+  else
+    {
+      return map->getPlayerFromId(_playerHightLightId);
+    }
+  return NULL;
+}
+
 void				Graphics::printHud(Map *map)
 {
   sf::Sprite			scroll;
-  Player			*currentPlayer = map->getPlayerFromPos(map->getHud());
+  Player			*currentPlayer = getPlayerHightlight(map->getHud(),
+									  map);
   Case				*currentCase = map->getCaseFromPos(map->getHud());
 
   scroll.SetImage(_scrollImage);

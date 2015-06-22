@@ -20,7 +20,7 @@ sf::Sprite*			Map::getPlayerSprite(size_t i)
   std::pair<int, int>		tmpPos;
   sf::Sprite*			currentCase = new sf::Sprite();
 
-  if (players.size() - 1 < i)
+  if (players.size() - 1 < i || players.size() == 0)
     return (NULL);
   tmpPlayer = players[i];
   tmpPos = tmpPlayer->getPos();
@@ -135,6 +135,16 @@ void			        Map::updateCase(std::pair<int, int> pos,
     {
       if (pos == _cases[i]->getPos())
       	{
+	  for (size_t j = 0; j != 7; j++)
+	    {
+	      if (res[(t_ressource)j] != 0)
+		break;
+	      if (j == 6)
+		{	
+		  _cases.erase(_cases.begin() + i);
+		  return ;
+		}	
+	    }
 	  _cases[i]->setRessources(res);
 	  return ;
       	}

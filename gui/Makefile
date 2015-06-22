@@ -20,6 +20,8 @@ SFML_LDFLAGS    =       -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 NAME 		= 	zappy_gui
 
+LNAME		=	../gui_zappy
+
 SRC		=	src/main.cpp \
 			src/Graphics.cpp \
 			src/Event.cpp \
@@ -37,6 +39,7 @@ all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
 			$(CC)  $(OBJ) -o $(NAME) $(SFML_LDFLAGS)
+			ln -s $$PWD/$(NAME) $(LNAME)
 
 %.o:			%.cpp
 			$(CC) $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
@@ -45,6 +48,7 @@ clean:
 
 fclean:			clean
 			$(RM) $(NAME)
+			$(RM) $(LNAME)
 
 re:			fclean all
 

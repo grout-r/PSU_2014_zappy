@@ -1,10 +1,11 @@
 
 #include "Camera.hh"
 
-Camera::Camera()
+Camera::Camera(int ac, char **av)
 {
-  _net = new Network();
-  _map = new Map(std::make_pair(100, 100));
+  setParams(ac, av);
+  _net = new Network(_ip, _port);
+  _map = new Map(std::make_pair(10, 10));
   _graph = new Graphics(_map->getSize());
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
   _bindExecFuncPtr[BCT] = &Camera::execBCT;
@@ -12,6 +13,21 @@ Camera::Camera()
   _bindExecFuncPtr[PPO] = &Camera::execPPO;
   _bindExecFuncPtr[PLV] = &Camera::execPLV;
   _bindExecFuncPtr[ENW] = &Camera::execENW;
+  _bindExecFuncPtr[PIN] = &Camera::execPIN;
+  _bindExecFuncPtr[PEX] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PBC] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PIC] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PIE] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PFK] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PDR] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PGT] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PDI] = &Camera::execNOTHING;
+  _bindExecFuncPtr[EHT] = &Camera::execNOTHING;
+  _bindExecFuncPtr[EBO] = &Camera::execNOTHING;
+  _bindExecFuncPtr[EDI] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SGT] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SEG] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SMG] = &Camera::execNOTHING;
 
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYRIGHT] = &Camera::execKEYMOVE;  
@@ -24,6 +40,17 @@ Camera::Camera()
 
 Camera::~Camera()
 {
+}
+
+void				Camera::setParams(int ac, char **av)
+{
+  if (ac != 3)
+    {
+      std::cout << " Usage : ./zappy_gui [IP] [PORT]" << std::endl;
+      exit(-1);
+    }
+  _ip = std::string(av[1]);
+  _port = std::string(av[2]);
 }
 
 void				Camera::treatEvent()
@@ -40,7 +67,6 @@ void				Camera::treatEvent()
 
 void				Camera::loop()
 {
-  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 42, "Lespatatesenfolies");
   if (_net->initNetwork() == false)
     exit(-1);
   while (true)
@@ -56,6 +82,11 @@ void				Camera::loop()
 void				Camera::updateGame()
 {
   
+}
+
+void				Camera::execNOTHING(Event)
+{
+  return ;
 }
 
 void				Camera::execMSZ(Event event)
