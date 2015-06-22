@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** dump_tools.c for TO DELETE in /home/oscar/rendu/PSU_2014_zappy/server
+** dump_tools.c for TO DELETE in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 14:06:43 2015 Oscar Morizet
-** Last update Sun Jun 21 14:02:10 2015 Oscar
+** Last update Mon Jun 22 16:36:15 2015 Oscar
 */
 
 #include	<stdio.h>

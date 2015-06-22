@@ -5,10 +5,12 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:03 2015 Oscar
-** Last update Mon Jun 22 08:04:33 2015 Oscar
+** Last update Mon Jun 22 18:44:42 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<strings.h>
+#include	<string.h>
 #include	"server.h"
 
 int		gfx_enw(t_game *data, t_graphix *client, char *arg)
@@ -29,4 +31,10 @@ int		gfx_edi(t_game *data, t_graphix *client, char *arg)
 
 int		gfx_sgt(t_game *data, t_graphix *client, char *arg)
 {
+  char		res[56];
+
+  bzero(res, 56);
+  sprintf(res, "sgt %d\n", data->action_delay);
+  write(client->fd, res, strlen(res));
+  return (0);
 }

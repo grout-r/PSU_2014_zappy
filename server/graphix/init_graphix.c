@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 07:36:42 2015 Oscar
-** Last update Mon Jun 22 10:36:31 2015 Oscar
+** Last update Mon Jun 22 15:55:32 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -17,6 +17,7 @@ void		init_gfx_command_names(t_game *game)
 {
   game->gfx_command_names[MSZ] = strdup("msz");
   game->gfx_command_names[BCT] = strdup("bct");
+  game->gfx_command_names[MCT] = strdup("mct");
   game->gfx_command_names[TNA] = strdup("tna");
   game->gfx_command_names[PPO] = strdup("ppo");
   game->gfx_command_names[PLV] = strdup("plv");
@@ -30,6 +31,7 @@ void		init_gfx_command_action(t_game *game)
 {
   game->gfx_command_action[MSZ] = &gfx_msz;
   game->gfx_command_action[BCT] = &gfx_bct;
+  game->gfx_command_action[MCT] = &gfx_mct;
   game->gfx_command_action[TNA] = &gfx_tna;
   game->gfx_command_action[PPO] = &gfx_ppo;
   game->gfx_command_action[PLV] = &gfx_plv;

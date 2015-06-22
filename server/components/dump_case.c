@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c1;2802;0c** dump_case.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/components
+** dump_case.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/components
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun  1 13:26:03 2015 Oscar Morizet
-** Last update Mon Jun 22 11:10:41 2015 Oscar
+** Last update Mon Jun 22 17:46:33 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -35,9 +35,7 @@ char		*dump_case(t_game *data, t_map_case *mcase, int index)
   while (mcase != NULL)
     {
       if ((mcase->obj == PLAYER && !skip_myself) && index == 0)
-	{
-	  skip_myself = 1;
-	}
+	skip_myself = 1;
       else
 	{
 	  if (do_alloc(&dump, data->inventory_names[mcase->obj]) == -1)
@@ -60,7 +58,6 @@ void		dump_case_for_gfx(t_game *game_data, char *str, int x, int y)
   char		char_item_count[5];
   
   item = NOURRITURE;
-  printf("%d %d\n", x, y);
   while (item != NONE)
     {
       bzero(char_item_count, 5);

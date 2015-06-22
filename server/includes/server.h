@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Mon Jun 22 14:44:55 2015 Oscar
+** Last update Mon Jun 22 18:51:33 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -96,7 +96,6 @@ typedef struct		s_player
   int		        fd;
   int			team_id;
   t_exec_line		*exec_queue;
-  char			*team;
   t_orientation		orientation;
   t_item		*inventory;
   struct s_player	*next;
@@ -215,6 +214,7 @@ void			map_spawn_items(t_game *game);
 void			print_map(t_game *game);
 void			reset_sets(t_server_info *server, t_game *game_data);
 void			dump_map(t_game *game);
+void			dump_case_for_gfx(t_game *game_data, char *str, int x, int y);
 
 t_command		get_command(t_game *game_data, char *cmd);
 t_player		*get_player_data(t_game *game_data, int req_fd);
@@ -224,8 +224,9 @@ t_graphix		*add_client_to_cameras(t_game *game, int fd);
 
 int			gfx_msz(t_game *data, t_graphix *client, char *arg);
 int			gfx_bct(t_game *data, t_graphix *client, char *arg);
+int			gfx_mct(t_game *data, t_graphix *client, char *arg);
 int			gfx_tna(t_game *data, t_graphix *client, char *arg);
-int			gfx_pnw(t_game *data, t_graphix *client, char *arg);
+int			gfx_pnw(t_game *data, t_graphix *client, int fd);
 int			gfx_ppo(t_game *data, t_graphix *client, char *arg);
 int			gfx_plv(t_game *data, t_graphix *client, char *arg);
 int			gfx_pin(t_game *data, t_graphix *client, char *arg);

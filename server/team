@@ -1,0 +1,53 @@
+components/inventory.c:  if (player->inventory == NULL)
+components/inventory.c:    player->inventory = new;
+components/inventory.c:      tmp = player->inventory;
+components/inventory.c:  if (player->inventory == NULL)
+components/inventory.c:  tmp = player->inventory;
+components/inventory.c:  if (player->inventory == NULL)
+components/inventory.c:  tmp = player->inventory;
+components/#map.c#:  remove_map_case_element(&(game->map[player->y][player->x]),
+components/#map.c#:  player->x = new_x;
+components/#map.c#:  player->y = new_y;
+components/map.c:  remove_map_case_element(&(game->map[player->y][player->x]),
+components/map.c:  player->x = new_x;
+components/map.c:  player->y = new_y;
+core/exec_line.c:  if ((player->cycles_to_die % 126) == 0)
+core/exec_line.c:  --player->cycles_to_die;
+core/exec_line.c:  if (player->cycles_to_die == 0)
+core/exec_line.c:  if (player->exec_queue == NULL)
+core/exec_line.c:      player->exec_queue = new;
+core/exec_line.c:  tmp = player->exec_queue;
+core/exec_line.c:  task = player->exec_queue;
+core/exec_line.c:			  player->exec_queue->parameter)) == -1)
+core/exec_line.c:  player->exec_queue = player->exec_queue->next;
+core/exec_line.c:  player->exec_queue = NULL;
+core/players.c:  remove_map_case_element(&(game->map[player->y][player->x]),
+core/players.c:  if (remove_client_from_players(game, player->fd) == -1)
+core/players.c:  write(player->fd, "mort\n", 5);
+core/players.c:  close(player->fd);
+core/server_interactions.c:      remove_map_case_element(&(game_data->map[player->y][player->x]),
+actions/action_pose_objet.c:  if (player->cycles_to_die <= FOOD_CONSUMING_CYCLE)
+actions/action_pose_objet.c:      while ((player->cycles_to_die % 126) != 0)
+actions/action_pose_objet.c:	--player->cycles_to_die;
+actions/#action_prend_objet.c#:	player->cycles_to_death += 
+actions/introduce_as_player.c:  player->team_id = team_id;
+actions/introduce_as_player.c:  team_add_slot(data, player->team_id);
+init/player_init.c:  player->x = x;
+init/player_init.c:  player->y = y;
+init/player_init.c:  if (add_map_case_element(&(game_data->map[player->y][player->x]),
+init/player_init.c:  player->level = 1;
+init/player_init.c:  player->inventory = NULL;
+init/player_init.c:  player->cycles_to_die = BASE_FOOD * FOOD_CONSUMING_CYCLE;
+init/player_init.c:  player->orientation = UP;
+graphix/graphic_actions_2.c:      if (player->fd == player_fd)
+graphix/graphic_actions_2.c:		  player_fd, player->x, player->y);
+graphix/graphic_actions_2.c:      player = player->next;
+graphix/graphic_actions_2.c:      if (player->fd == player_fd)
+graphix/graphic_actions_2.c:		  player_fd, player->level);
+graphix/graphic_actions_2.c:      player = player->next;
+graphix/graphic_actions_1.c:      if (player->fd == fd)
+graphix/graphic_actions_1.c:		  fd, player->x, player->y,
+graphix/graphic_actions_1.c:		  get_orientation(player), player->level,
+graphix/graphic_actions_1.c:		  player->team);
+graphix/graphic_actions_1.c:      player = player->next;
+tools/tools.c:  ori = player->orientation;

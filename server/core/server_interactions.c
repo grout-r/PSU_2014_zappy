@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Mon Jun 22 14:27:27 2015 Oscar
+** Last update Mon Jun 22 16:00:25 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -71,7 +71,6 @@ int			manage_camera_request(t_server_info *server,
   char			buffer[BUFFER_R_SIZE + 1];
   int			ret;
 
-  printf("camera request\n");
   bzero(buffer, BUFFER_R_SIZE);
   ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
   if (ret == -1)

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:48 2015 Oscar
-** Last update Mon Jun 22 11:21:06 2015 Oscar
+** Last update Mon Jun 22 18:10:28 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -26,7 +26,7 @@ int		gfx_suc(t_game *data, t_graphix *client, char *arg)
   char		err[20];
 
   bzero(err, sizeof(char) * 20);
-  sprintf(err, "Commande inconnue\n");
+  sprintf(err, "suc\n");
   write(client->fd, err, strlen(err));
 }
 
@@ -35,6 +35,6 @@ int		gfx_sbp(t_game *data, t_graphix *client, char *arg)
   char		err[20];
 
   bzero(err, sizeof(char) * 20);
-  sprintf(err, "Mauvais parametres\n");
+  sprintf(err, "sbp\n");
   write(client->fd, err, strlen(err));
 }
