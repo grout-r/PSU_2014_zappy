@@ -1,11 +1,11 @@
 /*
-** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Mon Jun 22 08:14:46 2015 Oscar
+** Last update Mon Jun 22 11:21:35 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -35,7 +35,7 @@ int		execute_graphical_request(t_game *game_data,
 
   if ((cm = get_gfx_command(game_data, buffer)) == SUC)
     {
-      gfx_fail(client);
+      gfx_suc(game_data, client, NULL);
       return (1);
     }
   extra = get_command_argument(buffer);

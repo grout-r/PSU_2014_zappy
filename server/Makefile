@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Mon Jun 22 08:06:11 2015 Oscar
+## Last update Mon Jun 22 10:06:45 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -85,6 +85,7 @@ SRC		=	$(CORE)/main.c \
 			$(GRAPHIX)/graphic_actions_3.c \
 			$(GRAPHIX)/graphic_actions_4.c \
 			$(GRAPHIX)/graphic_actions_5.c \
+			$(GRAPHIX)/graphic_actions_tools.c \
 			$(TEST)/dump_tools.c \
 
 OBJ 		= 	$(SRC:.c=.o)
