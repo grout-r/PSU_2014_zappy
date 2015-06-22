@@ -5,14 +5,6 @@
 # include <SFML/Graphics.hpp>
 # include <utility>
 # include <map>
-
-typedef enum					e_orientation
-  {
-    NORTH = 1,
-    EAST = 2,
-    SOUTH = 3,
-    WEST = 4
-  }						t_orientation;
   
 class						Player
 {

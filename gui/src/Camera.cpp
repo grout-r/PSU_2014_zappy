@@ -5,7 +5,7 @@
 // Login   <roman@epitech.net>
 // 
 // Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Mon Jun 22 12:07:53 2015 grout_r
+// Last update Mon Jun 22 13:00:13 2015 grout_r
 //
 
 #include "Camera.hh"
@@ -17,6 +17,7 @@ Camera::Camera()
   _map = new Map(std::make_pair(100, 100));
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
   _bindExecFuncPtr[BCT] = &Camera::execBCT;
+  _bindExecFuncPtr[PNW] = &Camera::execPNW;
 }
 
 Camera::~Camera()
@@ -57,4 +58,10 @@ void				Camera::execMSZ(Event event)
 void				Camera::execBCT(Event event)
 {
   _map->updateCase(std::make_pair(event.posX, event.posY), event.ressources);
+}
+
+void				Camera::execPNW(Event event)
+{
+  _map->addPlayer(event.playerId, std::make_pair(event.posX, event.posY), 
+		  (t_orientation)event.orientation, event.level, event.teamName);
 }

@@ -42,4 +42,12 @@ typedef	 enum				e_ressource
     THYSTAME
   }					t_ressource;
 
+typedef enum					e_orientation
+  {
+    NORTH = 1,
+    EAST = 2,
+    SOUTH = 3,
+    WEST = 4
+  }						t_orientation;
+
 #endif
