@@ -16,6 +16,7 @@ private:
   t_orientation					orientation;
   int						level;
   std::string					teamName;
+  std::map<t_ressource, int>			_inventaire;
 
 private:
   std::map<t_orientation, sf::IntRect>		IntRectFromOrientation;
@@ -33,6 +34,7 @@ public:
   void						setLevel(int level);
   void						setOrientation(t_orientation);
   sf::IntRect					getIntRectFromOrientation();
+  void						updateInventory(std::map<t_ressource, int>);
 };
 
 #endif

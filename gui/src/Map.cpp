@@ -49,6 +49,16 @@ void				Map::movePlayer(int pid, std::pair<int ,int> pos,
   tmpPlayer->setOrientation(orientation);
 }
 
+void				Map::updateInventory(int pid, 
+						     std::map<t_ressource, int> newInv)
+{
+  Player			*tmpPlayer = this->getPlayerFromId(pid);
+
+  if (tmpPlayer == NULL)
+    return ;
+  tmpPlayer->updateInventory(newInv);
+}
+
 void				Map::pexPlayer(int pid, int level)
 {
   Player			*tmpPlayer = this->getPlayerFromId(pid);

@@ -12,6 +12,14 @@ Player::Player(int pid, std::pair<int, int> pos, t_orientation orientation,
   this->IntRectFromOrientation[EAST] = sf::IntRect(0, 100, 50, 150);
   this->IntRectFromOrientation[WEST] = sf::IntRect(0, 50, 50, 100);
   this->IntRectFromOrientation[SOUTH] = sf::IntRect(0, 0, 50, 50);
+  _inventaire[FOOD] = 0;
+  _inventaire[LINEMATE] = 0;
+  _inventaire[DERAUMERE] = 0;
+  _inventaire[SIBUR] = 0;
+  _inventaire[MENDIANE] = 0;
+  _inventaire[PHIRAS] = 0;
+  _inventaire[THYSTAME] = 0;
+  
 }
 
 Player::~Player()
@@ -55,4 +63,9 @@ void				Player::setOrientation(t_orientation orientation)
 sf::IntRect			Player::getIntRectFromOrientation()
 {
   return (this->IntRectFromOrientation[this->orientation]);
+}
+
+void				Player::updateInventory(std::map<t_ressource, int> newInv)
+{
+  _inventaire = newInv;
 }
