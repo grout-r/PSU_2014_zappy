@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Mon Jun 22 10:06:45 2015 Oscar
+## Last update Mon Jun 22 14:18:48 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -94,7 +94,7 @@ all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
 			$(CC) $(OBJ) -o $(NAME)
-			ln -s $$PWD/$(NAME) $(LNAME)
+			ln -sf $$PWD/$(NAME) $(LNAME)
 
 %.o:			%.c
 			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<

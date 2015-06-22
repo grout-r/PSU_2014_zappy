@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:15:14 2015 Oscar Morizet
-** Last update Sun Jun 21 07:49:11 2015 Oscar
+** Last update Mon Jun 22 14:23:34 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -45,7 +45,6 @@ int			action_avance(t_game *data, t_player *player_data, char *arg)
   globify(data, &new_x, &new_y);
   if (move_player_to(data, player_data, new_x, new_y) == -1)
     return (-1);
-  dump_map(data);
   write(player_data->fd, "ok\n", 3);
   return (0);
 }

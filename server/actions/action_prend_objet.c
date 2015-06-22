@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:49 2015 Oscar Morizet
-** Last update Fri Jun 19 18:20:22 2015 Oscar
+** Last update Mon Jun 22 14:54:38 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -27,6 +27,8 @@ int		action_prend_objet(t_game *data, t_player *player_data, char *arg)
     {
       remove_map_case_element(&(data->map[player_data->y][player_data->x]), object);
       change_item_qt(player_data, arg, '+');
+      if (object == NOURRITURE)
+	player_data->cycles_to_die += FOOD_CONSUMING_CYCLE;
       write(player_data->fd, "ok\n", 3);
       return (0);
     }

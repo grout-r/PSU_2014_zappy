@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Mon Jun 22 08:17:24 2015 Oscar
+** Last update Mon Jun 22 14:44:55 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -13,6 +13,8 @@
 
 # define		MAX_CONNECTIONS		50
 # define		MAX_PLAYERS_PER_TEAM	25
+# define		BASE_FOOD		10
+# define		FOOD_CONSUMING_CYCLE	126
 # define		COMMAND_NB		12
 # define		GFX_COMMAND_NB		24
 # define		BUFFER_R_SIZE		56
@@ -85,6 +87,7 @@ typedef struct		s_exec_line t_exec_line;
 
 typedef struct		s_player
 {
+  int			cycles_to_die;
   int			x;
   int			y;
   int			level;

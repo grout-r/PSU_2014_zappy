@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 15:19:38 2015 Oscar Morizet
-** Last update Fri Jun 19 16:46:32 2015 Oscar
+** Last update Mon Jun 22 14:14:45 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -38,6 +38,9 @@ int		add_item_class_to_inventory(t_player *player, char *item_name)
 
 int		init_inventory(t_player *player)
 {
+  int		i;
+
+  i = 0;
   if (!add_item_class_to_inventory(player, "nourriture") ||
       !add_item_class_to_inventory(player, "linemate") ||
       !add_item_class_to_inventory(player, "deraumere") ||
@@ -46,6 +49,11 @@ int		init_inventory(t_player *player)
       !add_item_class_to_inventory(player, "phiras") ||
       !add_item_class_to_inventory(player, "thystame"))
     return (-1);
+  while (i != BASE_FOOD)
+    {
+      change_item_qt(player, "nourriture", '+');
+      i++;
+    }
   return (0);
 }
 

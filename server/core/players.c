@@ -5,11 +5,23 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 13:24:42 2015 Oscar
-** Last update Sun Jun 21 13:37:50 2015 Oscar
+** Last update Mon Jun 22 15:17:41 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	"server.h"
+
+int		player_dies(t_game *game, t_player *player)
+{
+  remove_map_case_element(&(game->map[player->y][player->x]),
+			  PLAYER);
+  if (remove_client_from_players(game, player->fd) == -1)
+    return (-1);
+  write(player->fd, "mort\n", 5);
+  close(player->fd);
+  return (0);
+}
+
 
 t_player	*get_player_data(t_game *game_data, int fd)
 {
@@ -66,5 +78,6 @@ int		remove_client_from_players(t_game *game, int player_fd)
   tofree = tmp->next;
   tmp->next = tofree->next;
   free(tofree);
+  close(player_fd);
   return (0);
 }

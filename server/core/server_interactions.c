@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Mon Jun 22 07:27:57 2015 Oscar
+** Last update Mon Jun 22 14:27:27 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -71,6 +71,7 @@ int			manage_camera_request(t_server_info *server,
   char			buffer[BUFFER_R_SIZE + 1];
   int			ret;
 
+  printf("camera request\n");
   bzero(buffer, BUFFER_R_SIZE);
   ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
   if (ret == -1)
@@ -90,7 +91,7 @@ int			manage_camera_request(t_server_info *server,
 }
 
 int			handle_server_requests(t_server_info *server,
-						   t_game *game_data)
+					      t_game *game_data)
 {
   t_player		*tmp;
 
@@ -102,9 +103,9 @@ int			handle_server_requests(t_server_info *server,
     }
   if (handle_player_requests(server, game_data) == -1)
     return (-1);
-  if (handle_anonymous_requests(server, game_data) == -1)
-    return (-1);
   if (handle_camera_requests(server, game_data) == -1)
+    return (-1);
+  if (handle_anonymous_requests(server, game_data) == -1)
     return (-1);
   return (0);
 }
