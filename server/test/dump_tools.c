@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 14:06:43 2015 Oscar Morizet
-** Last update Mon Jun  1 14:45:33 2015 Oscar Morizet
+** Last update Fri Jun 19 19:48:05 2015 Oscar
 */
 
 #include	<stdio.h>
@@ -14,19 +14,72 @@
 void		dump_map(t_game *game)
 {
   t_map_case	***map = game->map;
-  int		x;
+  int		i = 0;
+  int		x = 0;
   int		y = 0;
 
+  printf("-----------------------\n");
   while (y != game->map_size_y)
     {
       x = 0;
       while (x != game->map_size_x)
 	{
-	  printf("X[%d] Y[%d] : %s\n", x, y, dump_case(map[y][x], 0));
+	  printf("X[%d] Y[%d] : %s\n", x, y, dump_case(game, map[y][x], 0));
 	  ++x;
 	}
       ++y;
     }
+  printf("-----------------------\n");
+}
+
+void		print_map(t_game *game)
+{
+  t_map_case	***map = game->map;
+  t_map_case	*tmp;
+  int		i = 0;
+  int		x = 0;
+  int		y = 0;
+
+  
+  printf(" -");
+  while (i != game->map_size_x * 2)
+    {
+      printf("-");
+      i++;
+    }
+  printf("\n");
+  while (y != game->map_size_y)
+    {
+      x = 0;
+      printf(" ");
+      while (x != game->map_size_x)
+	{
+	  tmp = map[y][x];
+	  printf("|");
+	  while (tmp != NULL)
+	    {
+	      if (tmp->obj == PLAYER)
+		{
+		  printf("X");
+		  break;
+		} 
+	      tmp = tmp->next;
+	    }
+	  if (tmp == NULL)
+	    printf(" ");
+	  ++x;
+	}
+      printf("|\n");
+      ++y;
+    }
+  printf(" -");
+  i = 0;
+  while (i != game->map_size_x * 2)
+    {
+      printf("-");
+      i++;
+    }
+  printf("\n");
 }
 
 void		dump_teams(t_game *game)

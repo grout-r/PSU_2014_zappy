@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:49 2015 Oscar Morizet
-** Last update Tue Jun 16 14:35:58 2015 Jordan Verove
+** Last update Fri Jun 19 18:20:22 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -13,17 +13,23 @@
 
 int		action_prend_objet(t_game *data, t_player *player_data, char *arg)
 {
-  printf("action prend objet\n");
-  while (player_data->inventory->next != NULL)
+  t_map_case	*map_case;
+  t_object     	object;
+
+  object = get_inventory_name_enumed(data, arg);
+  if (object == PLAYER || object == NONE)
     {
-      if (strcmp(player_data->inventory->name, arg) == 0)
-        {
-          change_item_qt(player_data, arg, '+');
-	  write(player_data->fd, "ok\n", 3);
-          return (0);
-        }
-      player_data->inventory->next++;
+      write(player_data->fd, "ko\n", 3);
+      return (1);
+    }
+  map_case = data->map[player_data->y][player_data->x];
+  if (check_object_presence_in_map_case(map_case, object))
+    {
+      remove_map_case_element(&(data->map[player_data->y][player_data->x]), object);
+      change_item_qt(player_data, arg, '+');
+      write(player_data->fd, "ok\n", 3);
+      return (0);
     }
   write(player_data->fd, "ko\n", 3);
-  return (0);
+  return (1);
 }

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:15 2015 Oscar Morizet
-** Last update Tue Jun 16 22:27:14 2015 Oscar Morizet
+** Last update Fri Jun 19 20:07:19 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -25,13 +25,14 @@ char			*dump_line(int index, t_game *data,
   dump[0] = 0;
   while (i != (index * 2) + 1)
     {
-      if ((tmp = dump_case(data->map[coords_tmp->y]
+      if ((tmp = dump_case(data, data->map[coords_tmp->y]
 			   [coords_tmp->x], index)) == NULL)
 	return (NULL);
       dump = realloc(dump, sizeof(char) * (strlen(dump) + strlen(tmp) + 2));
       if (!dump)
 	return (NULL);
       strcat(dump, tmp);
+      //PATCH
       if (i + 1 != (index * 2) + 1)
 	strcat(dump, ",");
       if (index)
@@ -73,6 +74,7 @@ char			*trace_route(t_game *data, t_map_case ***map,
   coords.y = player_data->y;
   if ((vision = malloc(sizeof(char) * 1)) == NULL)
     return (NULL);
+  *vision = 0;
   while (i != player_data->level + 1)
     {
       if ((dumped_line = read_perpendicular(&coords, i,
@@ -100,6 +102,8 @@ int			action_voir(t_game *data, t_player *player_data, char *arg)
     return (-1);
   if ((final = malloc(sizeof(char) * (strlen(vision) + 3))) == NULL)
     return (-1);
+  if (*vision == ' ')
+    ++vision;
   sprintf(final, "{%s}\n", vision);
   write(player_data->fd, final, strlen(final));
   return (0);

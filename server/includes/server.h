@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 16 22:37:20 2015 Oscar
+** Last update Fri Jun 19 19:33:41 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -136,7 +136,7 @@ typedef struct		s_game
 }			t_game;
 
 char			*list_inventory(t_player *player);
-char			*dump_case(t_map_case *mcase, int index);
+char			*dump_case(t_game *data, t_map_case *mcase, int index);
 char			*get_command_argument(char *cmd);
 
 int			run(t_game *game_data, t_server_info *server);
