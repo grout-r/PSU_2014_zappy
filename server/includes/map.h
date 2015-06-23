@@ -5,13 +5,15 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:09:54 2015 Oscar Morizet
-** Last update Tue Jun 23 08:50:58 2015 Oscar
+** Last update Tue Jun 23 11:27:42 2015 Oscar
 */
 
 #ifndef			MAP_HH_
 # define		MAP_HH_
 
 # include		"object.h"
+
+# define		MIN_MAP_SIZE	3
 
 typedef struct		s_map_case
 {

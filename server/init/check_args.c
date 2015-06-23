@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 01:29:08 2015 Oscar
-** Last update Tue Jun 23 08:55:39 2015 Oscar
+** Last update Tue Jun 23 11:27:25 2015 Oscar
 */
 
 #include	"server.h"
@@ -23,6 +23,13 @@ int		check_args(t_game *game, t_server_info *server)
     {
       printf("Players per teams must be between 1 and %d\n",
 	     MAX_PLAYERS_PER_TEAM);
+      return (0);
+    }
+  if (game->map_size_x < MIN_MAP_SIZE ||
+      game->map_size_y < MIN_MAP_SIZE)
+    {
+      printf("Map's minimum size is %d\n",
+	     MIN_MAP_SIZE);
       return (0);
     }
   return (1);

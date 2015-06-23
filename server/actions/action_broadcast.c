@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:19:54 2015 Oscar Morizet
-** Last update Mon Jun 22 19:22:36 2015 Oscar
+** Last update Tue Jun 23 11:20:08 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -14,7 +14,7 @@
 #include	<string.h>
 #include	"server.h"
 
-void	path_xy(int *src, int dest, int size)
+void		path_xy(int *src, int dest, int size)
 {
   if (*src == dest)
     return;
@@ -38,7 +38,7 @@ void	path_xy(int *src, int dest, int size)
     *src = 0;
 }
 
-int	fill_orient(t_orientation orient, int tab[4], t_orientation from)
+int		fill_orient(t_orientation orient, int tab[4], t_orientation from)
 {
   if (orient == LEFT)
     {
