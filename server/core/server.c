@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Tue Jun 23 08:49:08 2015 Oscar
+** Last update Tue Jun 23 13:41:42 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -17,16 +17,22 @@
 
 int			make_cycle(t_game *game)
 {
-  t_player		*tmp;
-
-  tmp = game->players;
-  if (tmp == NULL)
-    return (0);
-  while (tmp != NULL)
+  t_player		*player;
+  t_egg			*egg;
+  
+  player = game->players;
+  egg = game->eggs;
+  while (player != NULL)
     {
-      if (player_process_cycle(game, tmp) == -1)
+      if (player_process_cycle(game, player) == -1)
 	return (-1);
-      tmp = tmp->next;
+      player = player->next;
+    }
+  while (egg != NULL)
+    {
+      if (egg_process_cycle(game, egg) == -1)
+	return (-1);
+      egg = egg->next;
     }
   return (0);
 }

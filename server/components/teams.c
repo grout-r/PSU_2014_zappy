@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 15:35:10 2015 Oscar Morizet
-** Last update Mon May 25 17:05:12 2015 Oscar Morizet
+** Last update Tue Jun 23 13:39:47 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -23,6 +23,7 @@ int		create_team(t_game *game, char *team_name)
   strcpy(new_team->name, team_name);
   new_team->id = next_id;
   new_team->players_nb = 0;
+  new_team->extra_place = 0;
   new_team->next = NULL;
   if (game->teams == NULL)
     game->teams = new_team;

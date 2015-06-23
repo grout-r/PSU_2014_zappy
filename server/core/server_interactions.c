@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Mon Jun 22 19:07:40 2015 Oscar
+** Last update Tue Jun 23 13:46:22 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -55,6 +55,7 @@ int			manage_player_request(t_server_info *server,
 			      PLAYER);
       if (remove_client_from_players(game_data, req_fd) == -1)
 	return (-1);
+      team_free_slot(game_data, player->team_id);
       return (0);
     }
   clean_out_buffer(buffer);

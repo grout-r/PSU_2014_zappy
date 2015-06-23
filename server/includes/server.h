@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 23 12:28:18 2015 Oscar
+** Last update Tue Jun 23 13:47:35 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -171,6 +171,7 @@ int			parse_parameters(int, char **, t_game *, t_server_info *);
 int			fill_orient(t_orientation orient,
 				    int tab[4], t_orientation from);
 int			introduce_as_graphical_client(t_game *data, int fd);
+int			egg_process_cycle(t_game *game, t_egg *egg);
 int			check_if_num(char *);
 int			add_new_standby_client(t_game *game,
 					       int client_fd);
@@ -308,6 +309,7 @@ void			ppo_to_all(t_game *data, t_player *player);
 void			get_perpendicular_begin(t_coords *coords, int index,
 						t_orientation orientation);
 void			init_inventory_names(t_game *game_data);
+void			team_free_slot(t_game *game, int team_id);
 
 t_command		get_command(t_game *game_data, char *cmd);
 t_player		*get_player_data(t_game *game_data, int req_fd);

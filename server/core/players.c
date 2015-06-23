@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 13:24:42 2015 Oscar
-** Last update Tue Jun 23 08:42:05 2015 Oscar
+** Last update Tue Jun 23 13:47:06 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -31,6 +31,7 @@ int		player_dies(t_game *game, t_player *player)
 			  PLAYER);
   if (remove_client_from_players(game, player->fd) == -1)
     return (-1);
+  team_free_slot(game, player->team_id);
   write(player->fd, "mort\n", 5);
   pdi_to_all(game, player);
   close(player->fd);
