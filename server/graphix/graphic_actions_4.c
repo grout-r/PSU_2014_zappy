@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:03 2015 Oscar
-** Last update Tue Jun 23 14:08:42 2015 Oscar
+** Last update Tue Jun 23 15:10:25 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -51,18 +51,14 @@ int		gfx_eht(t_game *data,
   return (0);
 }
 
-int		gfx_ebo(t_game *data, t_graphix *client, char *arg)
+int		gfx_ebo(t_game *data,
+			t_graphix *client, int egg_id)
 {
-  (void) data;
-  (void) client;
-  (void) arg;
-  return (0);
-}
+  char		end[56];
 
-int		gfx_edi(t_game *data, t_graphix *client, char *arg)
-{
   (void) data;
-  (void) client;
-  (void) arg;
+  bzero(end, 56);
+  sprintf(end, "ebo %d\n", egg_id);
+  write(client->fd, end, strlen(end));
   return (0);
 }

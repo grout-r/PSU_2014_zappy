@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:48 2015 Oscar
-** Last update Tue Jun 23 08:57:24 2015 Oscar
+** Last update Tue Jun 23 15:11:30 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -22,22 +22,6 @@ int		gfx_sgt(t_game *data, t_graphix *client, char *arg)
   bzero(res, 56);
   sprintf(res, "sgt %d\n", (int) data->action_delay);
   write(client->fd, res, strlen(res));
-  return (0);
-}
-
-int		gfx_seg(t_game *data, t_graphix *client, char *arg)
-{
-  (void) data;
-  (void) client;
-  (void) arg;
-  return (0);
-}
-
-int		gfx_smg(t_game *data, t_graphix *client, char *arg)
-{
-  (void) data;
-  (void) client;
-  (void) arg;
   return (0);
 }
 

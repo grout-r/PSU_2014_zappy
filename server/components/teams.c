@@ -1,11 +1,11 @@
 /*
-** teams.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+1;2802;0c** teams.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 15:35:10 2015 Oscar Morizet
-** Last update Tue Jun 23 13:39:47 2015 Oscar
+** Last update Tue Jun 23 15:20:50 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -67,6 +67,11 @@ void		team_add_slot(t_game *game, int team_id)
     {
       if (tmp->id == team_id)
 	{
+	  if (tmp->players_nb >= game->players_per_team)
+	    {
+	      use_egg(game, tmp->id);
+	      --tmp->extra_place;
+	    }
 	  tmp->players_nb = tmp->players_nb + 1;
 	  return ;
 	}
@@ -93,14 +98,18 @@ int		get_team_id(t_game *game, char *team_name)
 int		team_get_free_slots(t_game *game, int team_id)
 {
   t_team	*tmp;
+  int		free_slots;
 
-  if (game->teams == NULL)
-    return (0);
   tmp = game->teams;
   while (tmp != NULL)
     {
       if (tmp->id == team_id)
-	return (game->players_per_team - tmp->players_nb);
+	{
+	  free_slots = game->players_per_team -
+	    tmp->players_nb;
+	  free_slots += tmp->extra_place;
+	  return (free_slots);
+	}
       tmp = tmp->next;
     }
   return (0);

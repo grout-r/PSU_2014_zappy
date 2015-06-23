@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:36:27 2015 Oscar
-** Last update Tue Jun 23 08:50:43 2015 Oscar
+** Last update Tue Jun 23 15:12:57 2015 Oscar
 */
 
 #ifndef			GRAPHIX_H_
@@ -23,7 +23,6 @@ typedef enum		e_gfx_command
   PLV,
   PIN,
   SGT,
-  SST,
   SUC
 }			t_gfx_command;
 

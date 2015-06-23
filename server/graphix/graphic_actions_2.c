@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:02:13 2015 Oscar
-** Last update Tue Jun 23 12:25:34 2015 Oscar
+** Last update Tue Jun 23 15:09:28 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -67,14 +67,6 @@ int		gfx_plv(t_game *data, t_graphix *client, char *arg)
 }
 
 int		gfx_pin(t_game *data, t_graphix *client, char *arg)
-{
-  (void) data;
-  (void) client;
-  (void) arg;
-  return (0);
-}
-
-int		gfx_pex(t_game *data, t_graphix *client, char *arg)
 {
   (void) data;
   (void) client;

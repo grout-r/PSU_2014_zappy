@@ -5,17 +5,17 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:31 2015 Oscar Morizet
-** Last update Mon Jun 22 19:22:54 2015 Oscar
+** Last update Tue Jun 23 15:04:42 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	"server.h"
 
-int		action_incantation(t_game *data, t_player *player_data, char *arg)
+int		action_incantation(t_game *data,
+				   t_player *player_data, char *arg)
 {
   (void) data;
   (void) player_data;
   (void) arg;
-  printf("action incantation\n");
   return (0);
 }

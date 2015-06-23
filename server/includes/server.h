@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 23 14:11:20 2015 Oscar
+** Last update Tue Jun 23 15:17:17 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -268,21 +268,15 @@ int			gfx_pnw(t_game *data, t_graphix *client, int fd);
 int			gfx_ppo(t_game *data, t_graphix *client, char *arg);
 int			gfx_plv(t_game *data, t_graphix *client, char *arg);
 int			gfx_pin(t_game *data, t_graphix *client, char *arg);
-int			gfx_pex(t_game *data, t_graphix *client, char *arg);
 int			gfx_pbc(t_game *data, t_graphix *client, int fd, char *msg);
-int			gfx_pic(t_game *data, t_graphix *client, char *arg);
-int			gfx_pie(t_game *data, t_graphix *client, char *arg);
 int			gfx_pfk(t_game *data, t_graphix *client, int fd);
 int			gfx_pdr(t_game *data, t_graphix *client, char *arg);
 int			gfx_pgt(t_game *data, t_graphix *client, char *arg);
 int			gfx_pdi(t_game *data, t_graphix *client, int fd);
 int			gfx_enw(t_game *data, t_graphix *client, t_egg *egg);
 int			gfx_eht(t_game *data, t_graphix *client, int egg_id);
-int			gfx_ebo(t_game *data, t_graphix *client, char *arg);
-int			gfx_edi(t_game *data, t_graphix *client, char *arg);
+int			gfx_ebo(t_game *data, t_graphix *client, int egg_id);
 int			gfx_sgt(t_game *data, t_graphix *client, char *arg);
-int			gfx_seg(t_game *data, t_graphix *client, char *arg);
-int			gfx_smg(t_game *data, t_graphix *client, char *arg);
 int			gfx_suc(t_game *data, t_graphix *client, char *arg);
 int			gfx_sbp(t_game *data, t_graphix *client, char *arg);
 int			check_bct_parameters(char *arg);
@@ -314,6 +308,7 @@ void			get_perpendicular_begin(t_coords *coords, int index,
 						t_orientation orientation);
 void			init_inventory_names(t_game *game_data);
 void			team_free_slot(t_game *game, int team_id);
+void			use_egg(t_game *game, int team_id);
 
 t_command		get_command(t_game *game_data, char *cmd);
 t_player		*get_player_data(t_game *game_data, int req_fd);

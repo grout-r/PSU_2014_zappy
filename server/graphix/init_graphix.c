@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 07:36:42 2015 Oscar
-** Last update Tue Jun 23 08:50:09 2015 Oscar
+** Last update Tue Jun 23 15:13:05 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -23,7 +23,6 @@ void		init_gfx_command_names(t_game *game)
   game->gfx_command_names[PLV] = strdup("plv");
   game->gfx_command_names[PIN] = strdup("pin");
   game->gfx_command_names[SGT] = strdup("sgt");
-  game->gfx_command_names[SST] = strdup("sst");
   game->gfx_command_names[SUC] = NULL;
 }
 
@@ -37,7 +36,6 @@ void		init_gfx_command_action(t_game *game)
   game->gfx_command_action[PLV] = &gfx_plv;
   game->gfx_command_action[PIN] = &gfx_pin;
   game->gfx_command_action[SGT] = &gfx_sgt;
-  game->gfx_command_action[SST] = &gfx_seg;
   game->gfx_command_action[SUC] = &gfx_sbp;
 }
 

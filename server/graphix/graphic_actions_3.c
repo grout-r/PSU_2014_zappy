@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:03:01 2015 Oscar
-** Last update Tue Jun 23 12:13:17 2015 Oscar
+** Last update Tue Jun 23 15:08:13 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -13,22 +13,6 @@
 #include	<strings.h>
 #include	<unistd.h>
 #include	"server.h"
-
-int		gfx_pic(t_game *data, t_graphix *client, char *arg)
-{
-  (void) data;
-  (void) client;
-  (void) arg;
-  return (0);
-}
-
-int		gfx_pie(t_game *data, t_graphix *client, char *arg)
-{
-  (void) data;
-  (void) client;
-  (void) arg;
-  return (0);
-}
 
 int		gfx_pfk(t_game *data, t_graphix *client, int fd)
 {

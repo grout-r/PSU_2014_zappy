@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:52:56 2015 Oscar
-** Last update Mon Jun 22 19:08:39 2015 Oscar
+** Last update Tue Jun 23 15:25:45 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -30,8 +30,9 @@ int			handle_anonymous_requests(t_server_info *server,
 	      return (-1);
 	    }
 	}
-      if ((tmp = tmp->next) == NULL)
+      if (tmp->next == NULL)
 	return (0);
+      tmp = tmp->next;
     }
   return (0);
 }
