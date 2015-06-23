@@ -5,11 +5,12 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:22:08 2015 Oscar Morizet
-** Last update Tue Jun 23 12:11:53 2015 Oscar
+** Last update Tue Jun 23 14:13:40 2015 Oscar
 */
 
 #include		<stdlib.h>
 #include		<strings.h>
+#include		<unistd.h>
 #include		"server.h"
 
 void			pfk_to_all(t_game *data, t_player *player)
@@ -31,6 +32,7 @@ int			action_fork(t_game *data, t_player *player_data, char *arg)
   (void) arg;
   if (add_egg(data, player_data) == NULL)
     return (-1);
+  write(player_data->fd, "ok\n", 3);
   pfk_to_all(data, player_data);
   return (0);
 }

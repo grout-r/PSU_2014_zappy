@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:03 2015 Oscar
-** Last update Tue Jun 23 13:59:43 2015 Oscar
+** Last update Tue Jun 23 14:08:42 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -26,11 +26,16 @@ int		gfx_pdi(t_game *data,
   return (0);
 }
 
-int		gfx_enw(t_game *data, t_graphix *client, char *arg)
+int		gfx_enw(t_game *data,
+			t_graphix *client, t_egg *egg)
 {
+  char		end[56];
+
   (void) data;
-  (void) client;
-  (void) arg;
+  bzero(end, 56);
+  sprintf(end, "enw %d %d %d %d\n",
+	  egg->id, egg->owner, egg->x, egg->y);
+  write(client->fd, end, strlen(end));
   return (0);
 }
 

@@ -1,11 +1,11 @@
 /*
-1;2802;0c** action_broadcast.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
+** action_broadcast.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:19:54 2015 Oscar Morizet
-** Last update Tue Jun 23 12:32:51 2015 Oscar
+** Last update Tue Jun 23 14:11:52 2015 Oscar
 */
 
 #include	<stdlib.h>
