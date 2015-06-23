@@ -1,11 +1,11 @@
 /*
-1;2802;0c** teams.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** teams.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Wed May 20 15:35:10 2015 Oscar Morizet
-** Last update Tue Jun 23 15:20:50 2015 Oscar
+** Last update Tue Jun 23 15:27:57 2015 Oscar
 */
 
 #include	<stdlib.h>

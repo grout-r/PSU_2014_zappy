@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Tue Jun 23 13:41:42 2015 Oscar
+** Last update Tue Jun 23 15:28:11 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -19,7 +19,7 @@ int			make_cycle(t_game *game)
 {
   t_player		*player;
   t_egg			*egg;
-  
+
   player = game->players;
   egg = game->eggs;
   while (player != NULL)
