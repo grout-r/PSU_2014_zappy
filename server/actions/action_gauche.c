@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:20:13 2015 Oscar Morizet
-** Last update Sun Jun 21 07:50:00 2015 Oscar
+** Last update Tue Jun 23 08:18:52 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -18,5 +18,6 @@ int			action_gauche(t_game *data, t_player *player_data, char *arg)
   (void) arg;
   player_data->orientation = (player_data->orientation + 3) % 4;
   write(player_data->fd, "ok\n", 3);
+  ppo_to_all(data, player_data);
   return (0);
 }

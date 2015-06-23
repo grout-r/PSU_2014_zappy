@@ -5,12 +5,28 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:15:14 2015 Oscar Morizet
-** Last update Mon Jun 22 14:23:34 2015 Oscar
+** Last update Tue Jun 23 08:22:18 2015 Oscar
 */
 
 #include		<stdlib.h>
 #include		<unistd.h>
+#include		<strings.h>
 #include		"server.h"
+
+void			ppo_to_all(t_game *data, t_player *player)
+{
+  t_graphix		*tmp;
+  char			str_fd[56];
+
+  bzero(str_fd, 56);
+  tmp = data->cameras;
+  sprintf(str_fd, "%d", player->fd);
+  while (tmp != NULL)
+    {
+      gfx_ppo(data, tmp, str_fd);
+      tmp = tmp->next;
+    }
+}
 
 void			globify(t_game *data, int *x, int *y)
 {
@@ -46,5 +62,6 @@ int			action_avance(t_game *data, t_player *player_data, char *arg)
   if (move_player_to(data, player_data, new_x, new_y) == -1)
     return (-1);
   write(player_data->fd, "ok\n", 3);
+  ppo_to_all(data, player_data);
   return (0);
 }

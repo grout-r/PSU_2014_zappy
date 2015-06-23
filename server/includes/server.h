@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Mon Jun 22 19:28:33 2015 Oscar
+** Last update Tue Jun 23 08:21:15 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -278,11 +278,10 @@ void			init_gfx_command_action(t_game *game);
 void			make_round(t_coords *coords, int xmax, int ymax);
 void			trace_move(t_coords *coords, t_orientation orientation);
 void			move_perpendicular(t_coords *coords, t_orientation orientation);
+void			ppo_to_all(t_game *data, t_player *player);
 void			get_perpendicular_begin(t_coords *coords, int index,
 						t_orientation orientation);
 void			init_inventory_names(t_game *game_data);
-t_object		get_inventory_name_enumed(t_game *game_data,
-						  char *name);
 
 t_command		get_command(t_game *game_data, char *cmd);
 t_player		*get_player_data(t_game *game_data, int req_fd);
@@ -290,5 +289,7 @@ t_player		*add_client_to_players(t_game *game, int player_fd);
 t_graphix		*get_camera_data(t_game *game_data, int fd);
 t_graphix		*add_client_to_cameras(t_game *game, int fd);
 t_gfx_command		get_gfx_command(t_game *game_data, char *cmd);
+t_object		get_inventory_name_enumed(t_game *game_data,
+						  char *name);
 
 #endif			/* !SERVER_H_ */
