@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Tue Jun 23 11:30:28 2015 Oscar
+## Last update Tue Jun 23 12:26:32 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -80,6 +80,7 @@ SRC		=	$(CORE)/main.c \
 			$(SERVER_ACTIONS)/action_incantation.c \
 			$(SERVER_ACTIONS)/err_handling.c \
 			$(SERVER_ACTIONS)/$(ACTION_TOOLS)/voir_tools.c \
+			$(SERVER_ACTIONS)/$(ACTION_TOOLS)/broadcast_tools.c \
 			$(GRAPHIX)/graphical_clients.c \
 			$(GRAPHIX)/init_graphix.c \
 			$(GRAPHIX)/graphic_actions_1.c \

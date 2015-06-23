@@ -1,11 +1,11 @@
 /*
-** action_broadcast.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
+1;2802;0c** action_broadcast.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:19:54 2015 Oscar Morizet
-** Last update Tue Jun 23 11:20:08 2015 Oscar
+** Last update Tue Jun 23 12:32:51 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -13,6 +13,21 @@
 #include	<unistd.h>
 #include	<string.h>
 #include	"server.h"
+
+void		pbc_to_all(t_game *data,
+			   t_player *player, char *msg)
+{
+  t_graphix	*tmp;
+  char		str_fd[56];
+
+  bzero(str_fd, 56);
+  tmp = data->cameras;
+  while (tmp != NULL)
+    {
+      gfx_pbc(data, tmp, player->fd, msg);
+      tmp = tmp->next;
+    }
+}
 
 void		path_xy(int *src, int dest, int size)
 {
@@ -36,57 +51,6 @@ void		path_xy(int *src, int dest, int size)
     *src = size - 1;
   if (*src == size)
     *src = 0;
-}
-
-int		fill_orient(t_orientation orient, int tab[4], t_orientation from)
-{
-  if (orient == LEFT)
-    {
-      tab[LEFT] = 1;
-      tab[UP] = 7;
-      tab[RIGHT] = 5;
-      tab[DOWN] = 3;
-    }
-  else if (orient == UP)
-    {
-      tab[LEFT] = 3;
-      tab[UP] = 1;
-      tab[RIGHT] = 7;
-      tab[DOWN] = 5;
-    }
-  else if (orient == DOWN)
-    {
-      tab[LEFT] = 7;
-      tab[UP] = 5;
-      tab[RIGHT] = 3;
-      tab[DOWN] = 1;
-    }
-  return (tab[from]);
-}
-
-int    	find_case(int *prev_case, t_player *dest, t_game *data)
-{
-  int	tab[4];
-
-  tab[LEFT] = 5;
-  tab[UP] = 3;
-  tab[RIGHT] = 1;
-  tab[DOWN] = 7;
-  if (prev_case[0] != dest->x)
-    {
-      if (prev_case[0] == (dest->x + 1) % data->map_size_x)
-	return (fill_orient(dest->orientation, tab, RIGHT));
-      else
-	return (fill_orient(dest->orientation, tab, LEFT));
-    }
-  else if (prev_case[1] != dest->y)
-    {
-      if (prev_case[1] == (dest->y + 1) % data->map_size_y)
-	return (fill_orient(dest->orientation, tab, UP));
-      else
-	return (fill_orient(dest->orientation, tab, DOWN));
-    }
-  return (0);
 }
 
 int	find_path(t_game *data, t_player *src, t_player *dest)
@@ -133,5 +97,6 @@ int		action_broadcast(t_game *data, t_player *player_data,
 	}
       players = players->next;
     }
+  pbc_to_all(data, player_data, arg);
   return (0);
 }

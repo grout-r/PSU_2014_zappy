@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 23 12:12:26 2015 Oscar
+** Last update Tue Jun 23 12:28:18 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -168,6 +168,8 @@ char			*get_team_by_id(t_game *data, int id);
 
 int			run(t_game *game_data, t_server_info *server);
 int			parse_parameters(int, char **, t_game *, t_server_info *);
+int			fill_orient(t_orientation orient,
+				    int tab[4], t_orientation from);
 int			introduce_as_graphical_client(t_game *data, int fd);
 int			check_if_num(char *);
 int			add_new_standby_client(t_game *game,
@@ -180,6 +182,7 @@ int			init_server(t_server_info *server);
 int			handle_server_requests(t_server_info *server,
 					       t_game *game_data);
 int			introduce(t_game *data, char *message, int req_fd);
+int			find_case(int *prev_case, t_player *dest, t_game *data);
 int			action_avance(t_game *data, t_player *player_data, char *arg);
 int			action_droite(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
@@ -261,7 +264,7 @@ int			gfx_ppo(t_game *data, t_graphix *client, char *arg);
 int			gfx_plv(t_game *data, t_graphix *client, char *arg);
 int			gfx_pin(t_game *data, t_graphix *client, char *arg);
 int			gfx_pex(t_game *data, t_graphix *client, char *arg);
-int			gfx_pbc(t_game *data, t_graphix *client, char *arg);
+int			gfx_pbc(t_game *data, t_graphix *client, int fd, char *msg);
 int			gfx_pic(t_game *data, t_graphix *client, char *arg);
 int			gfx_pie(t_game *data, t_graphix *client, char *arg);
 int			gfx_pfk(t_game *data, t_graphix *client, int fd);
