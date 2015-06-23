@@ -5,12 +5,25 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 13:24:42 2015 Oscar
-** Last update Mon Jun 22 19:09:47 2015 Oscar
+** Last update Tue Jun 23 08:31:35 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
+#include	<strings.h>
 #include	"server.h"
+
+void		pdi_to_all(t_game *data, t_player *player)
+{
+  t_graphix    	*tmp;
+
+  tmp = data->cameras;
+  while (tmp != NULL)
+    {
+      gfx_pdi(data, tmp, player->fd);
+      tmp = tmp->next;
+    }
+}
 
 int		player_dies(t_game *game, t_player *player)
 {
@@ -19,6 +32,7 @@ int		player_dies(t_game *game, t_player *player)
   if (remove_client_from_players(game, player->fd) == -1)
     return (-1);
   write(player->fd, "mort\n", 5);
+  pdi_to_all(game, player);
   close(player->fd);
   return (0);
 }

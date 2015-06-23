@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:03 2015 Oscar
-** Last update Mon Jun 22 19:33:13 2015 Oscar
+** Last update Tue Jun 23 08:32:03 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -14,11 +14,14 @@
 #include	<unistd.h>
 #include	"server.h"
 
-int		gfx_pdi(t_game *data, t_graphix *client, char *arg)
+int		gfx_pdi(t_game *data, t_graphix *client, int fd)
 {
+  char		end[56];
+
   (void) data;
-  (void) client;
-  (void) arg;
+  bzero(end, 56);
+  sprintf(end, "pdi %d\n", fd);
+  write(client->fd, end, strlen(end));
   return (0);
 }
 
