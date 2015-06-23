@@ -1,12 +1,14 @@
 
 #include "Graphics.hh"
 
-Graphics::Graphics()
+Graphics::Graphics(std::pair<int, int> size)
 {
-  this->app = new sf::RenderWindow(sf::VideoMode(800, 800, 32), "La Zapette !", 
+  this->app = new sf::RenderWindow(sf::VideoMode(1500, 1000, 32), "La Zapette !", 
 				   sf::Style::Close | sf::Style::Titlebar);
+  _view.SetCenter(sf::Vector2f((size.first / 2) * 50, (size.second / 2) * 50));
+  _view.SetHalfSize(sf::Vector2f(750, 500));
+  app->SetView(_view);
   _grassImage.LoadFromFile("./res/grass.jpg");
-
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
   _ressourcesImage[DERAUMERE].LoadFromFile("./res/deraumere.png");
@@ -22,7 +24,12 @@ Graphics::Graphics()
   _ressourcesPadding[MENDIANE] = sf::Vector2f(16.666 , 16.666);
   _ressourcesPadding[PHIRAS] = sf::Vector2f(33.333 , 16.666);
   _ressourcesPadding[THYSTAME] = sf::Vector2f(0 , 33.333);
-  
+
+  _bindMove[KEYUP] = sf::Vector2f(0, -50);
+  _bindMove[KEYDOWN] = sf::Vector2f(0, 50);
+  _bindMove[KEYLEFT] = sf::Vector2f(-50, 0);
+  _bindMove[KEYRIGHT] = sf::Vector2f(50, 0);
+
 }
 
 Graphics::~Graphics()
@@ -94,25 +101,47 @@ void				Graphics::printRessources(Map *map)
     }
 }
 
-void				Graphics::handleEvent()
+void				Graphics::handleEvent(std::vector<Event> &eventStack)
 {
-  // sf::Event				event;
-  // Player				*tmp = this->getPlayerFromId(1);
+  sf::Event				event;
+  Event					myEvent;
 
-  // while (this->app->GetEvent(event))
-  //   {
-  //     if (event.Type == sf::Event::Closed)
-  // 	exit(0);
-  //     if (event.Type == sf::Event::KeyPressed)
-  // 	{
-  // 	  if (event.Key.Code == sf::Key::Left)
-  // 	    movePlayer(1, std::make_pair(tmp->getPos().first-1, tmp->getPos().second), WEST);
-  // 	  if (event.Key.Code == sf::Key::Right)
-  // 	    movePlayer(1, std::make_pair(tmp->getPos().first+1, tmp->getPos().second), EAST);
-  // 	  if (event.Key.Code == sf::Key::Up)
-  // 	    movePlayer(1, std::make_pair(tmp->getPos().first,tmp->getPos().second-1), NORTH);
-  // 	  if (event.Key.Code == sf::Key::Down)
-  // 	    movePlayer(1, std::make_pair(tmp->getPos().first, tmp->getPos().second+1),SOUTH);
-  // 	}
-  //   }
+  while (this->app->GetEvent(event))
+    {
+      if (event.Type == sf::Event::Closed)
+  	exit(0);
+      if (event.Type == sf::Event::KeyPressed)
+  	{
+  	  if (event.Key.Code == sf::Key::Left)
+	    myEvent.eventName = KEYLEFT;
+  	  if (event.Key.Code == sf::Key::Right)
+	    myEvent.eventName = KEYRIGHT;
+  	  if (event.Key.Code == sf::Key::Up)
+	    myEvent.eventName = KEYUP;
+  	  if (event.Key.Code == sf::Key::Down)
+	    myEvent.eventName = KEYDOWN;
+  	}
+      if (event.Type == sf::Event::MouseWheelMoved)
+	{
+	  if (event.MouseWheel.Delta == 1)
+	    myEvent.eventName = SCROLLUP;
+	  if (event.MouseWheel.Delta == -1)
+	    myEvent.eventName = SCROLLDOWN;
+	}
+      eventStack.push_back(myEvent);
+    }
+}
+
+void			       Graphics::moveView(t_eventName key)
+{
+  (void)key;
+  if (key == SCROLLUP || key == SCROLLDOWN)
+    {
+      if (key == SCROLLUP)
+	_view.Zoom(0.9f);
+      else
+	_view.Zoom(1.1f);	
+    }
+  else
+    _view.Move(_bindMove[key]);
 }

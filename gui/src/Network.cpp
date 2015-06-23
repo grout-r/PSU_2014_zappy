@@ -281,7 +281,7 @@ Event					Network::fillPBC(std::string command)
   return event;
 }
 
-Event					Network::fillPIE(str::string command)
+Event					Network::fillPIE(std::string command)
 {
   std::istringstream                    iss(command);
   std::string                           sub;

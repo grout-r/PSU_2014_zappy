@@ -27,7 +27,14 @@ typedef enum e_eventName
   SMG,
   SUC,
   SBP,
-  NOSUCH
+  NOSUCH,
+
+  KEYUP,
+  KEYDOWN,
+  KEYLEFT,
+  KEYRIGHT,
+  SCROLLUP,
+  SCROLLDOWN
 }	     t_eventName;
 
 
