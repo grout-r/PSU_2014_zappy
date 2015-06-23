@@ -5,17 +5,32 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:22:08 2015 Oscar Morizet
-** Last update Mon Jun 22 19:21:01 2015 Oscar
+** Last update Tue Jun 23 12:11:53 2015 Oscar
 */
 
-#include	<stdlib.h>
-#include	"server.h"
+#include		<stdlib.h>
+#include		<strings.h>
+#include		"server.h"
 
-int		action_fork(t_game *data, t_player *player_data, char *arg)
+void			pfk_to_all(t_game *data, t_player *player)
 {
-  (void) data;
-  (void) player_data;
+  t_graphix		*tmp;
+  char			str_fd[56];
+
+  bzero(str_fd, 56);
+  tmp = data->cameras;
+  while (tmp != NULL)
+    {
+      gfx_pfk(data, tmp, player->fd);
+      tmp = tmp->next;
+    }
+}
+
+int			action_fork(t_game *data, t_player *player_data, char *arg)
+{
   (void) arg;
-  printf("action fork\n");
+  if (add_egg(data, player_data) == NULL)
+    return (-1);
+  pfk_to_all(data, player_data);
   return (0);
 }

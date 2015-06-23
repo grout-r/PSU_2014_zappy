@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 23 08:54:20 2015 Oscar
+** Last update Tue Jun 23 12:12:26 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -20,6 +20,7 @@
 
 # define		MAX_CONNECTIONS		50
 # define		MAX_PLAYERS_PER_TEAM	25
+# define		BASE_ECLOSION_TIME	600
 # define		BASE_FOOD		10
 # define		FOOD_CONSUMING_CYCLE	126
 # define		COMMAND_NB		12
@@ -61,6 +62,13 @@ typedef struct			s_standby_client
   int				fd;
   struct s_standby_client	*next;
 }				t_standby_client;
+
+typedef struct		s_egg
+{
+  int			eclosion;
+  int			team_id;
+  struct s_egg		*next;
+}			t_egg;
 
 typedef struct		s_coords
 {
@@ -105,6 +113,7 @@ typedef struct		s_player
 typedef struct		s_team
 {
   char			name[56];
+  int			extra_place;
   int			id;
   int			players_nb;
   struct s_team		*next;
@@ -144,6 +153,7 @@ typedef struct		s_game
   int			map_size_y;
   int			players_per_team;
   float			action_delay;
+  t_egg			*eggs;
   t_team		*teams;
   t_player		*players;
   t_graphix		*cameras;
@@ -254,7 +264,7 @@ int			gfx_pex(t_game *data, t_graphix *client, char *arg);
 int			gfx_pbc(t_game *data, t_graphix *client, char *arg);
 int			gfx_pic(t_game *data, t_graphix *client, char *arg);
 int			gfx_pie(t_game *data, t_graphix *client, char *arg);
-int			gfx_pfk(t_game *data, t_graphix *client, char *arg);
+int			gfx_pfk(t_game *data, t_graphix *client, int fd);
 int			gfx_pdr(t_game *data, t_graphix *client, char *arg);
 int			gfx_pgt(t_game *data, t_graphix *client, char *arg);
 int			gfx_pdi(t_game *data, t_graphix *client, int fd);
@@ -301,6 +311,7 @@ t_player		*get_player_data(t_game *game_data, int req_fd);
 t_player		*add_client_to_players(t_game *game, int player_fd);
 t_graphix		*get_camera_data(t_game *game_data, int fd);
 t_graphix		*add_client_to_cameras(t_game *game, int fd);
+t_egg			*add_egg(t_game *game, t_player *player);
 t_gfx_command		get_gfx_command(t_game *game_data, char *cmd);
 t_object		get_inventory_name_enumed(t_game *game_data,
 						  char *name);

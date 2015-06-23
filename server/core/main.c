@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 23 08:41:57 2015 Oscar
-** Last update Tue Jun 23 08:41:58 2015 Oscar
+** Last update Tue Jun 23 11:37:50 2015 Oscar
 */
 
 #include		<stdio.h>
@@ -16,6 +16,7 @@
 void			pre_init(t_game *game_data)
 {
   srand(time(NULL));
+  game_data->eggs = NULL;
   game_data->standby_clients = NULL;
   game_data->players = NULL;
   game_data->cameras = NULL;
