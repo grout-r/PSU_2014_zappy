@@ -2,15 +2,18 @@
 
 from trantorian import Trantorian
 
+def getFoodToSurvive(player, q):
+    player.flush()
+    while player.haveEnough("nourriture", q) == False:
+        player.flush()
+        i = player.search("nourriture")
+        if i == -1:
+            player.move("avance")
+        else:
+            player.foundPathToItem(i)
+            player.moveWithPath()
+            player.take("nourriture")
+
 def IA(player):
     while player.isAlive():
-        player.flush()
-        # if player.haveEnough("phiras", 3):
-        #     print "Y a assez de phiras dans mon sac"
-        index = player.search("nourriture")
-        if index != -1:
-            player.foundPathToItem(index)
-            print "Fini de chercher le chemin"
-            player.moveWithPath()
-            print "Fini de bouger"
-            player.take("nourriture")
+        getFoodToSurvive(player, 5)

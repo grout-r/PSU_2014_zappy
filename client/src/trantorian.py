@@ -5,10 +5,26 @@ import sys
 class Trantorian:
     """AI class for zappy project"""
 
+    levTab = [{"joueur":1,"linemate":1,"deraumere":0,"sibur":0,
+               "mendiane":0,"phiras":0,"thystame":0}, 
+              {"joueur":2,"linemate":1,"deraumere":1,"sibur":1,
+               "mendiane":0,"phiras":0,"thystame":0},
+              {"joueur":2,"linemate":2,"deraumere":0,"sibur":1,
+               "mendiane":0,"phiras":2,"thystame":0},
+              {"joueur":4,"linemate":1,"deraumere":1,"sibur":2,
+               "mendiane":0,"phiras":1,"thystame":0},
+              {"joueur":4,"linemate":1,"deraumere":2,"sibur":1,
+               "mendiane":3,"phiras":0,"thystame":0},
+              {"joueur":6,"linemate":1,"deraumere":2,"sibur":3,
+               "mendiane":0,"phiras":1,"thystame":0},
+              {"joueur":6,"linemate":2,"deraumere":2,"sibur":2,
+               "mendiane":2,"phiras":2,"thystame":1}]
+
     def __init__(self, client, sock):
         self.__client = client
         self.__sock = sock
         self.__alive = True
+        self.__level = 1
         self.__invent = []
         self.__vision = []
         self.__msgStack = []
@@ -23,12 +39,12 @@ class Trantorian:
         resp = self.__sock.recv(4096)
         if not resp:
             return False
-        print resp,
+        # print resp,
         self.__sock.send("{0}\n".format(self.__client[0]))
         resp = self.__sock.recv(4096)
         if not resp:
             return False
-        print resp,
+        # print resp,
         try:
             nb = int(resp)
         except ValueError:
@@ -38,7 +54,7 @@ class Trantorian:
         resp = self.__sock.recv(4096)
         if not resp:
             return False
-        print resp,
+        # print resp,
         return True
 
     def isAlive(self):
@@ -49,12 +65,12 @@ class Trantorian:
         if not resp:
             sys.exit(1)
         for i in resp.strip('\n').split('\n'):
-            print "J'ajoute \"{0}\" a la stack de message".format(i)
+            # print "J'ajoute \"{0}\" a la stack de message".format(i)
             if i == "mort":
                 self.__alive = False
                 sys.exit(0)
             self.__msgStack.append(i)
-        print self.__msgStack
+        #print self.__msgStack
 
     def flush(self):
         self.__invent = []
@@ -151,7 +167,7 @@ class Trantorian:
 
     def __checkLeft(self, indexToItem, currentPos, inc):
         if indexToItem >= currentPos - (inc / 2) and indexToItem < currentPos:
-            print "Ajoute gauche"
+            #print "Ajoute gauche"
             self.__path.append("gauche")
             while currentPos != indexToItem:
                 self.__path.append("avance")
@@ -181,9 +197,30 @@ class Trantorian:
                 self.__path.append("avance")
             inc += 2
             pos += inc
-        print self.__path
+        # print self.__path
 
     def moveWithPath(self):
         for i in self.__path:
             self.move(i)
         self.__path = []
+
+    ## Msg functions
+
+    def sendIncantMsg(self):
+        nPlayer = 0
+        self.__see()
+        for item in self.__vision[0].split():
+            if item == "joueur":
+                nPlayer += 1
+        if levTab[self.__level]["joueur"] - nPlayer > 0:
+            self.__sock.send("{0} {1} {2}\n".format(
+                self.__client[0], self.__level + 1, levTab[self.__level]["joueur"] - nPlayer))
+        # else:
+        #     self.incant()
+
+    def readMsg(self):
+        for i in self.__msgStack:
+            msg = self.__msgStack.pop(self.__msgStack.index(i))
+            if msg.split()[0] == self.__client[0] and int(msg.split()[1]) - 1 == self.__level:
+                print msg
+                #faire le trouvage de chemin
