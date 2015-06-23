@@ -1,11 +1,11 @@
 /*
-1;2802;0c** tools.c for zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** tools.c for zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 21:22:41 2015 Oscar Morizet
-** Last update Mon Jun 22 18:34:08 2015 Oscar
+** Last update Tue Jun 23 08:56:43 2015 Oscar
 */
 
 #include	<string.h>

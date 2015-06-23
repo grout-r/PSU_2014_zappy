@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:49 2015 Oscar Morizet
-** Last update Mon Jun 22 19:17:58 2015 Oscar
+** Last update Tue Jun 23 08:35:47 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -26,7 +26,8 @@ int		action_prend_objet(t_game *data, t_player *player_data, char *arg)
   map_case = data->map[player_data->y][player_data->x];
   if (check_object_presence_in_map_case(map_case, object))
     {
-      remove_map_case_element(&(data->map[player_data->y][player_data->x]), object);
+      remove_map_case_element(&(data->map[player_data->y]
+				[player_data->x]), object);
       change_item_qt(player_data, arg, '+');
       if (object == NOURRITURE)
 	player_data->cycles_to_die += FOOD_CONSUMING_CYCLE;

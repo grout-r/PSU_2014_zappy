@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 13:24:42 2015 Oscar
-** Last update Tue Jun 23 08:31:35 2015 Oscar
+** Last update Tue Jun 23 08:42:05 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -36,7 +36,6 @@ int		player_dies(t_game *game, t_player *player)
   close(player->fd);
   return (0);
 }
-
 
 t_player	*get_player_data(t_game *game_data, int fd)
 {

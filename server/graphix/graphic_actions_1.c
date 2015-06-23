@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** graphic_actions_1.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/graphix
+** graphic_actions_1.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/graphix
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:00:18 2015 Oscar
-** Last update Tue Jun 23 07:38:26 2015 Oscar
+** Last update Tue Jun 23 08:50:03 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -34,7 +34,7 @@ int		gfx_bct(t_game *data,
   int		y;
   char		res[56];
   char		end[56];
-  
+
   bzero(res, 56);
   bzero(end, 56);
   if (get_bct_coords(data, arg, &x, &y) == -1)
@@ -55,7 +55,7 @@ int		gfx_mct(t_game *data,
   int		y;
   char		res[56];
   char		end[56];
-  
+
   y = 0;
   (void) arg;
   while (y != data->map_size_y)

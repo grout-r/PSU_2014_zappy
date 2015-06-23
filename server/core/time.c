@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun 12 19:55:54 2015 Oscar
-** Last update Sun Jun 21 07:42:34 2015 Oscar
+** Last update Tue Jun 23 08:41:15 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -15,10 +15,11 @@
 #include		"server.h"
 #include		"timer.h"
 
-int			count_extra_cycles(t_server_info *server, struct timeval *timelapse)
+int			count_extra_cycles(t_server_info *server,
+					   struct timeval *timelapse)
 {
   int			cycles;
-  
+
   cycles = 0;
   while (timercmp(timelapse, server->base_cycle_time, >))
     {
@@ -51,9 +52,9 @@ int			init_timer(t_game *game, t_server_info *server)
   if ((server->base_cycle_time = malloc(sizeof(struct timeval))) == NULL)
     return (-1);
   server->cycle_end->tv_sec = 0;
-  server->cycle_end->tv_usec = 0;  
+  server->cycle_end->tv_usec = 0;
   server->base_cycle_time->tv_sec = 0;
-  server->base_cycle_time->tv_usec = 0;  
+  server->base_cycle_time->tv_usec = 0;
   tmp = (1.0 / game->action_delay) * USEC_TO_SEC_CONV;
   if (tmp == 1000000)
     server->base_cycle_time->tv_sec = 1;

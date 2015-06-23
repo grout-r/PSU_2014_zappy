@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:29:16 2015 Oscar Morizet
-** Last update Mon Jun 22 19:21:17 2015 Oscar
+** Last update Tue Jun 23 08:35:00 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -23,6 +23,6 @@ int		action_connect_nbr(t_game *data, t_player *player_data,
   bzero(free_slots, 9);
   sprintf(free_slots, "%d\n",
 	  team_get_free_slots(data, player_data->team_id));
-  write(player_data->fd, free_slots, strlen(free_slots)); 
+  write(player_data->fd, free_slots, strlen(free_slots));
   return (0);
 }

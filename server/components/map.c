@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:15:46 2015 Oscar Morizet
-** Last update Mon Jun 22 19:19:45 2015 Oscar
+** Last update Tue Jun 23 08:39:02 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -69,7 +69,6 @@ int		check_object_presence_in_map_case(t_map_case *list,
 int		move_player_to(t_game *game, t_player *player,
 			       int new_x, int new_y)
 {
-  
   remove_map_case_element(&(game->map[player->y][player->x]),
 			  PLAYER);
   if (add_map_case_element(&(game->map[new_y][new_x]),

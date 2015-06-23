@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** server.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server
+** server.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Sun Jun 21 13:58:22 2015 Oscar
+** Last update Tue Jun 23 08:49:08 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -45,12 +45,28 @@ int			cyclify(int cycle_nb, t_game *game)
   return (0);
 }
 
+int			process(t_game *game_data, t_server_info *server, int cycles)
+{
+  if (server->cycle_end->tv_usec == 0 && server->cycle_end->tv_sec == 0)
+    {
+      if (cyclify(cycles, game_data) == -1)
+	return (-1);
+    }
+  else
+    {
+      usleep(server->cycle_end->tv_usec);
+      if (handle_server_requests(server, game_data) == -1)
+	return (-1);
+    }
+  return (0);
+}
+
 int		        run(t_game *game_data, t_server_info *server)
 {
   struct timeval	cycle_start;
   struct timeval	cycle_finish;
   int			cycles;
-  
+
   gettimeofday(&cycle_start, NULL);
   while (42)
     {
@@ -64,17 +80,8 @@ int		        run(t_game *game_data, t_server_info *server)
 	  return (-1);
 	}
       gettimeofday(&cycle_start, NULL);
-      if (server->cycle_end->tv_usec == 0 && server->cycle_end->tv_sec == 0)
-	{
-	  if (cyclify(cycles, game_data) == -1)
-	    return (-1);
-	}
-      else
-	{
-	  usleep(server->cycle_end->tv_usec);
-	  if (handle_server_requests(server, game_data) == -1)
-	    return (-1);
-	}
+      if (process(game_data, server, cycles) == -1)
+	return (-1);
     }
   return (0);
 }

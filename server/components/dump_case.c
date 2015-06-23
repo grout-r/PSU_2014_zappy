@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun  1 13:26:03 2015 Oscar Morizet
-** Last update Mon Jun 22 17:46:33 2015 Oscar
+** Last update Tue Jun 23 08:38:28 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -15,7 +15,7 @@
 int		do_alloc(char **dump, char *object)
 {
   int		add_size;
-  
+
   add_size = sizeof(char) * strlen(object) + 2;
   *dump = realloc(*dump, (sizeof(char) * strlen(*dump)) + add_size);
   if (*dump == NULL)
@@ -56,7 +56,7 @@ void		dump_case_for_gfx(t_game *game_data, char *str, int x, int y)
   t_object	item;
   int		item_count;
   char		char_item_count[5];
-  
+
   item = NOURRITURE;
   while (item != NONE)
     {

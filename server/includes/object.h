@@ -5,14 +5,14 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue May 26 15:02:34 2015 Oscar Morizet
-** Last update Fri Jun 12 22:39:22 2015 Oscar
+** Last update Tue Jun 23 08:51:10 2015 Oscar
 */
 
 #ifndef	        OBJECT_H_
 # define        OBJECT_H_
 
 # define	MAX_OBJECTS	8
-	
+
 typedef enum	e_object
   {
     PLAYER = 0,

@@ -1,4 +1,3 @@
-
 /*
 ** map.h for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/includes
 ** 
@@ -6,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 18 17:09:54 2015 Oscar Morizet
-** Last update Tue May 26 15:12:11 2015 Oscar Morizet
+** Last update Tue Jun 23 08:50:58 2015 Oscar
 */
 
 #ifndef			MAP_HH_
@@ -23,4 +22,4 @@ typedef struct		s_map_case
 int			add_map_case_element(t_map_case **list, t_object obj);
 void			remove_map_case_element(t_map_case **list, t_object obj);
 
-#endif			/* !MAP_HH_ */ 
+#endif			/* !MAP_HH_ */

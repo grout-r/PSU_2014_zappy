@@ -1,11 +1,11 @@
 /*
-1;2802;0c** action_voir.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
+** action_voir.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:15 2015 Oscar Morizet
-** Last update Mon Jun 22 19:15:01 2015 Oscar
+** Last update Tue Jun 23 08:58:47 2015 Oscar
 */
 
 #include		<stdlib.h>
@@ -77,9 +77,8 @@ char			*trace_route(t_game *data, t_player *player_data)
       if ((dumped_line = read_perpendicular(&coords, i,
 					    player_data, data)) == NULL)
 	return (NULL);
-      vision = realloc(vision, sizeof(char) * (strlen(vision)
-					       + strlen(dumped_line) + 2));
-      if (!vision)
+      if ((vision = realloc(vision, sizeof(char) *
+			    (strlen(vision) + strlen(dumped_line) + 2))) == NULL)
 	return (NULL);
       strcat(vision, dumped_line);
       ++i;

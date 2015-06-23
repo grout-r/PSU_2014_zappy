@@ -1,11 +1,11 @@
 /*
-1;2802;0c** inventory.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** inventory.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 15:19:38 2015 Oscar Morizet
-** Last update Mon Jun 22 19:20:42 2015 Oscar
+** Last update Tue Jun 23 08:39:53 2015 Oscar
 */
 
 #include	<stdlib.h>

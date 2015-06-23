@@ -5,11 +5,18 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 23 08:29:52 2015 Oscar
+** Last update Tue Jun 23 08:54:20 2015 Oscar
 */
 
 #ifndef			SERVER_H_
 # define		SERVER_H_
+
+# include		<stdio.h>
+# include		<sys/select.h>
+# include		<arpa/inet.h>
+# include		"map.h"
+# include		"object.h"
+# include		"graphix.h"
 
 # define		MAX_CONNECTIONS		50
 # define		MAX_PLAYERS_PER_TEAM	25
@@ -19,21 +26,15 @@
 # define		GFX_COMMAND_NB		24
 # define		BUFFER_R_SIZE		56
 # define		PARAMETERS_BASE		"pxynct"
-# define		USAGE			"\n\tUsage : ./server [-p (port)] [-x (map width)] \
+# define		USAGE			"\n\tUsage : \
+./server [-p (port)] [-x (map width)] \
 [-y (map length)] [-n (team_name_1 team_name_X)] \
 [-c (players/team)] [-t (temporal delay)]\n\n"
-
-# include		<stdio.h>
-# include		<sys/select.h>
-# include		<arpa/inet.h>
-# include		"map.h"
-# include		"object.h"
-# include		"graphix.h"
 
 typedef enum		e_orientation
   {
     LEFT = 0,
-    UP, 
+    UP,
     RIGHT,
     DOWN
   }			t_orientation;
@@ -60,7 +61,7 @@ typedef struct			s_standby_client
   int				fd;
   struct s_standby_client	*next;
 }				t_standby_client;
-  
+
 typedef struct		s_coords
 {
   int			x;
@@ -166,29 +167,40 @@ int			check_object_presence_in_map_case(t_map_case *list,
 						  t_object object);
 int			init(t_game *, t_server_info *);
 int			init_server(t_server_info *server);
-int			handle_server_requests(t_server_info *server, t_game *game_data);
+int			handle_server_requests(t_server_info *server,
+					       t_game *game_data);
 int			introduce(t_game *data, char *message, int req_fd);
 int			action_avance(t_game *data, t_player *player_data, char *arg);
 int			action_droite(t_game *data, t_player *player_data, char *arg);
 int			action_gauche(t_game *data, t_player *player_data, char *arg);
-int			action_voir(t_game *data, t_player *player_data, char *arg);
-int			action_inventaire(t_game *data, t_player *player_data, char *arg);
-int			action_prend_objet(t_game *data, t_player *player_data, char *arg);
-int			action_pose_objet(t_game *data, t_player *player_data, char *arg);
-int			action_expulse(t_game *data, t_player *player_data, char *arg);
-int			action_broadcast(t_game *data, t_player *player_data, char *arg);
-int			action_incantation(t_game *data, t_player *player_data, char *arg);
-int			action_gauche(t_game *data, t_player *player_data, char *arg);
+int			action_voir(t_game *data, t_player
+				    *player_data, char *arg);
+int			action_inventaire(t_game *data,
+					  t_player *player_data, char *arg);
+int			action_prend_objet(t_game *data,
+					   t_player *player_data, char *arg);
+int			action_pose_objet(t_game *data,
+					  t_player *player_data, char *arg);
+int			action_expulse(t_game *data,
+				       t_player *player_data, char *arg);
+int			action_broadcast(t_game *data,
+					 t_player *player_data, char *arg);
+int			action_incantation(t_game *data,
+					   t_player *player_data, char *arg);
+int			action_gauche(t_game *data,
+				      t_player *player_data, char *arg);
 int			check_object_presence_in_inventory(t_player *player_data,
 						   char *name);
 int			action_fork(t_game *data, t_player *player_data, char *arg);
-int			action_connect_nbr(t_game *data, t_player *player_data, char *arg);
+int			action_connect_nbr(t_game *data,
+					   t_player *player_data, char *arg);
 int			init_map(t_game *game_data);
 int			create_team(t_game *game, char *team_name);
 int			remove_client_from_players(t_game *game, int player_fd);
 int			execute(t_game *game_data, char *buffer, t_player *player);
 int			init_map_case(t_map_case ***map, int x, int y);
-int			move_player_to(t_game *game, t_player *player, int new_x, int new_y);
+int			move_player_to(t_game *game,
+				       t_player *player, int new_x, int new_y);
 int			init_inventory(t_player *player);
 int			add_item_class_to_inventory(t_player *player, char *item_name);
 int			init_player(t_game *game_data, t_player *player);
@@ -277,7 +289,8 @@ void			init_gfx_command_names(t_game *game);
 void			init_gfx_command_action(t_game *game);
 void			make_round(t_coords *coords, int xmax, int ymax);
 void			trace_move(t_coords *coords, t_orientation orientation);
-void			move_perpendicular(t_coords *coords, t_orientation orientation);
+void			move_perpendicular(t_coords *coords,
+					   t_orientation orientation);
 void			ppo_to_all(t_game *data, t_player *player);
 void			get_perpendicular_begin(t_coords *coords, int index,
 						t_orientation orientation);

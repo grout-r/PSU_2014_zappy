@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Apr 28 19:42:16 2015 Oscar Morizet
-** Last update Mon May 25 17:13:45 2015 Oscar Morizet
+** Last update Tue Jun 23 08:55:19 2015 Oscar
 */
 
 #include	<string.h>
@@ -56,7 +56,7 @@ int		argument_checker(t_parse_arg *tmp, t_game *game_properties,
     {
       return (error_print_usage());
     }
-  if ((!check_if_num(tmp->running_port)) || 
+  if ((!check_if_num(tmp->running_port)) ||
       (!check_if_num(tmp->map_size_x)) ||
       (!check_if_num(tmp->map_size_y)) ||
       (!check_if_num(tmp->players_per_team)) ||

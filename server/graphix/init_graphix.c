@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c1;2802;0c** init_graphix.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server
+** init_graphix.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 07:36:42 2015 Oscar
-** Last update Mon Jun 22 15:55:32 2015 Oscar
+** Last update Tue Jun 23 08:50:09 2015 Oscar
 */
 
 #include	<stdlib.h>

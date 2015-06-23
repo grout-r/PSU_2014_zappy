@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:23:08 2015 Oscar Morizet
-** Last update Mon Jun 22 19:20:03 2015 Oscar
+** Last update Tue Jun 23 08:35:35 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -27,7 +27,8 @@ int		get_less_food_mult(t_game *game, t_player *player)
   return (0);
 }
 
-int		action_pose_objet(t_game *data, t_player *player_data, char *arg)
+int		action_pose_objet(t_game *data,
+				  t_player *player_data, char *arg)
 {
   t_object     	object;
 
@@ -39,7 +40,8 @@ int		action_pose_objet(t_game *data, t_player *player_data, char *arg)
     }
   if (check_object_presence_in_inventory(player_data, arg))
     {
-      add_map_case_element(&(data->map[player_data->y][player_data->x]), object);
+      add_map_case_element(&(data->map[player_data->y]
+			     [player_data->x]), object);
       change_item_qt(player_data, arg, '-');
       if (object == NOURRITURE)
 	{

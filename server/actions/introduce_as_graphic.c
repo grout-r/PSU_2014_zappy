@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:38:48 2015 Oscar
-** Last update Mon Jun 22 19:12:12 2015 Oscar
+** Last update Tue Jun 23 08:38:05 2015 Oscar
 */
 
 #include	<string.h>
@@ -18,7 +18,7 @@ int		introduce_as_graphical_client(t_game *data, int fd)
 {
   t_graphix	*client;
   t_player	*tmp;
-  
+
   if (!(client = add_client_to_cameras(data, fd)))
     return (-1);
   gfx_msz(data, client, NULL);

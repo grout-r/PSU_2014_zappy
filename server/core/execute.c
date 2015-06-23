@@ -1,11 +1,11 @@
 /*
-1;2802;0c** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** execute.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Mon Jun 22 11:21:35 2015 Oscar
+** Last update Tue Jun 23 08:42:40 2015 Oscar
 */
 
 #include	<stdlib.h>
