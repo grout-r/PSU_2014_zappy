@@ -298,3 +298,30 @@ Event					Network::fillPIE(std::string command)
   event.eventName = PIE;
   return event;
 }
+
+Event					Network::fillENW(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(4, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.eggId;
+  iss >> event.playerId;
+  iss >> event.posX;
+  iss >> event.posY;
+  if (event.eggId < 0 || event.playerId < 0 || event.posX < 0 || event.posY < 0)
+    return event;
+  event.eventName = ENW;
+  return event;
+}
