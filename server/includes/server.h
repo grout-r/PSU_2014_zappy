@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Tue Jun 23 13:47:35 2015 Oscar
+** Last update Tue Jun 23 14:02:19 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -65,6 +65,7 @@ typedef struct			s_standby_client
 
 typedef struct		s_egg
 {
+  int			id;
   int			eclosion;
   int			team_id;
   struct s_egg		*next;
@@ -273,7 +274,7 @@ int			gfx_pdr(t_game *data, t_graphix *client, char *arg);
 int			gfx_pgt(t_game *data, t_graphix *client, char *arg);
 int			gfx_pdi(t_game *data, t_graphix *client, int fd);
 int			gfx_enw(t_game *data, t_graphix *client, char *arg);
-int			gfx_eht(t_game *data, t_graphix *client, char *arg);
+int			gfx_eht(t_game *data, t_graphix *client, int egg_id);
 int			gfx_ebo(t_game *data, t_graphix *client, char *arg);
 int			gfx_edi(t_game *data, t_graphix *client, char *arg);
 int			gfx_sgt(t_game *data, t_graphix *client, char *arg);

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:03 2015 Oscar
-** Last update Tue Jun 23 08:32:03 2015 Oscar
+** Last update Tue Jun 23 13:59:43 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -14,7 +14,8 @@
 #include	<unistd.h>
 #include	"server.h"
 
-int		gfx_pdi(t_game *data, t_graphix *client, int fd)
+int		gfx_pdi(t_game *data,
+			t_graphix *client, int fd)
 {
   char		end[56];
 
@@ -33,11 +34,15 @@ int		gfx_enw(t_game *data, t_graphix *client, char *arg)
   return (0);
 }
 
-int		gfx_eht(t_game *data, t_graphix *client, char *arg)
+int		gfx_eht(t_game *data,
+			t_graphix *client, int egg_id)
 {
+  char		end[56];
+
   (void) data;
-  (void) client;
-  (void) arg;
+  bzero(end, 56);
+  sprintf(end, "eht %d\n", egg_id);
+  write(client->fd, end, strlen(end));
   return (0);
 }
 
