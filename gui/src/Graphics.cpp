@@ -40,8 +40,8 @@ void				Graphics::cleanMap(Map *map)
 {
   sf::Sprite			tmp;
   std::pair<int, int>		mapSize = map->getSize();
-
- for (int x = 0; x != mapSize.first; x++)
+  
+  for (int x = 0; x != mapSize.first; x++)
     for (int y = 0; y != mapSize.second; y++)
       { 
 	tmp.SetImage(_grassImage);
@@ -54,9 +54,25 @@ void				Graphics::refreshScreen(Map *map)
 {
   app->Clear();
   cleanMap(map);
-  printPlayers(map);
   printRessources(map);
+  printEggs(map);
+  printPlayers(map);
   app->Display();
+}
+
+void				Graphics::printEggs(Map *map)
+{
+  sf::Sprite			currentSprite;
+  Egg				*currentEgg;
+  std::pair<int, int>		currentPos;
+
+  for (size_t i = 0; (currentEgg = map->getEgg(i)) != NULL; i++)
+    {
+      currentPos = currentEgg->getPos();
+      currentSprite.SetImage(*(currentEgg->getSkin()));
+      currentSprite.SetPosition(sf::Vector2f(50 * currentPos.first, 50 * currentPos.second));
+      app->Draw(currentSprite);
+    }
 }
 
 void				Graphics::printPlayers(Map *map)
@@ -96,7 +112,6 @@ void				Graphics::printRessources(Map *map)
 	  currentRes = (t_ressource)j;
 	  if (currentMap[currentRes] > 0)
 	    printThisRessourceAtPos(currentRes, currentCase->getPos());
-	  //	    (this->*_bindPrintRsPtr[currentRes])(currentCase->getPos());
 	}
     }
 }
@@ -134,7 +149,6 @@ void				Graphics::handleEvent(std::vector<Event> &eventStack)
 
 void			       Graphics::moveView(t_eventName key)
 {
-  (void)key;
   if (key == SCROLLUP || key == SCROLLDOWN)
     {
       if (key == SCROLLUP)

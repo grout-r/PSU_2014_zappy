@@ -366,7 +366,6 @@ Event					Network::fillENW(std::string command)
   iss >> event.posY;
   if (event.eggId < 0 || event.playerId < 0 || event.posX < 0 || event.posY < 0)
     return event;
-  std::cout << "lel" << std::endl;
   event.eventName = ENW;
   return event;
 }

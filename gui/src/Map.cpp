@@ -21,6 +21,13 @@ sf::Sprite*			Map::getPlayerSprite(size_t i)
   return (currentCase);
 }
 
+Egg*				Map::getEgg(size_t i)
+{
+  if (i > _eggs.size() - 1 || _eggs.size() == 0)
+    return (NULL);
+  return (_eggs[i]);  
+}
+
 Case*				Map::getCase(size_t i)
 {
   if (i > _cases.size() - 1 || _cases.size() == 0)
@@ -75,6 +82,11 @@ void				Map::addPlayer(int pid, std::pair<int, int> pos,
   Player			*bob = new Player(pid, pos, orientation, level, teamName);
   
   this->players.push_back(bob);  
+}
+
+void				Map::addEgg(int eggId, int pid, std::pair<int, int> pos)
+{
+  _eggs.push_back(new Egg(eggId, pid, pos));
 }
 
 std::pair<int, int>		Map::getSize()

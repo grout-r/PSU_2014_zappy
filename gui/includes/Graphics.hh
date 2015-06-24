@@ -29,6 +29,7 @@ private:
 private:
   void							cleanMap(Map *map);
   void							printRessources(Map *map);
+  void							printEggs(Map *map);
   void							printPlayers(Map *map);
   
   void							printThisRessourceAtPos

@@ -1,12 +1,3 @@
-//
-// Camera.cpp for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Tue Jun 23 14:25:14 2015 grout_r
-//
 
 #include "Camera.hh"
 
@@ -94,8 +85,7 @@ void				Camera::execPIN(Event event)
 
 void				Camera::execENW(Event event)
 {
-  (void)event;
-  //_map->addEgg();
+  _map->addEgg(event.eggId, event.playerId, std::make_pair(event.posX, event.posY));
 }
 
 void				Camera::execKEYMOVE(Event event)
