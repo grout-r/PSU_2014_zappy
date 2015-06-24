@@ -1,9 +1,18 @@
 # include "Map.hh"
 
-Map::Map(std::pair<int, int> size) : _size(size)
+Map::Map(std::pair<int, int> size) : _size(size), _hudLookAt(-1, -1)
 {
 }
 
+void				Map::setHud(std::pair<int, int> pos)
+{
+  _hudLookAt = pos;
+}
+
+std::pair<int, int>	        Map::getHud()
+{
+  return (_hudLookAt);
+}
 
 sf::Sprite*			Map::getPlayerSprite(size_t i)
 {
@@ -35,11 +44,31 @@ Case*				Map::getCase(size_t i)
   return (_cases[i]);
 }
 
+Case*				Map::getCaseFromPos(std::pair<int, int> pos)
+{
+  for (size_t i = 0; i != _cases.size(); i++)
+    {
+      if (_cases[i]->getPos() == pos)
+	return (_cases[i]);
+    }
+  return (NULL);  
+}
+
 Player*				Map::getPlayerFromId(int id)
 {
   for (size_t i = 0; i != players.size(); i++)
     {
       if (players[i]->getPid() == id)
+	return (players[i]);
+    }
+  return (NULL);
+}
+
+Player*				Map::getPlayerFromPos(std::pair<int, int> pos)
+{
+  for (size_t i = 0; i != players.size(); i++)
+    {
+      if (players[i]->getPos() == pos)
 	return (players[i]);
     }
   return (NULL);

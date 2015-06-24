@@ -10,8 +10,8 @@ class			Event
 {
 public:
   std::map<t_ressource, int>	ressources;
-  int			posX;
-  int			posY;
+  float			posX;
+  float			posY;
   int			quantity;
   int			playerId;
   int			orientation;

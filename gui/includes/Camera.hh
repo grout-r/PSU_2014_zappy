@@ -23,6 +23,7 @@ private:
   std::map<t_eventName, execFuncPtr> _bindExecFuncPtr;
 
 private:
+  void				updateGame();
   void				treatEvent();
 
 public:
@@ -38,6 +39,7 @@ private:
   void				execPLV(Event);
   void				execPIN(Event);
   void				execENW(Event);
+  void				execCHFOCUS(Event);
 
 private:
   void				execKEYMOVE(Event);

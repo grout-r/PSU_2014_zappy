@@ -16,21 +16,24 @@ class							Map
 private:
   std::vector<Player*>					players;
   std::vector<Egg*>					_eggs;
-
   std::vector<Case*>					_cases;
   std::pair<int, int>					_size;
-  
+  std::pair<int, int>					_hudLookAt;
+
 public:
   Map(std::pair<int, int>);
   ~Map();
   std::pair<int, int>					getSize();
 
 public:
+  void							setHud(std::pair<int, int>);
+  std::pair<int, int>					getHud();
   Egg*							getEgg(size_t i);
   sf::Sprite*						getPlayerSprite(size_t i);
   Case*							getCase(size_t i);
+  Case*							getCaseFromPos(std::pair<int, int>);
   Player*						getPlayerFromId(int pid);
-
+  Player*						getPlayerFromPos(std::pair<int, int>);
 public:
   void							updateInventory
   (int pid, std::map<t_ressource, int>);

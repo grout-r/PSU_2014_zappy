@@ -4,7 +4,7 @@
 Camera::Camera()
 {
   _net = new Network();
-  _map = new Map(std::make_pair(10, 10));
+  _map = new Map(std::make_pair(100, 100));
   _graph = new Graphics(_map->getSize());
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
   _bindExecFuncPtr[BCT] = &Camera::execBCT;
@@ -19,6 +19,7 @@ Camera::Camera()
   _bindExecFuncPtr[KEYDOWN] = &Camera::execKEYMOVE;
   _bindExecFuncPtr[SCROLLUP] = &Camera::execKEYMOVE;
   _bindExecFuncPtr[SCROLLDOWN] = &Camera::execKEYMOVE;
+  _bindExecFuncPtr[CHFOCUS] = &Camera::execCHFOCUS;
 }
 
 Camera::~Camera()
@@ -39,7 +40,7 @@ void				Camera::treatEvent()
 
 void				Camera::loop()
 {
-  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 0, "Lespatatesenfolies");
+  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 42, "Lespatatesenfolies");
   if (_net->initNetwork() == false)
     exit(-1);
   while (true)
@@ -48,7 +49,13 @@ void				Camera::loop()
       _graph->handleEvent(_eventStack);
       _net->handleEvent(_eventStack);
       treatEvent();
+      updateGame();
     }
+}
+
+void				Camera::updateGame()
+{
+  
 }
 
 void				Camera::execMSZ(Event event)
@@ -91,4 +98,19 @@ void				Camera::execENW(Event event)
 void				Camera::execKEYMOVE(Event event)
 {
   _graph->moveView(event.eventName);
+}
+
+void				Camera::execCHFOCUS(Event event)
+{
+  std::pair<int, int>		size = _map->getSize();
+  std::pair<int, int>		newFocus;
+
+  if (event.posX < 0 || event.posX > size.first || 
+      event.posY < 0 || event.posY > size.second)
+    {
+      newFocus = std::make_pair(-1 , -1);
+    }
+  else
+    newFocus = std::make_pair(event.posX, event.posY);
+  _map->setHud(newFocus);
 }

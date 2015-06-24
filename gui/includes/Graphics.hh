@@ -7,6 +7,7 @@
 # include <vector>
 # include <map>
 # include <iostream>
+# include <sstream>
 # include "Event.hh"
 # include "Player.hh"
 # include "Map.hh"
@@ -20,12 +21,19 @@ typedef	void						(Graphics::*printRsPtr)
 class							Graphics
 {
 private:
+  sf::Image						_grassImage;
+  sf::Image						_scrollImage;
+  std::map<t_ressource, sf::Image>			_ressourcesImage;
+  sf::Font						_font;
+
+private:
   sf::RenderWindow					*app;
   sf::View						_view;
-  sf::Image						_grassImage;
-  std::map<t_ressource, sf::Image>			_ressourcesImage;
   std::map<t_ressource, sf::Vector2f>			_ressourcesPadding;
   std::map<t_eventName, sf::Vector2f>			_bindMove;
+  float							_zoomCoeff;
+  sf::Vector2f						_offsetCoeff;
+
 private:
   void							cleanMap(Map *map);
   void							printRessources(Map *map);
@@ -42,6 +50,11 @@ public:
   void							handleEvent(std::vector<Event> &);
   void							refreshScreen(Map *map);
 
+public:
+  void							nothingToHud();
+  void							printHud(Map *map);
+  void							printPlayerOnHud(Player *player);
+  void							printCaseOnHud(Case *currentCase);
 public:
   void							moveView(t_eventName key);
 };
