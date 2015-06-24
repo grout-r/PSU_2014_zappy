@@ -252,8 +252,8 @@ void				Graphics::handleEvent(std::vector<Event> &eventStack)
 	  if (event.MouseButton.Button == sf::Mouse::Left)
 	    {
 	      myEvent.eventName = CHFOCUS;
-	      myEvent.posX = (event.MouseButton.X + _offsetCoeff.x) / (50 * _zoomCoeff); 
-	      myEvent.posY = (event.MouseButton.Y + _offsetCoeff.y) / (50 * _zoomCoeff);
+	      myEvent.posX = (event.MouseButton.X + _offsetCoeff.x) / (50 / _zoomCoeff); 
+	      myEvent.posY = (event.MouseButton.Y + _offsetCoeff.y) / (50 / _zoomCoeff);
 	    }
 	}
       eventStack.push_back(myEvent);
@@ -266,12 +266,12 @@ void			       Graphics::moveView(t_eventName key)
     {
       if (key == SCROLLUP)
 	{
-	  _view.Zoom(0.9f);
+	  //	  _view.Zoom(0.9f);
 	  _zoomCoeff -= 0.1;
 	}	
       else
 	{
-	  _view.Zoom(1.1f);
+	  //_view.Zoom(1.1f);
 	  _zoomCoeff += 0.1;
 	}
     }
