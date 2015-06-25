@@ -14,6 +14,21 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[PLV] = &Camera::execPLV;
   _bindExecFuncPtr[ENW] = &Camera::execENW;
   _bindExecFuncPtr[PIN] = &Camera::execPIN;
+  _bindExecFuncPtr[PEX] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PBC] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PIC] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PIE] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PFK] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PDR] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PGT] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PDI] = &Camera::execNOTHING;
+  _bindExecFuncPtr[EHT] = &Camera::execNOTHING;
+  _bindExecFuncPtr[EBO] = &Camera::execNOTHING;
+  _bindExecFuncPtr[EDI] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SGT] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SEG] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SMG] = &Camera::execNOTHING;
+
 
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYRIGHT] = &Camera::execKEYMOVE;  
@@ -69,6 +84,11 @@ void				Camera::loop()
 void				Camera::updateGame()
 {
   
+}
+
+void				Camera::execNOTHING(Event)
+{
+  return ;
 }
 
 void				Camera::execMSZ(Event event)
