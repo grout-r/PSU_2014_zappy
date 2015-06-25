@@ -68,7 +68,6 @@ void				Camera::treatEvent()
 
 void				Camera::loop()
 {
-  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 42, "Lespatatesenfolies");
   if (_net->initNetwork() == false)
     exit(-1);
   while (true)
