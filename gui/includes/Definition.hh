@@ -34,7 +34,8 @@ typedef enum e_eventName
   KEYLEFT,
   KEYRIGHT,
   SCROLLUP,
-  SCROLLDOWN
+  SCROLLDOWN,
+  CHFOCUS
 }	     t_eventName;
 
 

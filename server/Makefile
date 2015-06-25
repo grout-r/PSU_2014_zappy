@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Sun Jun 21 08:47:36 2015 Oscar
+## Last update Sun Jun 21 14:23:03 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -32,6 +32,8 @@ TEST		=	test
 
 CORE		=	core
 
+GRAPHIX		=	graphix
+
 SRC		=	$(CORE)/main.c \
 			$(INIT)/init.c \
 			$(INIT)/argument_parser.c \
@@ -43,8 +45,11 @@ SRC		=	$(CORE)/main.c \
 			$(CORE)/time.c \
 			$(CORE)/server.c \
 			$(CORE)/server_interactions.c \
+			$(CORE)/server_requesting.c \
 			$(CORE)/server_commands.c \
-			$(CORE)/manage_clients.c \
+			$(CORE)/players.c \
+			$(CORE)/standby_clients.c \
+			$(CORE)/quit.c \
 			$(COMPONENTS)/map.c \
 			$(COMPONENTS)/map_gen.c \
 			$(COMPONENTS)/teams.c \
@@ -54,6 +59,8 @@ SRC		=	$(CORE)/main.c \
 			$(TOOLS)/launch_tools.c \
 			$(TOOLS)/tools.c \
 			$(TOOLS)/server_run_tools.c \
+			$(SERVER_ACTIONS)/introduce_as_player.c \
+			$(SERVER_ACTIONS)/introduce_as_graphic.c \
 			$(SERVER_ACTIONS)/introduce.c \
 			$(SERVER_ACTIONS)/action_avance.c \
 			$(SERVER_ACTIONS)/action_gauche.c \

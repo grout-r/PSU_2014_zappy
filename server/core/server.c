@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun  5 17:39:08 2015 Oscar
-** Last update Sun Jun 21 07:47:44 2015 Oscar
+** Last update Sun Jun 21 13:58:22 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -49,12 +49,9 @@ int		        run(t_game *game_data, t_server_info *server)
 {
   struct timeval	cycle_start;
   struct timeval	cycle_finish;
-  struct timeval	cycle_start_tmp;
-  struct timeval	timelapse;
   int			cycles;
   
   gettimeofday(&cycle_start, NULL);
-  cycle_start_tmp = cycle_start;
   while (42)
     {
       gettimeofday(&cycle_finish, NULL);
@@ -67,8 +64,6 @@ int		        run(t_game *game_data, t_server_info *server)
 	  return (-1);
 	}
       gettimeofday(&cycle_start, NULL);
-      timersub(&cycle_start, &cycle_start_tmp, &timelapse);
-      cycle_start_tmp = cycle_start;
       if (server->cycle_end->tv_usec == 0 && server->cycle_end->tv_sec == 0)
 	{
 	  if (cyclify(cycles, game_data) == -1)
@@ -77,7 +72,7 @@ int		        run(t_game *game_data, t_server_info *server)
       else
 	{
 	  usleep(server->cycle_end->tv_usec);
-	  if (handle_server_interactions(server, game_data) == -1)
+	  if (handle_server_requests(server, game_data) == -1)
 	    return (-1);
 	}
     }

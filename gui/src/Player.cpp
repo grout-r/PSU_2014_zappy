@@ -24,6 +24,11 @@ Player::Player(int pid, std::pair<int, int> pos, t_orientation orientation,
 Player::~Player()
 {}
 
+std::string			Player::getTeamName()
+{
+  return (teamName);
+}
+
 std::pair<int, int>		Player::getPos()
 {
   return (this->pos);
@@ -67,4 +72,9 @@ sf::IntRect			Player::getIntRectFromOrientation()
 void				Player::updateInventory(std::map<t_ressource, int> newInv)
 {
   _inventaire = newInv;
+}
+
+int				Player::askInventory(t_ressource res)
+{
+  return (_inventaire[res]);
 }

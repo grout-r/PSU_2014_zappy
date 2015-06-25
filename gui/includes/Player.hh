@@ -32,9 +32,11 @@ public:
   int						getPid();
   int						getLevel();
   void						setLevel(int level);
+  std::string					getTeamName();
   void						setOrientation(t_orientation);
   sf::IntRect					getIntRectFromOrientation();
   void						updateInventory(std::map<t_ressource, int>);
+  int						askInventory(t_ressource);
 };
 
 #endif

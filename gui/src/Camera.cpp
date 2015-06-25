@@ -1,18 +1,10 @@
-//
-// Camera.cpp for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Tue Apr 28 15:30:33 2015 grout_r
-// Last update Tue Jun 23 14:25:14 2015 grout_r
-//
 
 #include "Camera.hh"
 
-Camera::Camera()
+Camera::Camera(int ac, char **av)
 {
-  _net = new Network();
+  setParams(ac, av);
+  _net = new Network(_ip, _port);
   _map = new Map(std::make_pair(10, 10));
   _graph = new Graphics(_map->getSize());
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
@@ -28,10 +20,22 @@ Camera::Camera()
   _bindExecFuncPtr[KEYDOWN] = &Camera::execKEYMOVE;
   _bindExecFuncPtr[SCROLLUP] = &Camera::execKEYMOVE;
   _bindExecFuncPtr[SCROLLDOWN] = &Camera::execKEYMOVE;
+  _bindExecFuncPtr[CHFOCUS] = &Camera::execCHFOCUS;
 }
 
 Camera::~Camera()
 {
+}
+
+void				Camera::setParams(int ac, char **av)
+{
+  if (ac != 3)
+    {
+      std::cout << " Usage : ./zappy_gui [IP] [PORT]" << std::endl;
+      exit(-1);
+    }
+  _ip = std::string(av[1]);
+  _port = std::string(av[2]);
 }
 
 void				Camera::treatEvent()
@@ -48,7 +52,7 @@ void				Camera::treatEvent()
 
 void				Camera::loop()
 {
-  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 0, "Lespatatesenfolies");
+  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 42, "Lespatatesenfolies");
   if (_net->initNetwork() == false)
     exit(-1);
   while (true)
@@ -57,7 +61,13 @@ void				Camera::loop()
       _graph->handleEvent(_eventStack);
       _net->handleEvent(_eventStack);
       treatEvent();
+      updateGame();
     }
+}
+
+void				Camera::updateGame()
+{
+  
 }
 
 void				Camera::execMSZ(Event event)
@@ -94,11 +104,25 @@ void				Camera::execPIN(Event event)
 
 void				Camera::execENW(Event event)
 {
-  (void)event;
-  //_map->addEgg();
+  _map->addEgg(event.eggId, event.playerId, std::make_pair(event.posX, event.posY));
 }
 
 void				Camera::execKEYMOVE(Event event)
 {
   _graph->moveView(event.eventName);
+}
+
+void				Camera::execCHFOCUS(Event event)
+{
+  std::pair<int, int>		size = _map->getSize();
+  std::pair<int, int>		newFocus;
+
+  if (event.posX < 0 || event.posX > size.first || 
+      event.posY < 0 || event.posY > size.second)
+    {
+      newFocus = std::make_pair(-1 , -1);
+    }
+  else
+    newFocus = std::make_pair(event.posX, event.posY);
+  _map->setHud(newFocus);
 }

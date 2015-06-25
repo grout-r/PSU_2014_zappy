@@ -3,10 +3,12 @@
 # define GRAPHICS_HH_
 
 # include <SFML/Graphics.hpp>
+# include <SFML/Audio.hpp>
 # include <utility>
 # include <vector>
 # include <map>
 # include <iostream>
+# include <sstream>
 # include "Event.hh"
 # include "Player.hh"
 # include "Map.hh"
@@ -20,15 +22,27 @@ typedef	void						(Graphics::*printRsPtr)
 class							Graphics
 {
 private:
+  sf::Image						_grassImage;
+  sf::Image						_backgroundImage;
+  sf::Image						_hightlightGrassImage;
+  sf::Image						_scrollImage;
+  std::map<t_ressource, sf::Image>			_ressourcesImage;
+  sf::Font						_font;
+  sf::Music						_music;
+
+private:
   sf::RenderWindow					*app;
   sf::View						_view;
-  sf::Image						_grassImage;
-  std::map<t_ressource, sf::Image>			_ressourcesImage;
   std::map<t_ressource, sf::Vector2f>			_ressourcesPadding;
   std::map<t_eventName, sf::Vector2f>			_bindMove;
+  float							_zoomCoeff;
+  sf::Vector2f						_offsetCoeff;
+
 private:
+  void							printBackground();
   void							cleanMap(Map *map);
   void							printRessources(Map *map);
+  void							printEggs(Map *map);
   void							printPlayers(Map *map);
   
   void							printThisRessourceAtPos
@@ -41,6 +55,12 @@ public:
   void							handleEvent(std::vector<Event> &);
   void							refreshScreen(Map *map);
 
+public:
+  void							nothingToHud();
+  void							highlightCase(std::pair<int, int>);
+  void							printHud(Map *map);
+  void							printPlayerOnHud(Player *player);
+  void							printCaseOnHud(Case *currentCase);
 public:
   void							moveView(t_eventName key);
 };

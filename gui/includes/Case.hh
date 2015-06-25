@@ -18,9 +18,9 @@ public:
   std::pair<int, int>			getPos();
   void					setRessources(std::map<t_ressource, int>);
   std::map<t_ressource, int>		getRessources();
+ 
 public:
-  void					dumpRessources();
-
+  int					askInventory(t_ressource);
 };
 
 #endif

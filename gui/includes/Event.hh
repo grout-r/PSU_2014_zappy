@@ -1,12 +1,3 @@
-//
-// Event.hh for zappy in /home/roman/Documents/dev/PSU_2014_zappy/gui/src
-// 
-// Made by grout_r
-// Login   <roman@epitech.net>
-// 
-// Started on  Tue Apr 28 14:54:51 2015 grout_r
-// Last update Thu Jun 18 11:00:01 2015 grout_r
-//
 
 #ifndef EVENT
 # define EVENT
@@ -19,8 +10,8 @@ class			Event
 {
 public:
   std::map<t_ressource, int>	ressources;
-  int			posX;
-  int			posY;
+  float			posX;
+  float			posY;
   int			quantity;
   int			playerId;
   int			orientation;

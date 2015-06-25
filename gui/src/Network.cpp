@@ -1,10 +1,12 @@
 
 #include "Network.hh"
 
-Network::Network()
+Network::Network(std::string ip, std::string port)
 {
-  this->port = 4242;
-  this->server_ip = "127.0.0.1";
+  std::stringstream ss(port);
+
+  ss >> this->port;
+  this->server_ip = ip;
   this->pe = getprotobyname("TCP");
   this->s_in.sin_family = AF_INET;
   _commandMapping["msz"] = &Network::fillMSZ;
@@ -39,6 +41,8 @@ bool				Network::initNetwork()
       if (connect(this->socket_fd, (struct sockaddr *)&(this->s_in),
 		  sizeof(this->s_in)) == -1)
 	throw (Error("Error on connect : " + std::string(strerror(errno))));
+      if (write(socket_fd, "GRAPHIC\n", strlen("GRAPHIC\n")) < 0)
+	return (false);
       return (true);
     }
   catch (Error e)
@@ -57,18 +61,19 @@ Event				Network::parseCommand(std::string command)
   iss >> sub;
   it = _commandMapping.find(sub);
   if (it == _commandMapping.end())
-    return Event();
+    {
+      return Event();
+    }
   return (this->*_commandMapping[sub])(iss.str());
 }
 
 void				Network::handleEvent(std::vector<Event> &eventStack)
 {
-  char				buff[1024];
-
   fd_set rfds;
   struct timeval tv;
   int retval;
   Event				event;
+  std::string		        buffer;
 
   FD_ZERO(&rfds);
   FD_SET(this->socket_fd, &rfds);
@@ -79,15 +84,27 @@ void				Network::handleEvent(std::vector<Event> &eventStack)
     throw (Error("select()"));
   else if (retval)
     {
-      printf("Data is available now.\n");
-      bzero(buff, 1024);
-      read(this->socket_fd, buff, 1024);
-      event = parseCommand(std::string(buff));
+      buffer = getMsg();
+      std::cout << buffer << std::endl;
+      event = parseCommand(buffer);
     }
   eventStack.push_back(event);
 }
 
-bool					Network::cptWord(int nb, std::string command)
+std::string				Network::getMsg()
+{
+  char					tmp;
+  std::string				ret;
+  
+  while (tmp != '\n')
+    {
+      read(this->socket_fd, &tmp, 1);
+      ret.push_back(tmp);
+    }
+  return (ret);
+}
+
+int					Network::cptWord(int nb, std::string command)
 {
   int					i;
   int					cpt;
@@ -111,6 +128,9 @@ Event					Network::fillMSZ(std::string command)
   std::string				sub;
   Event					event;
   
+  std::cout << "MSZ" << std::endl;
+  if (cptWord(2, command) == 1)
+    return event;
   iss >> sub;
   iss >> event.posX;
   if (event.posX <= 0)
@@ -118,7 +138,6 @@ Event					Network::fillMSZ(std::string command)
   iss >> event.posY;
   if (event.posY <= 0)
     return event;
-  std::cout << "after return" << std::endl;
   event.eventName = MSZ;
   return event;
 }
@@ -129,6 +148,7 @@ Event					Network::fillBCT(std::string command)
   std::string				sub;
   Event					event;
 
+  std::cout << "BCT" << std::endl;
   if (cptWord(9, command) == 1)
     return event;
   iss >> sub;
@@ -149,17 +169,13 @@ Event					Network::fillBCT(std::string command)
 
 Event					Network::fillPNW(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PNW" << std::endl;
   if (cptWord(6, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   iss >> event.posX;
@@ -175,17 +191,13 @@ Event					Network::fillPNW(std::string command)
 
 Event					Network::fillPPO(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PPO" << std::endl;
   if (cptWord(4, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   iss >> event.posX;
@@ -199,17 +211,13 @@ Event					Network::fillPPO(std::string command)
 
 Event					Network::fillPLV(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PLV" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   iss >> event.level;
@@ -221,19 +229,17 @@ Event					Network::fillPLV(std::string command)
 
 Event					Network::fillPIN(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PIN" << std::endl;
   if (cptWord(10, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
+  iss >> event.posX;
+  iss >> event.posY;
   for (int i = 0; i != 7; i++)
     iss >> event.ressources[(t_ressource)i];
   for (int i = 0; i != 7; i++)
@@ -242,22 +248,19 @@ Event					Network::fillPIN(std::string command)
         return event;
     }
   event.eventName = PIN;
+  std::cout << "PIN2" << std::endl;
   return event;
 }
 
 Event					Network::fillPEX(std::string command)
 {
-  std::istringstream                    iss;
+  std::istringstream                    iss(command);
   std::string                           sub;
-  std::string::iterator                 it;
   Event                                 event;
 
+  std::cout << "PEX" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   if (event.playerId < 0)
@@ -268,17 +271,13 @@ Event					Network::fillPEX(std::string command)
 
 Event					Network::fillPBC(std::string command)
 {
-  std::istringstream                    iss;
+  std::istringstream                    iss(command);
   std::string                           sub;
-  std::string::iterator                 it;
   Event                                 event;
 
+  std::cout << "PBC" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.message;
   if (event.message.size() == 0)
@@ -293,6 +292,7 @@ Event					Network::fillPIE(std::string command)
   std::string                           sub;
   Event                                 event;
 
+  std::cout << "PIE" << std::endl;
   if (cptWord(3, command) == 1)
     return event;
   iss >> sub;
@@ -307,14 +307,12 @@ Event					Network::fillPIE(std::string command)
 
 Event					Network::fillPFK(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PFK" << std::endl;
   if (cptWord(1, command) == 1)
-    return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
     return event;
   iss >> sub;
   iss >> event.playerId;
@@ -326,17 +324,13 @@ Event					Network::fillPFK(std::string command)
 
 Event					Network::fillPDR(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PDR" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   iss >> event.ressourceId;
@@ -348,17 +342,13 @@ Event					Network::fillPDR(std::string command)
 
 Event					Network::fillPGT(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PGT" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   iss >> event.ressourceId;
@@ -370,17 +360,13 @@ Event					Network::fillPGT(std::string command)
 
 Event					Network::fillPDI(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "PDI" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.playerId;
   if (event.playerId < 0)
@@ -391,20 +377,13 @@ Event					Network::fillPDI(std::string command)
 
 Event					Network::fillENW(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "ENW" << std::endl;
   if (cptWord(4, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.eggId;
   iss >> event.playerId;
@@ -412,24 +391,19 @@ Event					Network::fillENW(std::string command)
   iss >> event.posY;
   if (event.eggId < 0 || event.playerId < 0 || event.posX < 0 || event.posY < 0)
     return event;
-  std::cout << "lel" << std::endl;
   event.eventName = ENW;
   return event;
 }
 
 Event					Network::fillEHT(std::string command)
 {
-  std::istringstream			iss;
+  std::istringstream			iss(command);
   std::string				sub;
-  std::string::iterator			it;
   Event					event;
 
+  std::cout << "EHT" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
-  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
-    return event;
-  command.erase(it);
-  iss.str(command);
   iss >> sub;
   iss >> event.eggId;
   if (event.eggId < 0)
