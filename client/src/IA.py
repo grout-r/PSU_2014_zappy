@@ -3,9 +3,7 @@
 from trantorian import Trantorian
 
 def getFoodToSurvive(player, q):
-    player.flush()
     while player.haveEnough("nourriture", q) == False:
-        player.flush()
         i = player.search("nourriture")
         if i == -1:
             player.move("avance")
@@ -17,3 +15,8 @@ def getFoodToSurvive(player, q):
 def IA(player):
     while player.isAlive():
         getFoodToSurvive(player, 5)
+        if player.readMsg() == True:
+            print "Je vais a l'incant"
+            player.moveWithPath()
+        else:
+            player.getStoneForLevel()
