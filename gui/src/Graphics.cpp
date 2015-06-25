@@ -23,7 +23,7 @@ Graphics::Graphics(std::pair<int, int>)
   
   _font.LoadFromFile("./res/font.ttf");
   _music.OpenFromFile("./res/bo.ogg");
-  //_music.Play();
+  _music.Play();
 
   _ressourcesPadding[FOOD] = sf::Vector2f(0 , 0);
   _ressourcesPadding[LINEMATE] = sf::Vector2f(16.666 , 0);
