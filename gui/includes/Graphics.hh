@@ -3,6 +3,7 @@
 # define GRAPHICS_HH_
 
 # include <SFML/Graphics.hpp>
+# include <SFML/Audio.hpp>
 # include <utility>
 # include <vector>
 # include <map>
@@ -26,6 +27,7 @@ private:
   sf::Image						_scrollImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
   sf::Font						_font;
+  sf::Music						_music;
 
 private:
   sf::RenderWindow					*app;

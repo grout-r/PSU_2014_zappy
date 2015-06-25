@@ -18,9 +18,11 @@ Graphics::Graphics(std::pair<int, int>)
   _ressourcesImage[MENDIANE].LoadFromFile("./res/mendiane.png");
   _ressourcesImage[PHIRAS].LoadFromFile("./res/phiras.png");
   _ressourcesImage[THYSTAME].LoadFromFile("./res/thystame.png");
-
-  _font.LoadFromFile("./res/font.ttf");
   
+  _font.LoadFromFile("./res/font.ttf");
+  //_music.OpenFromFile("./res/bo.ogg");
+  //_music.Play();
+
   _ressourcesPadding[FOOD] = sf::Vector2f(0 , 0);
   _ressourcesPadding[LINEMATE] = sf::Vector2f(16.666 , 0);
   _ressourcesPadding[DERAUMERE] = sf::Vector2f(33.333 , 0);
@@ -154,6 +156,8 @@ void				Graphics::highlightCase(std::pair<int, int> pos)
 {
   sf::Sprite			current;
   
+  if (pos.first < 0 || pos.second < 0)
+    return ;
   current.SetImage(_hightlightGrassImage);
   current.SetPosition(sf::Vector2f(pos.first * 50, pos.second * 50));
   app->Draw(current);
