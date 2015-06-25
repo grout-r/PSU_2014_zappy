@@ -20,8 +20,8 @@ Graphics::Graphics(std::pair<int, int>)
   _ressourcesImage[THYSTAME].LoadFromFile("./res/thystame.png");
   
   _font.LoadFromFile("./res/font.ttf");
-  //_music.OpenFromFile("./res/bo.ogg");
-  //_music.Play();
+  _music.OpenFromFile("./res/bo.ogg");
+  _music.Play();
 
   _ressourcesPadding[FOOD] = sf::Vector2f(0 , 0);
   _ressourcesPadding[LINEMATE] = sf::Vector2f(16.666 , 0);
@@ -170,11 +170,10 @@ void				Graphics::printHud(Map *map)
   Player			*currentPlayer = map->getPlayerFromPos(map->getHud());
   Case				*currentCase = map->getCaseFromPos(map->getHud());
 
+  highlightCase(map->getHud());
   scroll.SetImage(_scrollImage);
   scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
   app->Draw(scroll);
-
-  highlightCase(map->getHud());
   if (currentPlayer != NULL)
     printPlayerOnHud(currentPlayer);
   if (currentCase != NULL)
