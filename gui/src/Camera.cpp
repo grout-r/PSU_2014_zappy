@@ -29,7 +29,6 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[SEG] = &Camera::execNOTHING;
   _bindExecFuncPtr[SMG] = &Camera::execNOTHING;
 
-
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYRIGHT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYUP] = &Camera::execKEYMOVE;  

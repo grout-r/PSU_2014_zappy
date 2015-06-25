@@ -75,6 +75,7 @@ void				Graphics::refreshScreen(Map *map)
   app->Clear();
   printBackground();
   cleanMap(map);
+  highlightCase(map->getHud());
   printRessources(map);
   printEggs(map);
   printPlayers(map);
@@ -184,7 +185,6 @@ void				Graphics::printHud(Map *map)
   Player			*currentPlayer = map->getPlayerFromPos(map->getHud());
   Case				*currentCase = map->getCaseFromPos(map->getHud());
 
-  highlightCase(map->getHud());
   scroll.SetImage(_scrollImage);
   scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
   app->Draw(scroll);
