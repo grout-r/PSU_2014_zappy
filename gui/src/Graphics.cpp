@@ -9,6 +9,7 @@ Graphics::Graphics(std::pair<int, int>)
   _view.SetHalfSize(sf::Vector2f(750, 500));
   app->SetView(_view);
   _grassImage.LoadFromFile("./res/grass.jpg");
+  _hightlightGrassImage.LoadFromFile("./res/grass_highlight.jpg");
   _scrollImage.LoadFromFile("./res/scroll.png");
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
@@ -58,10 +59,10 @@ void				Graphics::refreshScreen(Map *map)
 {
   app->Clear();
   cleanMap(map);
+  printHud(map);
   printRessources(map);
   printEggs(map);
   printPlayers(map);
-  printHud(map);
   app->Display();
 }
 
@@ -83,7 +84,8 @@ void				Graphics::printPlayerOnHud(Player *currentPlayer)
 
   currentString.SetColor(sf::Color(0, 0, 0, 255));
   ss << currentPlayer->getLevel();
-  currentString.SetSize(20);
+  currentString.SetSize(20);  
+  currentString.SetFont(_font);
   currentString.SetText(std::string("Level : " + ss.str()));
   currentString.SetPosition(sf::Vector2f(1325,  y)+ _offsetCoeff);
   app->Draw(currentString);
@@ -121,7 +123,8 @@ void				Graphics::printCaseOnHud(Case *currentCase)
   std::stringstream		ss;
   int				y = 500;
 
-  currentRes.Scale(sf::Vector2f(0.1, 0.1));  
+  currentRes.Scale(sf::Vector2f(0.1, 0.1));
+  currentString.SetFont(_font);
   currentString.SetSize(10);
   currentString.SetColor(sf::Color(0, 0, 0, 255));
   ss << currentCase->getPos().first;
@@ -147,6 +150,16 @@ void				Graphics::printCaseOnHud(Case *currentCase)
     }
 }
 
+void				Graphics::highlightCase(std::pair<int, int> pos)
+{
+  sf::Sprite			current;
+  
+  current.SetImage(_hightlightGrassImage);
+  current.SetPosition(sf::Vector2f(pos.first * 50, pos.second * 50));
+  app->Draw(current);
+  return ;
+}
+
 void				Graphics::printHud(Map *map)
 {
   sf::Sprite			scroll;
@@ -156,6 +169,8 @@ void				Graphics::printHud(Map *map)
   scroll.SetImage(_scrollImage);
   scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
   app->Draw(scroll);
+
+  highlightCase(map->getHud());
   if (currentPlayer != NULL)
     printPlayerOnHud(currentPlayer);
   if (currentCase != NULL)

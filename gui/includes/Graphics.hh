@@ -22,6 +22,7 @@ class							Graphics
 {
 private:
   sf::Image						_grassImage;
+  sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
   sf::Font						_font;
@@ -52,6 +53,7 @@ public:
 
 public:
   void							nothingToHud();
+  void							highlightCase(std::pair<int, int>);
   void							printHud(Map *map);
   void							printPlayerOnHud(Player *player);
   void							printCaseOnHud(Case *currentCase);

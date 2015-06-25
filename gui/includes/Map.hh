@@ -5,6 +5,7 @@
 # include <vector>
 # include <map>
 # include <iostream>
+# include <algorithm>
 # include "Event.hh"
 # include "Player.hh"
 # include "Case.hh"
