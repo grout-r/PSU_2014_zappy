@@ -67,6 +67,7 @@ public:
   ~Network();
   bool				initNetwork();
   void				handleEvent(std::vector<Event> &);
+  std::string			getMsg();
 };
 
 #endif

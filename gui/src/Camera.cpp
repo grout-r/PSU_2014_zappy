@@ -5,7 +5,7 @@ Camera::Camera(int ac, char **av)
 {
   setParams(ac, av);
   _net = new Network(_ip, _port);
-  _map = new Map(std::make_pair(100, 100));
+  _map = new Map(std::make_pair(10, 10));
   _graph = new Graphics(_map->getSize());
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
   _bindExecFuncPtr[BCT] = &Camera::execBCT;
@@ -31,7 +31,7 @@ void				Camera::setParams(int ac, char **av)
 {
   if (ac != 3)
     {
-      std::cout << " Usage : ./zappy_hui [IP] [PORT]" << std::endl;
+      std::cout << " Usage : ./zappy_gui [IP] [PORT]" << std::endl;
       exit(-1);
     }
   _ip = std::string(av[1]);

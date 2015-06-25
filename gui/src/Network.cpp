@@ -38,6 +38,8 @@ bool				Network::initNetwork()
       if (connect(this->socket_fd, (struct sockaddr *)&(this->s_in),
 		  sizeof(this->s_in)) == -1)
 	throw (Error("Error on connect : " + std::string(strerror(errno))));
+      if (write(socket_fd, "GRAPHIC\n", strlen("GRAPHIC\n")) < 0)
+	return (false);
       return (true);
     }
   catch (Error e)
@@ -56,18 +58,19 @@ Event				Network::parseCommand(std::string command)
   iss >> sub;
   it = _commandMapping.find(sub);
   if (it == _commandMapping.end())
-    return Event();
+    {
+      return Event();
+    }
   return (this->*_commandMapping[sub])(iss.str());
 }
 
 void				Network::handleEvent(std::vector<Event> &eventStack)
 {
-  char				buff[1024];
-
   fd_set rfds;
   struct timeval tv;
   int retval;
   Event				event;
+  std::string		        buffer;
 
   FD_ZERO(&rfds);
   FD_SET(this->socket_fd, &rfds);
@@ -78,12 +81,23 @@ void				Network::handleEvent(std::vector<Event> &eventStack)
     throw (Error("select()"));
   else if (retval)
     {
-      printf("Data is available now.\n");
-      bzero(buff, 1024);
-      read(this->socket_fd, buff, 1024);
-      event = parseCommand(std::string(buff));
+      buffer = getMsg();
+      event = parseCommand(buffer);
     }
   eventStack.push_back(event);
+}
+
+std::string				Network::getMsg()
+{
+  char					tmp;
+  std::string				ret;
+  
+  while (tmp != '\n')
+    {
+      read(this->socket_fd, &tmp, 1);
+      ret.push_back(tmp);
+    }
+  return (ret);
 }
 
 bool					Network::cptWord(int nb, std::string command)
@@ -117,7 +131,6 @@ Event					Network::fillMSZ(std::string command)
   iss >> event.posY;
   if (event.posY <= 0)
     return event;
-  std::cout << "after return" << std::endl;
   event.eventName = MSZ;
   return event;
 }

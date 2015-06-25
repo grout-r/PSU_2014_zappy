@@ -75,10 +75,10 @@ void				Graphics::refreshScreen(Map *map)
   app->Clear();
   printBackground();
   cleanMap(map);
-  printHud(map);
   printRessources(map);
   printEggs(map);
   printPlayers(map);
+  printHud(map);
   app->Display();
 }
 
