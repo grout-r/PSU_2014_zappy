@@ -1,9 +1,10 @@
 
 #include "Camera.hh"
 
-Camera::Camera()
+Camera::Camera(int ac, char **av)
 {
-  _net = new Network();
+  setParams(ac, av);
+  _net = new Network(_ip, _port);
   _map = new Map(std::make_pair(100, 100));
   _graph = new Graphics(_map->getSize());
   _bindExecFuncPtr[MSZ] = &Camera::execMSZ;
@@ -24,6 +25,17 @@ Camera::Camera()
 
 Camera::~Camera()
 {
+}
+
+void				Camera::setParams(int ac, char **av)
+{
+  if (ac != 3)
+    {
+      std::cout << " Usage : ./zappy_hui [IP] [PORT]" << std::endl;
+      exit(-1);
+    }
+  _ip = std::string(av[1]);
+  _port = std::string(av[2]);
 }
 
 void				Camera::treatEvent()

@@ -16,6 +16,7 @@
 # include <sstream>
 # include <vector>
 # include <unistd.h>
+# include <sstream>
 # include "Graphics.hh"
 # include "Exception.hh"
 
@@ -62,7 +63,7 @@ private:
   bool				cptWord(int nb, std::string);
 
 public:
-  Network();
+  Network(std::string, std::string);
   ~Network();
   bool				initNetwork();
   void				handleEvent(std::vector<Event> &);

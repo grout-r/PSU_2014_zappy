@@ -11,6 +11,8 @@ Graphics::Graphics(std::pair<int, int>)
   _grassImage.LoadFromFile("./res/grass.jpg");
   _hightlightGrassImage.LoadFromFile("./res/grass_highlight.jpg");
   _scrollImage.LoadFromFile("./res/scroll.png");
+  _backgroundImage.LoadFromFile("./res/bckgrnd.jpg");
+
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
   _ressourcesImage[DERAUMERE].LoadFromFile("./res/deraumere.png");
@@ -21,7 +23,7 @@ Graphics::Graphics(std::pair<int, int>)
   
   _font.LoadFromFile("./res/font.ttf");
   _music.OpenFromFile("./res/bo.ogg");
-  _music.Play();
+  //_music.Play();
 
   _ressourcesPadding[FOOD] = sf::Vector2f(0 , 0);
   _ressourcesPadding[LINEMATE] = sf::Vector2f(16.666 , 0);
@@ -43,6 +45,17 @@ Graphics::~Graphics()
 {
 }
 
+void				Graphics::printBackground()
+{
+  sf::Sprite			current;
+  
+  current.SetImage(_backgroundImage);
+  current.SetPosition(_offsetCoeff);
+  current.Resize(sf::Vector2f(1500, 1000));
+  app->Draw(current);
+  
+}
+
 void				Graphics::cleanMap(Map *map)
 {
   sf::Sprite			tmp;
@@ -60,6 +73,7 @@ void				Graphics::cleanMap(Map *map)
 void				Graphics::refreshScreen(Map *map)
 {
   app->Clear();
+  printBackground();
   cleanMap(map);
   printHud(map);
   printRessources(map);

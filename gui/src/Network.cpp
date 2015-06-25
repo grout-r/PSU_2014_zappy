@@ -1,10 +1,12 @@
 
 #include "Network.hh"
 
-Network::Network()
+Network::Network(std::string ip, std::string port)
 {
-  this->port = 4242;
-  this->server_ip = "127.0.0.1";
+  std::stringstream ss(port);
+
+  ss >> this->port;
+  this->server_ip = ip;
   this->pe = getprotobyname("TCP");
   this->s_in.sin_family = AF_INET;
   _commandMapping["msz"] = &Network::fillMSZ;

@@ -23,6 +23,7 @@ class							Graphics
 {
 private:
   sf::Image						_grassImage;
+  sf::Image						_backgroundImage;
   sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
@@ -38,6 +39,7 @@ private:
   sf::Vector2f						_offsetCoeff;
 
 private:
+  void							printBackground();
   void							cleanMap(Map *map);
   void							printRessources(Map *map);
   void							printEggs(Map *map);
