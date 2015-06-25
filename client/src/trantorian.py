@@ -20,6 +20,16 @@ class Trantorian:
               {"joueur":6,"linemate":2,"deraumere":2,"sibur":2,
                "mendiane":2,"phiras":2,"thystame":1}]
 
+    soundTab = {0:"",
+                1:"avance",
+                2:"avance gauche avance",
+                3:"gauche avance",
+                4:"gauche avance gauche avance",
+                5:"droite droite avance",
+                6:"droite avance droite avance",
+                7:"droite avance",
+                8:"avance droite avance"}
+
     def __init__(self, client, sock):
         self.__client = client
         self.__sock = sock
@@ -39,12 +49,10 @@ class Trantorian:
         resp = self.__sock.recv(4096)
         if not resp:
             return False
-        # print resp,
         self.__sock.send("{0}\n".format(self.__client[0]))
         resp = self.__sock.recv(4096)
         if not resp:
             return False
-        # print resp,
         try:
             nb = int(resp)
         except ValueError:
@@ -54,7 +62,6 @@ class Trantorian:
         resp = self.__sock.recv(4096)
         if not resp:
             return False
-        # print resp,
         return True
 
     def isAlive(self):
@@ -65,23 +72,25 @@ class Trantorian:
         if not resp:
             sys.exit(1)
         for i in resp.strip('\n').split('\n'):
-            # print "J'ajoute \"{0}\" a la stack de message".format(i)
             if i == "mort":
                 self.__alive = False
                 sys.exit(0)
             self.__msgStack.append(i)
-        #print self.__msgStack
 
-    def flush(self):
-        self.__invent = []
-        self.__vision = []
-
-    def broadcast(self, msg):
+    def __broadcast(self, msg):
+        isBroad = False
         self.__sock.send("broadcast {0}\n".format(msg))
+        while isBroad != True:
+            self.__getServMsg()
+            for msg in self.__msgStack:
+                if msg == "ok" or msg == "ko":
+                    isBroad= True
+                    self.__msgStack.pop(self.__msgStack.index(msg))
 
     ### Inventory functions
 
     def __inventory(self):
+        self.__invent = []
         isInventory = False
         self.__sock.send("inventaire\n")
         while isInventory != True :
@@ -130,6 +139,7 @@ class Trantorian:
     ### Vision functions
     
     def __see(self):
+        self.__vision = []
         isVision = False
         self.__sock.send("voir\n")
         while isVision != True:
@@ -167,7 +177,6 @@ class Trantorian:
 
     def __checkLeft(self, indexToItem, currentPos, inc):
         if indexToItem >= currentPos - (inc / 2) and indexToItem < currentPos:
-            #print "Ajoute gauche"
             self.__path.append("gauche")
             while currentPos != indexToItem:
                 self.__path.append("avance")
@@ -197,7 +206,6 @@ class Trantorian:
                 self.__path.append("avance")
             inc += 2
             pos += inc
-        # print self.__path
 
     def moveWithPath(self):
         for i in self.__path:
@@ -212,15 +220,93 @@ class Trantorian:
         for item in self.__vision[0].split():
             if item == "joueur":
                 nPlayer += 1
-        if levTab[self.__level]["joueur"] - nPlayer > 0:
-            self.__sock.send("{0} {1} {2}\n".format(
-                self.__client[0], self.__level + 1, levTab[self.__level]["joueur"] - nPlayer))
-        # else:
-        #     self.incant()
+        if self.levTab[self.__level - 1]["joueur"] - nPlayer > 0:
+            self.__broadcast("{0} {1} {2}".format(
+                self.__client[0], self.__level + 1, self.levTab[self.__level - 1]["joueur"] - nPlayer))
+        else:
+            self.incant()
 
     def readMsg(self):
         for i in self.__msgStack:
             msg = self.__msgStack.pop(self.__msgStack.index(i))
-            if msg.split()[0] == self.__client[0] and int(msg.split()[1]) - 1 == self.__level:
+            print msg
+            if msg == "elevation en cours":
+                levelUp = False
+                while levelUp != True :
+                    self.__getServMsg()
+                    for msg in self.__msgStack:
+                        if msg.split(" : ")[0] == "niveau actuel":
+                            levelUp = True
+                            self.__level = int(msg.split(" : ")[1])
+                            self.__msgStack.pop(self.__msgStack.index(msg))
+            elif msg.split(",")[1].split()[0] == self.__client[0] and int(msg.split(",")[1].split()[1]) - 1 == self.__level:
                 print msg
-                #faire le trouvage de chemin
+                for i in self.soundTab[int(msg.split(",")[0].split()[1])].split():
+                    print i
+                    self.__path.append(i)
+                return True
+            break
+        return False
+
+    ## Incant functions
+
+    def __checkEmptySquare(self):
+        self.__see()
+        for i in self.__vision[0].split():
+            if i != "joueur":
+                return False
+        return True
+
+    def __emptySquare(self):
+        for i in self.__vision[0].split():
+            if i != "joueur" and i != "nourriture":
+                self.take(i)
+
+    def __putStuffForIncant(self):
+        for i in self.levTab[self.__level - 1]:
+            if i == "joueur":
+                continue
+            for nb in range(0, self.levTab[self.__level - 1][i]):
+                self.put(i)
+
+    def incant(self):
+        if self.__checkEmptySquare() == False:
+            self.__emptySquare()
+        self.__putStuffForIncant()
+        self.__sock.send("incantation\n")
+        levelUp = False
+        isIncant = False
+        while levelUp == False or isIncant == False:
+            self.__getServMsg()
+            for msg in self.__msgStack:
+                if msg == "elevation en cours":
+                    isIncant = True
+                    self.__msgStack.pop(self.__msgStack.index(msg))
+                if msg.split(" : ")[0] == "niveau actuel":
+                    levelUp = True
+                    self.__level = int(msg.split(" : ")[1])
+                    self.__msgStack.pop(self.__msgStack.index(msg))
+
+    def __canLevelUp(self):
+        for i in self.levTab[self.__level - 1]:
+            if i == "joueur":
+                continue
+            if self.haveEnough(i, self.levTab[self.__level - 1][i]) == False:
+                return False
+        return True
+
+    def getStoneForLevel(self):
+        if self.__canLevelUp() == False:
+            self.__see()
+            for i in self.__vision:
+                for item in i.split():
+                    if item == "joueur" or item == "nourriture":
+                        continue
+                    if self.haveEnough(item, self.levTab[self.__level - 1][item]) == False:
+                        self.foundPathToItem(self.__vision.index(i))
+                        self.moveWithPath()
+                        self.take(item)
+                        break
+            self.move("avance")
+        else:
+            self.sendIncantMsg()
