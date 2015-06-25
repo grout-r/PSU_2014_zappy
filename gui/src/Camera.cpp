@@ -13,6 +13,7 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[PPO] = &Camera::execPPO;
   _bindExecFuncPtr[PLV] = &Camera::execPLV;
   _bindExecFuncPtr[ENW] = &Camera::execENW;
+  _bindExecFuncPtr[PIN] = &Camera::execPIN;
 
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYRIGHT] = &Camera::execKEYMOVE;  
