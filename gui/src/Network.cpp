@@ -18,7 +18,10 @@ Network::Network()
   _commandMapping["pie"] = &Network::fillPIE;
   _commandMapping["pfk"] = &Network::fillPFK;
   _commandMapping["pdr"] = &Network::fillPDR;
+  _commandMapping["pgt"] = &Network::fillPGT;
+  _commandMapping["pdi"] = &Network::fillPDI;
   _commandMapping["enw"] = &Network::fillENW;
+  _commandMapping["eht"] = &Network::fillEHT;
 }
 
 Network::~Network()
@@ -270,7 +273,7 @@ Event					Network::fillPBC(std::string command)
   std::string::iterator                 it;
   Event                                 event;
 
-  if (cptWord(1, command) == 1)
+  if (cptWord(2, command) == 1)
     return event;
   if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
     return event;
@@ -343,6 +346,49 @@ Event					Network::fillPDR(std::string command)
   return event;
 }
 
+Event					Network::fillPGT(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(2, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  iss >> event.ressourceId;
+  if (event.playerId < 0 || event.ressourceId < 0)
+    return event;
+  event.eventName = PGT;
+  return event;
+}
+
+Event					Network::fillPDI(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(1, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.playerId;
+  if (event.playerId < 0)
+    return event;
+  event.eventName = PDI;
+  return event;
+}
+
 Event					Network::fillENW(std::string command)
 {
   std::istringstream			iss;
@@ -368,5 +414,26 @@ Event					Network::fillENW(std::string command)
     return event;
   std::cout << "lel" << std::endl;
   event.eventName = ENW;
+  return event;
+}
+
+Event					Network::fillEHT(std::string command)
+{
+  std::istringstream			iss;
+  std::string				sub;
+  std::string::iterator			it;
+  Event					event;
+
+  if (cptWord(1, command) == 1)
+    return event;
+  if ((it = std::find(command.begin(), command.end(), '#')) == command.end())
+    return event;
+  command.erase(it);
+  iss.str(command);
+  iss >> sub;
+  iss >> event.eggId;
+  if (event.eggId < 0)
+    return event;
+  event.eventName = EHT;
   return event;
 }
