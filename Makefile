@@ -32,12 +32,14 @@ $(NAME_S):
 	cd $(SERVER) && $(MAKE)
 
 clean:
-	cd $(GUI) && $(MAKE) $@
+	cd $(CLIENT) && $(MAKE) $@
 	cd $(SERVER) && $(MAKE) $@
+	cd $(GUI) && $(MAKE) $@
 
 fclean: clean
-	cd $(GUI) && $(MAKE) $@
+	cd $(CLIENT) && $(MAKE) $@
 	cd $(SERVER) && $(MAKE) $@
+	cd $(GUI) && $(MAKE) $@
 
 re: fclean all
 
