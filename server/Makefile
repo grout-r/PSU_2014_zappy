@@ -18,6 +18,8 @@ RM		= 	rm -f
 
 NAME 		= 	server
 
+LNAME		=	../server_zappy
+
 SERVER_ACTIONS	=	actions
 
 ACTION_TOOLS	=	action_tools
@@ -84,6 +86,7 @@ all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
 			$(CC) $(OBJ) -o $(NAME)
+			ln -s $$PWD/$(NAME) $(LNAME)
 
 %.o:			%.c
 			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
@@ -92,6 +95,7 @@ clean:
 
 fclean:			clean
 			$(RM) $(NAME)
+			$(RM) $(LNAME)
 
 re:			fclean all
 
