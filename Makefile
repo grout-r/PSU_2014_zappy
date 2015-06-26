@@ -23,8 +23,7 @@ NAME_S	=	zappy_server
 all:		$(NAME_C) $(NAME_S) $(NAME_G)
 
 $(NAME_C):
-	@echo "Makefile Client"
-	#cd $(CLIENT) && $(MAKE)
+	cd $(CLIENT) && $(MAKE)
 
 $(NAME_G):
 	cd $(GUI) && $(MAKE)
