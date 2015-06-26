@@ -85,7 +85,6 @@ void				Network::handleEvent(std::vector<Event> &eventStack)
   else if (retval)
     {
       buffer = getMsg();
-      std::cout << buffer << std::endl;
       event = parseCommand(buffer);
     }
   eventStack.push_back(event);
@@ -128,7 +127,6 @@ Event					Network::fillMSZ(std::string command)
   std::string				sub;
   Event					event;
   
-  std::cout << "MSZ" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
   iss >> sub;
@@ -148,7 +146,6 @@ Event					Network::fillBCT(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "BCT" << std::endl;
   if (cptWord(9, command) == 1)
     return event;
   iss >> sub;
@@ -173,7 +170,6 @@ Event					Network::fillPNW(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PNW" << std::endl;
   if (cptWord(6, command) == 1)
     return event;
   iss >> sub;
@@ -195,7 +191,6 @@ Event					Network::fillPPO(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PPO" << std::endl;
   if (cptWord(4, command) == 1)
     return event;
   iss >> sub;
@@ -215,7 +210,6 @@ Event					Network::fillPLV(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PLV" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
   iss >> sub;
@@ -233,7 +227,6 @@ Event					Network::fillPIN(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PIN" << std::endl;
   if (cptWord(10, command) == 1)
     return event;
   iss >> sub;
@@ -248,7 +241,6 @@ Event					Network::fillPIN(std::string command)
         return event;
     }
   event.eventName = PIN;
-  std::cout << "PIN2" << std::endl;
   return event;
 }
 
@@ -258,7 +250,6 @@ Event					Network::fillPEX(std::string command)
   std::string                           sub;
   Event                                 event;
 
-  std::cout << "PEX" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -275,7 +266,6 @@ Event					Network::fillPBC(std::string command)
   std::string                           sub;
   Event                                 event;
 
-  std::cout << "PBC" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
   iss >> sub;
@@ -292,7 +282,6 @@ Event					Network::fillPIE(std::string command)
   std::string                           sub;
   Event                                 event;
 
-  std::cout << "PIE" << std::endl;
   if (cptWord(3, command) == 1)
     return event;
   iss >> sub;
@@ -311,7 +300,6 @@ Event					Network::fillPFK(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PFK" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -328,7 +316,6 @@ Event					Network::fillPDR(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PDR" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
   iss >> sub;
@@ -346,7 +333,6 @@ Event					Network::fillPGT(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PGT" << std::endl;
   if (cptWord(2, command) == 1)
     return event;
   iss >> sub;
@@ -364,7 +350,6 @@ Event					Network::fillPDI(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "PDI" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -381,7 +366,6 @@ Event					Network::fillENW(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "ENW" << std::endl;
   if (cptWord(4, command) == 1)
     return event;
   iss >> sub;
@@ -401,7 +385,6 @@ Event					Network::fillEHT(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "EHT" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;

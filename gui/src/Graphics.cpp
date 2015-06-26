@@ -179,10 +179,28 @@ void				Graphics::highlightCase(std::pair<int, int> pos)
   return ;
 }
 
+Player*				Graphics::getPlayerHightlight(std::pair<int, int> pos,
+							      Map *map)
+{
+  Player			*current;
+
+  if ((current = map->getPlayerFromPos(pos)) != NULL)
+    {
+      _playerHightLightId = current->getPid();
+	return current;
+    }
+  else
+    {
+      return map->getPlayerFromId(_playerHightLightId);
+    }
+  return NULL;
+}
+
 void				Graphics::printHud(Map *map)
 {
   sf::Sprite			scroll;
-  Player			*currentPlayer = map->getPlayerFromPos(map->getHud());
+  Player			*currentPlayer = getPlayerHightlight(map->getHud(),
+									  map);
   Case				*currentCase = map->getCaseFromPos(map->getHud());
 
   scroll.SetImage(_scrollImage);
