@@ -24,6 +24,13 @@ Network::Network(std::string ip, std::string port)
   _commandMapping["pdi"] = &Network::fillPDI;
   _commandMapping["enw"] = &Network::fillENW;
   _commandMapping["eht"] = &Network::fillEHT;
+  _commandMapping["ebo"] = &Network::fillEBO;
+  _commandMapping["edi"] = &Network::fillEDI;
+  _commandMapping["sgt"] = &Network::fillSGT;
+  _commandMapping["seg"] = &Network::fillSEG;
+  _commandMapping["smg"] = &Network::fillSMG;
+  _commandMapping["suc"] = &Network::fillSUC;
+  _commandMapping["sbp"] = &Network::fillSBP;
 }
 
 Network::~Network()
@@ -409,5 +416,102 @@ Event					Network::fillEHT(std::string command)
   if (event.eggId < 0)
     return event;
   event.eventName = EHT;
+  return event;
+}
+
+Event					Network::fillEBO(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  std::cout << "EBO" << std::endl;
+  if (cptWord(1, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.eggId;
+  if (event.eggId < 0)
+    return event;
+  event.eventName = EBO;
+  return event;
+}
+
+Event					Network::fillEDI(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  std::cout << "EDI" << std::endl;
+  if (cptWord(1, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.eggId;
+  if (event.eggId < 0)
+    return event;
+  event.eventName = EDI;
+  return event;
+}
+
+Event					Network::fillSGT(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  std::cout << "SGT" << std::endl;
+  if (cptWord(1, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.time;
+  if (event.time < 0)
+    return event;
+  event.eventName = SGT;
+  return event;
+}
+
+Event					Network::fillSEG(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  std::cout << "SEG" << std::endl;
+  if (cptWord(1, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.teamName;
+  event.eventName = SEG;
+  return event;
+}
+
+Event					Network::fillSMG(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  std::cout << "SMG" << std::endl;
+  if (cptWord(1, command) == 1)
+    return event;
+  iss >> sub;
+  iss >> event.message;
+  event.eventName = SMG;
+  return event;
+}
+
+Event					Network::fillSUC(std::string)
+{
+  Event					event;
+
+  event.eventName = NOSUCH; /* NOSUCH a verifier */
+  return event;
+}
+
+Event					Network::fillSBP(std::string)
+{
+  Event					event;
+
+  event.eventName = NOSUCH; /* changer de valeur. SBP = mauvais parametre pour la commande */
   return event;
 }
