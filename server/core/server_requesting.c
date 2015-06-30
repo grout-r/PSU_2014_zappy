@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:52:56 2015 Oscar
-** Last update Sun Jun 21 14:10:13 2015 Oscar
+** Last update Mon Jun 22 07:29:41 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -48,9 +48,7 @@ int			handle_player_requests(t_server_info *server,
 	{
 	  if (manage_player_request(server,
 				    game_data, tmp->fd) == -1)
-	    {
-	      return (-1);
-	    }
+	    return (-1);
 	}
       if ((tmp = tmp->next) == NULL)
 	return (0);
@@ -58,8 +56,22 @@ int			handle_player_requests(t_server_info *server,
   return (0);
 }
 
-int			handle_cameras_requests(t_server_info *server,
+int			handle_camera_requests(t_server_info *server,
 						t_game *game_data)
 {
+  t_graphix		*tmp;
+
+  tmp = game_data->cameras;
+  while (tmp != NULL)
+    {
+      if (FD_ISSET(tmp->fd, server->fd_reads))
+	{
+	  if (manage_camera_request(server,
+				    game_data, tmp->fd) == -1)
+	    return (-1);
+	}
+      if ((tmp = tmp->next) == NULL)
+	return (0);
+    }
   return (0);
 }

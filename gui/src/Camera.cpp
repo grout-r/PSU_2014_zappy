@@ -29,7 +29,6 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[SEG] = &Camera::execNOTHING;
   _bindExecFuncPtr[SMG] = &Camera::execNOTHING;
 
-
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYRIGHT] = &Camera::execKEYMOVE;  
   _bindExecFuncPtr[KEYUP] = &Camera::execKEYMOVE;  
@@ -68,7 +67,6 @@ void				Camera::treatEvent()
 
 void				Camera::loop()
 {
-  _map->addPlayer(1, std::make_pair(5, 5), SOUTH, 42, "Lespatatesenfolies");
   if (_net->initNetwork() == false)
     exit(-1);
   while (true)

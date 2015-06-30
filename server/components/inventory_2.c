@@ -1,11 +1,11 @@
 /*
-** inventory_2.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
+1;2802;0c** inventory_2.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Fri Jun 12 22:19:59 2015 Oscar
-** Last update Fri Jun 19 17:44:30 2015 Oscar
+** Last update Mon Jun 22 10:18:51 2015 Oscar
 */
 
 #include	<stdlib.h>

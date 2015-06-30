@@ -37,6 +37,7 @@ private:
   std::map<t_eventName, sf::Vector2f>			_bindMove;
   float							_zoomCoeff;
   sf::Vector2f						_offsetCoeff;
+  int							_playerHightLightId;
 
 private:
   void							printBackground();
@@ -56,6 +57,8 @@ public:
   void							refreshScreen(Map *map);
 
 public:
+  Player*						getPlayerHightlight(std::pair<int, int>
+									    , Map *map);
   void							nothingToHud();
   void							highlightCase(std::pair<int, int>);
   void							printHud(Map *map);

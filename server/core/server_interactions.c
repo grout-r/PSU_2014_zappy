@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 15:49:46 2015 Oscar Morizet
-** Last update Sun Jun 21 14:17:26 2015 Oscar
+** Last update Mon Jun 22 07:27:57 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -21,7 +21,6 @@ int			manage_standby_client_request(t_server_info *server,
   char			buffer[BUFFER_R_SIZE + 1];
   int			ret;
 
-  printf("Anonymous request\n");
   bzero(buffer, BUFFER_R_SIZE);
   ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
   if (ret == -1)
@@ -45,7 +44,6 @@ int			manage_player_request(t_server_info *server,
   char			buffer[BUFFER_R_SIZE + 1];
   int			ret;
 
-  printf("Player request\n");
   bzero(buffer, BUFFER_R_SIZE);
   ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
   if (ret == -1)
@@ -69,7 +67,25 @@ int			manage_player_request(t_server_info *server,
 int			manage_camera_request(t_server_info *server,
 					      t_game *game_data, int req_fd)
 {
-  printf("Camera request\n");
+  t_graphix		*client;
+  char			buffer[BUFFER_R_SIZE + 1];
+  int			ret;
+
+  bzero(buffer, BUFFER_R_SIZE);
+  ret = recv(req_fd, buffer, BUFFER_R_SIZE, 0);
+  if (ret == -1)
+    return (-1);
+  client = get_camera_data(game_data, req_fd);
+  if (ret == 0)
+    {
+      FD_CLR(req_fd, server->fd_reads);
+      if (remove_client_from_cameras(game_data, req_fd) == -1)
+	return (-1);
+      return (0);
+    }
+  clean_out_buffer(buffer);
+  if (execute_graphical_request(game_data, buffer, client) == -1)
+    return (-1);
   return (0);
 }
 
@@ -88,7 +104,7 @@ int			handle_server_requests(t_server_info *server,
     return (-1);
   if (handle_anonymous_requests(server, game_data) == -1)
     return (-1);
-  if (handle_cameras_requests(server, game_data) == -1)
+  if (handle_camera_requests(server, game_data) == -1)
     return (-1);
   return (0);
 }

@@ -1,11 +1,11 @@
 /*
-** exec_line.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
+1;2802;0c** exec_line.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Sun Jun 21 08:54:23 2015 Oscar
+** Last update Mon Jun 22 07:59:29 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -16,7 +16,8 @@
 int		instant_exec(t_game *game, t_player *player,
 			     t_command command, char *argument)
 {
-  return ((game->command_action[command])(game, player, argument));
+  return ((game->command_action[command])
+	  (game, player, argument));
 }
 
 int		add_new_task_to_queue(t_game *game, t_player *player,
@@ -59,7 +60,8 @@ int		player_process_cycle(t_game *game, t_player *player)
       --task->cycles_before_exec;
       return (0);
     }
-  if ((ret = task->action(game, player, player->exec_queue->parameter)) == -1)
+  if ((ret = task->action(game, player,
+			  player->exec_queue->parameter)) == -1)
     return (-1);
   print_map(game);
   player->exec_queue = player->exec_queue->next;

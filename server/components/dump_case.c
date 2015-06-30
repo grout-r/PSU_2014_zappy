@@ -1,11 +1,11 @@
 /*
-1;2802;0c** dump_case.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/components
+1;2802;0c1;2802;0c1;2802;0c** dump_case.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/components
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun  1 13:26:03 2015 Oscar Morizet
-** Last update Sun Jun 21 08:34:12 2015 Oscar
+** Last update Mon Jun 22 11:10:41 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -50,4 +50,30 @@ char		*dump_case(t_game *data, t_map_case *mcase, int index)
       ++index;
     }
   return (dump);
+}
+
+void		dump_case_for_gfx(t_game *game_data, char *str, int x, int y)
+{
+  t_map_case	*map_case;
+  t_object	item;
+  int		item_count;
+  char		char_item_count[5];
+  
+  item = NOURRITURE;
+  printf("%d %d\n", x, y);
+  while (item != NONE)
+    {
+      bzero(char_item_count, 5);
+      item_count = 0;
+      map_case = game_data->map[y][x];
+      while (map_case != NULL)
+	{
+	  if (map_case->obj == item)
+	    ++item_count;
+	  map_case = map_case->next;
+	}
+      sprintf(char_item_count, " %d", item_count);
+      strcat(str, char_item_count);
+      ++item;
+    }
 }

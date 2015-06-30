@@ -20,7 +20,7 @@ sf::Sprite*			Map::getPlayerSprite(size_t i)
   std::pair<int, int>		tmpPos;
   sf::Sprite*			currentCase = new sf::Sprite();
 
-  if (players.size() - 1 < i)
+  if (players.size() - 1 < i || players.size() == 0)
     return (NULL);
   tmpPlayer = players[i];
   tmpPos = tmpPlayer->getPos();

@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Sun Jun 21 14:23:03 2015 Oscar
+## Last update Mon Jun 22 10:06:45 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -17,6 +17,8 @@ RM		= 	rm -f
 #CFLAGS		=	-W -Wall -Wextra -Werror
 
 NAME 		= 	server
+
+LNAME		=	../server_zappy
 
 SERVER_ACTIONS	=	actions
 
@@ -76,6 +78,14 @@ SRC		=	$(CORE)/main.c \
 			$(SERVER_ACTIONS)/action_incantation.c \
 			$(SERVER_ACTIONS)/err_handling.c \
 			$(SERVER_ACTIONS)/$(ACTION_TOOLS)/voir_tools.c \
+			$(GRAPHIX)/graphical_clients.c \
+			$(GRAPHIX)/init_graphix.c \
+			$(GRAPHIX)/graphic_actions_1.c \
+			$(GRAPHIX)/graphic_actions_2.c \
+			$(GRAPHIX)/graphic_actions_3.c \
+			$(GRAPHIX)/graphic_actions_4.c \
+			$(GRAPHIX)/graphic_actions_5.c \
+			$(GRAPHIX)/graphic_actions_tools.c \
 			$(TEST)/dump_tools.c \
 
 OBJ 		= 	$(SRC:.c=.o)
@@ -84,6 +94,7 @@ all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
 			$(CC) $(OBJ) -o $(NAME)
+			ln -s $$PWD/$(NAME) $(LNAME)
 
 %.o:			%.c
 			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
@@ -92,6 +103,7 @@ clean:
 
 fclean:			clean
 			$(RM) $(NAME)
+			$(RM) $(LNAME)
 
 re:			fclean all
 

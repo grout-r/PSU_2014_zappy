@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 13:02:08 2015 Oscar
-** Last update Sun Jun 21 14:10:21 2015 Oscar
+** Last update Mon Jun 22 08:30:33 2015 Oscar
 */
 
 #include		<sys/select.h>
@@ -72,6 +72,6 @@ int			accept_new_client(t_server_info *server, t_game *game_data)
     return (-1);
   if (add_new_standby_client(game_data, client_fd) == -1)
     return (-1);
-  printf("Added to standby\n");
+  write(client_fd, "BIENVENUE\n", 10);  
   return (0);
 }
