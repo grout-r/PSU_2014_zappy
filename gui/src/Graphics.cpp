@@ -13,6 +13,7 @@ Graphics::Graphics(std::pair<int, int>)
   _scrollImage.LoadFromFile("./res/scroll.png");
   _backgroundImage.LoadFromFile("./res/bckgrnd.jpg");
   _gameOverImage.LoadFromFile("./res/gameover.jpg");
+  _starImage.LoadFromFile("./res/star.png");
 
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
@@ -254,18 +255,32 @@ void				Graphics::printEggs(Map *map)
 void				Graphics::printPlayers(Map *map)
 {
   Player			*current;
-  sf::Sprite			currentCase;
+  sf::Sprite			currentSprite;
   std::pair<int, int>		tmpPos;
+  int				level;
+  int				x;
 
   for (size_t i = 0; (current = map->getPlayerSprite(i)) != NULL; i++)
     {
+      currentSprite = sf::Sprite();
       tmpPos = current->getPos();
-      currentCase.SetPosition(sf::Vector2f(50 * tmpPos.first, tmpPos.second * 50));
-      currentCase.SetImage(*(current->getSkin()));
-      currentCase.SetSubRect(current->getIntRectFromOrientation());
-      app->Draw(currentCase);
+      currentSprite.SetPosition(sf::Vector2f(50 * tmpPos.first, tmpPos.second * 50));
+      currentSprite.SetImage(*(current->getSkin()));
+      currentSprite.SetSubRect(current->getIntRectFromOrientation());
+      app->Draw(currentSprite);
+      currentSprite = sf::Sprite();
+      level = current->getLevel();
+      currentSprite.SetImage(_starImage);
+      x = 0;
+      for (int i = 0; i != level; i++)
+	{
+	  currentSprite.SetScale(sf::Vector2f(0.1, 0.1));
+	  currentSprite.SetPosition(sf::Vector2f((50 * tmpPos.first) + x, 
+						 (tmpPos.second) * 50 - 15));
+	  app->Draw(currentSprite);
+	  x += 15;
+	}
     }
-  
 }
 
 void				Graphics::printThisRessourceAtPos(t_ressource res,

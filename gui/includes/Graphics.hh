@@ -27,6 +27,7 @@ private:
   sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
   sf::Image						_gameOverImage;
+  sf::Image						_starImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
   sf::Font						_font;
   sf::Music						_music;
