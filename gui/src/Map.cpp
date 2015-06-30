@@ -1,6 +1,7 @@
 # include "Map.hh"
 
-Map::Map(std::pair<int, int> size) : _size(size), _hudLookAt(-1, -1)
+Map::Map(std::pair<int, int> size) : _size(size), _hudLookAt(-1, -1), 
+				     _gameOver(std::make_pair(false, ""))
 {
 }
 
@@ -14,20 +15,11 @@ std::pair<int, int>	        Map::getHud()
   return (_hudLookAt);
 }
 
-sf::Sprite*			Map::getPlayerSprite(size_t i)
+Player*			Map::getPlayerSprite(size_t i)
 {
-  Player			*tmpPlayer;
-  std::pair<int, int>		tmpPos;
-  sf::Sprite*			currentCase = new sf::Sprite();
-
   if (players.size() - 1 < i || players.size() == 0)
-    return (NULL);
-  tmpPlayer = players[i];
-  tmpPos = tmpPlayer->getPos();
-  currentCase->SetPosition(sf::Vector2f(50 * tmpPos.first, tmpPos.second * 50));
-  currentCase->SetImage(*(tmpPlayer->getSkin()));
-  currentCase->SetSubRect(tmpPlayer->getIntRectFromOrientation());
-  return (currentCase);
+    return (NULL);  
+  return (players[i]);
 }
 
 Egg*				Map::getEgg(size_t i)
@@ -151,4 +143,14 @@ void			        Map::updateCase(std::pair<int, int> pos,
     }
   _cases.push_back(new Case(pos));
   _cases.back()->setRessources(res);
+}
+
+std::pair<bool, std::string>	Map::getGameOver()
+{
+  return (_gameOver);
+}
+
+void				Map::gameOver(std::string winTeam)
+{
+  _gameOver = std::make_pair(true, winTeam);
 }

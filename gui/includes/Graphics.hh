@@ -26,6 +26,7 @@ private:
   sf::Image						_backgroundImage;
   sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
+  sf::Image						_gameOverImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
   sf::Font						_font;
   sf::Music						_music;
@@ -64,6 +65,8 @@ public:
   void							printHud(Map *map);
   void							printPlayerOnHud(Player *player);
   void							printCaseOnHud(Case *currentCase);
+  void							printGameOver(std::string);
+
 public:
   void							moveView(t_eventName key);
 };

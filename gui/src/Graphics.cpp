@@ -12,6 +12,7 @@ Graphics::Graphics(std::pair<int, int>)
   _hightlightGrassImage.LoadFromFile("./res/grass_highlight.jpg");
   _scrollImage.LoadFromFile("./res/scroll.png");
   _backgroundImage.LoadFromFile("./res/bckgrnd.jpg");
+  _gameOverImage.LoadFromFile("./res/gameover.jpg");
 
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
@@ -20,7 +21,7 @@ Graphics::Graphics(std::pair<int, int>)
   _ressourcesImage[MENDIANE].LoadFromFile("./res/mendiane.png");
   _ressourcesImage[PHIRAS].LoadFromFile("./res/phiras.png");
   _ressourcesImage[THYSTAME].LoadFromFile("./res/thystame.png");
-  
+ 
   _font.LoadFromFile("./res/font.ttf");
   _music.OpenFromFile("./res/bo.ogg");
   _music.Play();
@@ -170,7 +171,7 @@ void				Graphics::printCaseOnHud(Case *currentCase)
 void				Graphics::highlightCase(std::pair<int, int> pos)
 {
   sf::Sprite			current;
-  
+ 
   if (pos.first < 0 || pos.second < 0)
     return ;
   current.SetImage(_hightlightGrassImage);
@@ -196,22 +197,43 @@ Player*				Graphics::getPlayerHightlight(std::pair<int, int> pos,
   return NULL;
 }
 
+void				Graphics::printGameOver(std::string teamName)
+{
+  sf::Sprite			current;
+  sf::String			message;
+  
+  current.SetImage(_gameOverImage);
+  current.SetPosition(sf::Vector2f(250, 250));
+  app->Draw(current);
+  message.SetSize(30);
+  message.SetColor(sf::Color(0, 0, 0, 255));
+  message.SetFont(_font);
+  message.SetText(std::string(" La team \n" + teamName + "\na gagnee !"));
+  message.SetPosition(sf::Vector2f(500, 800));
+  app->Draw(message);
+}
+
 void				Graphics::printHud(Map *map)
 {
   sf::Sprite			scroll;
   Player			*currentPlayer = getPlayerHightlight(map->getHud(),
-									  map);
+								     map);
   Case				*currentCase = map->getCaseFromPos(map->getHud());
 
-  scroll.SetImage(_scrollImage);
-  scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
-  app->Draw(scroll);
-  if (currentPlayer != NULL)
-    printPlayerOnHud(currentPlayer);
-  if (currentCase != NULL)
-    printCaseOnHud(currentCase);
-  if (currentCase == NULL && currentPlayer == NULL)
-    nothingToHud();
+  if (map->getGameOver().first == true)
+    printGameOver(map->getGameOver().second);
+  else
+    {
+      scroll.SetImage(_scrollImage);
+      scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
+      app->Draw(scroll);
+      if (currentPlayer != NULL)
+	printPlayerOnHud(currentPlayer);
+      if (currentCase != NULL)
+	printCaseOnHud(currentCase);
+      if (currentCase == NULL && currentPlayer == NULL)
+	nothingToHud();
+    }
 }
 
 void				Graphics::printEggs(Map *map)
@@ -231,13 +253,19 @@ void				Graphics::printEggs(Map *map)
 
 void				Graphics::printPlayers(Map *map)
 {
-  sf::Sprite			*current;
+  Player			*current;
+  sf::Sprite			currentCase;
+  std::pair<int, int>		tmpPos;
 
   for (size_t i = 0; (current = map->getPlayerSprite(i)) != NULL; i++)
     {
-      app->Draw(*current);
-      delete current;
+      tmpPos = current->getPos();
+      currentCase.SetPosition(sf::Vector2f(50 * tmpPos.first, tmpPos.second * 50));
+      currentCase.SetImage(*(current->getSkin()));
+      currentCase.SetSubRect(current->getIntRectFromOrientation());
+      app->Draw(currentCase);
     }
+  
 }
 
 void				Graphics::printThisRessourceAtPos(t_ressource res,

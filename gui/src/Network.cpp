@@ -408,7 +408,6 @@ Event					Network::fillEBO(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "EBO" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -425,7 +424,6 @@ Event					Network::fillEDI(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "EDI" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -442,7 +440,6 @@ Event					Network::fillSGT(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "SGT" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -459,7 +456,6 @@ Event					Network::fillSEG(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "SEG" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;
@@ -474,7 +470,6 @@ Event					Network::fillSMG(std::string command)
   std::string				sub;
   Event					event;
 
-  std::cout << "SMG" << std::endl;
   if (cptWord(1, command) == 1)
     return event;
   iss >> sub;

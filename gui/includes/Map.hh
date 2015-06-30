@@ -20,6 +20,7 @@ private:
   std::vector<Case*>					_cases;
   std::pair<int, int>					_size;
   std::pair<int, int>					_hudLookAt;
+  std::pair<bool, std::string>				_gameOver;
 
 public:
   Map(std::pair<int, int>);
@@ -30,7 +31,7 @@ public:
   void							setHud(std::pair<int, int>);
   std::pair<int, int>					getHud();
   Egg*							getEgg(size_t i);
-  sf::Sprite*						getPlayerSprite(size_t i);
+  Player*						getPlayerSprite(size_t i);
   Case*							getCase(size_t i);
   Case*							getCaseFromPos(std::pair<int, int>);
   Player*						getPlayerFromId(int pid);
@@ -52,6 +53,8 @@ public:
   void							resizeMap(std::pair<int ,int>);
   void							updateCase(std::pair<int, int>,
 								   std::map<t_ressource, int>);
+  void							gameOver(std::string);
+  std::pair<bool, std::string>				getGameOver();
 };
 
 #endif
