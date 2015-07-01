@@ -18,7 +18,7 @@ Player::Player(int pid, std::pair<int, int> pos, t_orientation orientation,
   _inventaire[MENDIANE] = 0;
   _inventaire[PHIRAS] = 0;
   _inventaire[THYSTAME] = 0;
-  
+  _broadcasting = false;
 }
 
 Player::~Player()
@@ -77,4 +77,22 @@ void				Player::updateInventory(std::map<t_ressource, int> newInv)
 int				Player::askInventory(t_ressource res)
 {
   return (_inventaire[res]);
+}
+
+bool				Player::getBroadcast()
+{
+  return (_broadcasting);
+}
+
+void				Player::startBroadcast()
+{
+  _broadcasting = true;
+  _timer.Reset();
+}
+
+void				Player::update()
+{
+  if (_broadcasting == true)
+    if (_timer.GetElapsedTime() > 1.5)
+      _broadcasting = false;
 }
