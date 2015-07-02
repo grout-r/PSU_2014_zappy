@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:00:18 2015 Oscar
-** Last update Mon Jun 22 19:27:22 2015 Oscar
+** Last update Mon Jun 22 23:18:53 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -43,7 +43,7 @@ int		gfx_bct(t_game *data,
       return (1);
     }
   dump_case_for_gfx(data, res, x, y);
-  sprintf(end, "bct%s\n", res);
+  sprintf(end, "bct %d %d%s\n", x, y, res);
   write(client->fd, end, strlen(end));
   return (0);
 }
@@ -66,7 +66,7 @@ int		gfx_mct(t_game *data,
 	  bzero(end, 56);
 	  bzero(res, 56);
 	  dump_case_for_gfx(data, res, x, y);
-	  sprintf(end, "bct%s\n", res);
+	  sprintf(end, "bct %d %d%s\n", x, y, res);
 	  write(client->fd, end, strlen(end));
 	  ++x;
 	}
