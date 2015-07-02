@@ -215,7 +215,7 @@ class Trantorian:
     ## Msg functions
 
     def sendIncantMsg(self):
-        nPlayer = 0
+        nPlayer = 1
         self.__see()
         for item in self.__vision[0].split():
             if item == "joueur":
@@ -253,7 +253,7 @@ class Trantorian:
     def __checkEmptySquare(self):
         self.__see()
         for i in self.__vision[0].split():
-            if i != "joueur":
+            if i != "joueur" and i != "nourriture":
                 return False
         return True
 
