@@ -16,8 +16,8 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[PIN] = &Camera::execPIN;
   _bindExecFuncPtr[PEX] = &Camera::execNOTHING;
   _bindExecFuncPtr[PBC] = &Camera::execPBC;
-  _bindExecFuncPtr[PIC] = &Camera::execNOTHING;
-  _bindExecFuncPtr[PIE] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PIC] = &Camera::execPIC;
+  _bindExecFuncPtr[PIE] = &Camera::execPIE;
   _bindExecFuncPtr[PFK] = &Camera::execNOTHING;
   _bindExecFuncPtr[PDR] = &Camera::execNOTHING;
   _bindExecFuncPtr[PGT] = &Camera::execNOTHING;
@@ -82,6 +82,7 @@ void				Camera::loop()
 void				Camera::updateGame()
 {
   _map->updatePlayers();
+  _map->updateCases();
 }
 
 void				Camera::execNOTHING(Event)
@@ -126,6 +127,19 @@ void				Camera::execPBC(Event event)
   _map->startBroadcast(event.playerId, event.message);
 }
 
+void				Camera::execPIC(Event event)
+{
+  _map->startIncant(std::make_pair(event.posX, event.posY), event.level);
+}
+
+void				Camera::execPIE(Event event)
+{
+  if (event.incantResult == 0)
+    _map->resultIncant(std::make_pair(event.posX, event.posY), false);
+  else
+    _map->resultIncant(std::make_pair(event.posX, event.posY), true);
+
+}
 void				Camera::execEBO(Event event)
 {
   _map->deleteEgg(event.eggId);

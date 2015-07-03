@@ -40,6 +40,8 @@ public:
 
 public:
   void							updatePlayers();
+  void							updateCases();
+  t_incant						getCaseStatus(std::pair<int, int>);
   void							updateInventory
   (int pid, std::map<t_ressource, int>);
   void							startBroadcast
@@ -61,6 +63,10 @@ public:
 								   std::map<t_ressource, int>);
   void							gameOver(std::string);
   std::pair<bool, std::string>				getGameOver();
+  void							startIncant(std::pair<int, int> pos, 
+								    int level);
+  void							resultIncant(std::pair<int, int> pos,
+								     bool isFail);
 };
 
 #endif

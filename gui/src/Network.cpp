@@ -1,4 +1,3 @@
-
 #include "Network.hh"
 
 Network::Network(std::string ip, std::string port)

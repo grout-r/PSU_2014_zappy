@@ -16,6 +16,10 @@ Graphics::Graphics(std::pair<int, int>)
   _starImage.LoadFromFile("./res/star.png");
   _bullImage.LoadFromFile("./res/bull.png");
 
+  _grassIncant.LoadFromFile("./res/grass_incant.jpg");
+  _grassIncantFailed.LoadFromFile("./res/grass_incant_fail.jpg");
+  _grassIncantPassed.LoadFromFile("./res/grass_incant_passed.jpg");
+  
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
   _ressourcesImage[DERAUMERE].LoadFromFile("./res/deraumere.png");
@@ -62,12 +66,21 @@ void				Graphics::printBackground()
 void				Graphics::cleanMap(Map *map)
 {
   sf::Sprite			tmp;
+  t_incant			status;
   std::pair<int, int>		mapSize = map->getSize();
   
   for (int x = 0; x != mapSize.first; x++)
     for (int y = 0; y != mapSize.second; y++)
       { 
-	tmp.SetImage(_grassImage);
+	status = map->getCaseStatus(std::make_pair(x, y));
+	if (status == NO)
+	  tmp.SetImage(_grassImage);
+	if (status == PROCESS)
+	  tmp.SetImage(_grassIncant);
+	if (status == FAILED)
+	  tmp.SetImage(_grassIncantFailed);
+	if (status == PASSED)
+	  tmp.SetImage(_grassIncantPassed);
 	tmp.SetPosition(sf::Vector2f(50 * x, 50 * y));
 	app->Draw(tmp);
       }

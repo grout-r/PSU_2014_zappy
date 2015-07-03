@@ -15,7 +15,7 @@ std::pair<int, int>	        Map::getHud()
   return (_hudLookAt);
 }
 
-Player*			Map::getPlayerSprite(size_t i)
+Player*				Map::getPlayerSprite(size_t i)
 {
   if (players.size() - 1 < i || players.size() == 0)
     return (NULL);  
@@ -92,6 +92,8 @@ void				Map::movePlayer(int pid, std::pair<int ,int> pos,
 {
   Player			*tmpPlayer = this->getPlayerFromId(pid);
 
+  if (pos.first > _size.first - 1 || pos.second > _size.second - 1)
+    return ;
   if (tmpPlayer == NULL)
     return ;
   tmpPlayer->setPos(pos);
@@ -103,6 +105,14 @@ void				Map::updatePlayers()
   for (size_t i = 0; i != players.size(); i++)
     {
       players[i]->update();
+    }
+}
+
+void				Map::updateCases()
+{
+  for (size_t i = 0; i != _cases.size(); i++)
+    {
+      _cases[i]->update();
     }
 }
 
@@ -142,12 +152,16 @@ void				Map::addPlayer(int pid, std::pair<int, int> pos,
 						    std::string teamName)
 {
   Player			*bob = new Player(pid, pos, orientation, level, teamName);
-  
+ 
+  if (pos.first > _size.first - 1 || pos.second > _size.second - 1)
+    return ;
   this->players.push_back(bob);  
 }
 
 void				Map::addEgg(int eggId, int pid, std::pair<int, int> pos)
 {
+  if (pos.first > _size.first - 1 || pos.second > _size.second - 1)
+    return ;
   _eggs.push_back(new Egg(eggId, pid, pos));
 }
 
@@ -195,3 +209,44 @@ void				Map::gameOver(std::string winTeam)
 {
   _gameOver = std::make_pair(true, winTeam);
 }
+
+t_incant		        Map::getCaseStatus(std::pair<int, int> pos)
+{
+  for (size_t i = 0; i != _cases.size(); i++)
+    {
+      if (_cases[i]->getPos() == pos)
+	{
+	  return _cases[i]->getStatus();
+	}
+    }
+  return (NO);
+}
+
+void				Map::startIncant(std::pair<int, int> pos, int)
+{
+  for (size_t i = 0; i != _cases.size(); i++)
+    {
+      if (_cases[i]->getPos() == pos)
+	{
+	  _cases[i]->startIncant();
+	  return ;
+	}
+    }
+  _cases.push_back(new Case(pos));
+  _cases.back()->startIncant();
+}
+
+void			        Map::resultIncant(std::pair<int, int> pos, bool isFail)
+{
+  for (size_t i = 0; i != _cases.size(); i++)
+    {
+      if (_cases[i]->getPos() == pos)
+	{
+	  _cases[i]->resultIncant(isFail);
+	  return ;
+	}
+    }
+  _cases.push_back(new Case(pos));
+  _cases.back()->resultIncant(isFail);
+}
+

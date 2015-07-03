@@ -47,6 +47,8 @@ private:
   void				execPLV(Event);
   void				execPIN(Event);
   void				execPBC(Event);
+  void				execPIC(Event);
+  void				execPIE(Event);
   void				execENW(Event);
   void				execSEG(Event);
   void				execEBO(Event);

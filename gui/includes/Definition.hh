@@ -38,6 +38,13 @@ typedef enum e_eventName
   CHFOCUS
 }	     t_eventName;
 
+typedef  enum				e_incant
+  {
+    NO = 0,
+    PROCESS = 1,
+    FAILED = 2,
+    PASSED = 3
+  }					t_incant;
 
 typedef	 enum				e_ressource
   {

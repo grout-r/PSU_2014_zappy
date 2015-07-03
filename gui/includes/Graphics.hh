@@ -23,6 +23,9 @@ class							Graphics
 {
 private:
   sf::Image						_grassImage;
+  sf::Image						_grassIncant;
+  sf::Image						_grassIncantFailed;
+  sf::Image						_grassIncantPassed;  
   sf::Image						_backgroundImage;
   sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
