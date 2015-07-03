@@ -12,6 +12,9 @@ Graphics::Graphics(std::pair<int, int>)
   _hightlightGrassImage.LoadFromFile("./res/grass_highlight.jpg");
   _scrollImage.LoadFromFile("./res/scroll.png");
   _backgroundImage.LoadFromFile("./res/bckgrnd.jpg");
+  _gameOverImage.LoadFromFile("./res/gameover.jpg");
+  _starImage.LoadFromFile("./res/star.png");
+  _bullImage.LoadFromFile("./res/bull.png");
 
   _ressourcesImage[FOOD].LoadFromFile("./res/food.png");
   _ressourcesImage[LINEMATE].LoadFromFile("./res/linemate.png"); 
@@ -20,7 +23,7 @@ Graphics::Graphics(std::pair<int, int>)
   _ressourcesImage[MENDIANE].LoadFromFile("./res/mendiane.png");
   _ressourcesImage[PHIRAS].LoadFromFile("./res/phiras.png");
   _ressourcesImage[THYSTAME].LoadFromFile("./res/thystame.png");
-  
+ 
   _font.LoadFromFile("./res/font.ttf");
   _music.OpenFromFile("./res/bo.ogg");
   _music.Play();
@@ -170,7 +173,7 @@ void				Graphics::printCaseOnHud(Case *currentCase)
 void				Graphics::highlightCase(std::pair<int, int> pos)
 {
   sf::Sprite			current;
-  
+ 
   if (pos.first < 0 || pos.second < 0)
     return ;
   current.SetImage(_hightlightGrassImage);
@@ -196,22 +199,43 @@ Player*				Graphics::getPlayerHightlight(std::pair<int, int> pos,
   return NULL;
 }
 
+void				Graphics::printGameOver(std::string teamName)
+{
+  sf::Sprite			current;
+  sf::String			message;
+  
+  current.SetImage(_gameOverImage);
+  current.SetPosition(sf::Vector2f(250, 250));
+  app->Draw(current);
+  message.SetSize(30);
+  message.SetColor(sf::Color(0, 0, 0, 255));
+  message.SetFont(_font);
+  message.SetText(std::string(" La team \n" + teamName + "\na gagnee !"));
+  message.SetPosition(sf::Vector2f(500, 800));
+  app->Draw(message);
+}
+
 void				Graphics::printHud(Map *map)
 {
   sf::Sprite			scroll;
   Player			*currentPlayer = getPlayerHightlight(map->getHud(),
-									  map);
+								     map);
   Case				*currentCase = map->getCaseFromPos(map->getHud());
 
-  scroll.SetImage(_scrollImage);
-  scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
-  app->Draw(scroll);
-  if (currentPlayer != NULL)
-    printPlayerOnHud(currentPlayer);
-  if (currentCase != NULL)
-    printCaseOnHud(currentCase);
-  if (currentCase == NULL && currentPlayer == NULL)
-    nothingToHud();
+  if (map->getGameOver().first == true)
+    printGameOver(map->getGameOver().second);
+  else
+    {
+      scroll.SetImage(_scrollImage);
+      scroll.SetPosition(sf::Vector2f(1300, 0) + _offsetCoeff);
+      app->Draw(scroll);
+      if (currentPlayer != NULL)
+	printPlayerOnHud(currentPlayer);
+      if (currentCase != NULL)
+	printCaseOnHud(currentCase);
+      if (currentCase == NULL && currentPlayer == NULL)
+	nothingToHud();
+    }
 }
 
 void				Graphics::printEggs(Map *map)
@@ -231,13 +255,45 @@ void				Graphics::printEggs(Map *map)
 
 void				Graphics::printPlayers(Map *map)
 {
-  sf::Sprite			*current;
+  Player			*current;
+  sf::Sprite			currentSprite;
+  std::pair<int, int>		tmpPos;
+  int				level;
+  int				x;
 
   for (size_t i = 0; (current = map->getPlayerSprite(i)) != NULL; i++)
     {
-      app->Draw(*current);
-      delete current;
+      currentSprite = sf::Sprite();
+      tmpPos = current->getPos();
+      currentSprite.SetPosition(sf::Vector2f(50 * tmpPos.first, tmpPos.second * 50));
+      currentSprite.SetImage(*(current->getSkin()));
+      currentSprite.SetSubRect(current->getIntRectFromOrientation());
+      app->Draw(currentSprite);
+      currentSprite = sf::Sprite();
+      level = current->getLevel();
+      currentSprite.SetImage(_starImage);
+      x = 0;
+      for (int i = 0; i != level; i++)
+	{
+	  currentSprite.SetScale(sf::Vector2f(0.1, 0.1));
+	  currentSprite.SetPosition(sf::Vector2f((50 * tmpPos.first) + x, 
+						 (tmpPos.second) * 50 - 15));
+	  app->Draw(currentSprite);
+	  x += 15;
+	}
+      if (current->getBroadcast() == true)
+	printBull(tmpPos);
     }
+}
+
+void				Graphics::printBull(std::pair<int, int> pos)
+{
+  sf::Sprite			current;
+  
+  current.SetImage(_bullImage);
+  current.SetScale(sf::Vector2f(0.05, 0.05));
+  current.SetPosition(sf::Vector2f((pos.first * 50) - 15, (pos.second * 50) - 15));
+  app->Draw(current);
 }
 
 void				Graphics::printThisRessourceAtPos(t_ressource res,

@@ -5,11 +5,12 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 16:43:31 2015 Oscar Morizet
-** Last update Sun Jun 21 14:21:10 2015 Oscar
+** Last update Mon Jun 22 19:23:10 2015 Oscar
 */
 
 #include	<string.h>
 #include	<strings.h>
+#include	<unistd.h>
 #include	"server.h"
 
 int		err_ko(int fd)

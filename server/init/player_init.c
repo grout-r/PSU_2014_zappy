@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 17:08:21 2015 Oscar Morizet
-** Last update Mon Jun 22 08:28:46 2015 Oscar
+** Last update Mon Jun 22 14:44:33 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -32,6 +32,7 @@ int		init_player(t_game *game_data, t_player *player)
   (void) game_data;
   player->level = 1;
   player->inventory = NULL;
+  player->cycles_to_die = BASE_FOOD * FOOD_CONSUMING_CYCLE;
   if (init_inventory(player) == -1)
     return (-1);
   if (init_player_exec_line(player) == -1)

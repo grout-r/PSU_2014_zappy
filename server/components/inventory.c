@@ -1,11 +1,11 @@
 /*
-1;2802;0c** inventory.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** inventory.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 25 15:19:38 2015 Oscar Morizet
-** Last update Fri Jun 19 16:46:32 2015 Oscar
+** Last update Tue Jun 23 08:39:53 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -38,6 +38,9 @@ int		add_item_class_to_inventory(t_player *player, char *item_name)
 
 int		init_inventory(t_player *player)
 {
+  int		i;
+
+  i = 0;
   if (!add_item_class_to_inventory(player, "nourriture") ||
       !add_item_class_to_inventory(player, "linemate") ||
       !add_item_class_to_inventory(player, "deraumere") ||
@@ -46,6 +49,11 @@ int		init_inventory(t_player *player)
       !add_item_class_to_inventory(player, "phiras") ||
       !add_item_class_to_inventory(player, "thystame"))
     return (-1);
+  while (i != BASE_FOOD)
+    {
+      change_item_qt(player, "nourriture", '+');
+      i++;
+    }
   return (0);
 }
 
@@ -96,7 +104,8 @@ char		*list_inventory(t_player *player)
   return (dump);
 }
 
-int		check_object_presence_in_inventory(t_player *player_data, char *name)
+int		check_object_presence_in_inventory(t_player *player_data,
+						   char *name)
 {
   t_item	*tmp;
 

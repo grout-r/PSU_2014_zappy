@@ -1,15 +1,11 @@
 /*
-** init.c for zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** init.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/init
 ** 
-** Made by Oscar Morizet
+** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
-** Started on  Tue Apr 28 18:53:50 2015 Oscar Morizet
-<<<<<<< HEAD
-** Last update Mon Jun 22 10:46:49 2015 Oscar
-=======
-** Last update Sat Jun 13 00:21:16 2015 Oscar
->>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
+** Started on  Tue Jun 23 08:55:48 2015 Oscar
+** Last update Tue Jun 23 08:55:49 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -36,7 +32,6 @@ int		init(t_game *game_data, t_server_info *server_info)
     return (-1);
   if (init_timer(game_data, server_info) == -1)
     return (-1);
-  dump_map(game_data);
   return (1);
 }
 

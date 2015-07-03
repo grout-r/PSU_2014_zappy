@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:22:08 2015 Oscar Morizet
-** Last update Mon May 11 17:01:05 2015 Oscar Morizet
+** Last update Mon Jun 22 19:21:01 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -13,6 +13,9 @@
 
 int		action_fork(t_game *data, t_player *player_data, char *arg)
 {
+  (void) data;
+  (void) player_data;
+  (void) arg;
   printf("action fork\n");
   return (0);
 }

@@ -1,17 +1,30 @@
 /*
-1;2802;0c** exec_line.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
+** exec_line.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/components
 ** 
 ** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Thu Jun  4 22:48:37 2015 Oscar
-** Last update Mon Jun 22 07:59:29 2015 Oscar
+** Last update Tue Jun 23 08:40:32 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	<string.h>
 #include	"server.h"
 #include	"execute_line.h"
+
+int		manage_player_cycles_to_death(t_game *game, t_player *player)
+{
+  if ((player->cycles_to_die % 126) == 0)
+    change_item_qt(player, "nourriture", '-');
+  --player->cycles_to_die;
+  if (player->cycles_to_die == 0)
+    {
+      if (player_dies(game, player) == -1)
+	return (-1);
+    }
+  return (0);
+}
 
 int		instant_exec(t_game *game, t_player *player,
 			     t_command command, char *argument)
@@ -52,6 +65,8 @@ int		player_process_cycle(t_game *game, t_player *player)
   int		ret;
   t_exec_line	*task;
 
+  if (manage_player_cycles_to_death(game, player) == -1)
+    return (-1);
   task = player->exec_queue;
   if (task == NULL)
     return (0);
@@ -63,7 +78,6 @@ int		player_process_cycle(t_game *game, t_player *player)
   if ((ret = task->action(game, player,
 			  player->exec_queue->parameter)) == -1)
     return (-1);
-  print_map(game);
   player->exec_queue = player->exec_queue->next;
   free(task);
   return (0);

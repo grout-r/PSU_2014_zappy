@@ -26,6 +26,9 @@ private:
   sf::Image						_backgroundImage;
   sf::Image						_hightlightGrassImage;
   sf::Image						_scrollImage;
+  sf::Image						_bullImage;
+  sf::Image						_gameOverImage;
+  sf::Image						_starImage;
   std::map<t_ressource, sf::Image>			_ressourcesImage;
   sf::Font						_font;
   sf::Music						_music;
@@ -45,7 +48,7 @@ private:
   void							printRessources(Map *map);
   void							printEggs(Map *map);
   void							printPlayers(Map *map);
-  
+  void							printBull(std::pair<int, int> pos);
   void							printThisRessourceAtPos
   (t_ressource, std::pair<int, int>);
   
@@ -64,6 +67,8 @@ public:
   void							printHud(Map *map);
   void							printPlayerOnHud(Player *player);
   void							printCaseOnHud(Case *currentCase);
+  void							printGameOver(std::string);
+
 public:
   void							moveView(t_eventName key);
 };

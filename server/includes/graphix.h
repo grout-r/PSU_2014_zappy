@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:36:27 2015 Oscar
-** Last update Mon Jun 22 10:34:40 2015 Oscar
+** Last update Tue Jun 23 08:50:43 2015 Oscar
 */
 
 #ifndef			GRAPHIX_H_
@@ -17,6 +17,7 @@ typedef enum		e_gfx_command
 {
   MSZ = 0,
   BCT,
+  MCT,
   TNA,
   PPO,
   PLV,
@@ -25,7 +26,7 @@ typedef enum		e_gfx_command
   SST,
   SUC
 }			t_gfx_command;
-  
+
 typedef struct		s_graphix
 {
   int			fd;

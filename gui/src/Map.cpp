@@ -1,6 +1,7 @@
 # include "Map.hh"
 
-Map::Map(std::pair<int, int> size) : _size(size), _hudLookAt(-1, -1)
+Map::Map(std::pair<int, int> size) : _size(size), _hudLookAt(-1, -1), 
+				     _gameOver(std::make_pair(false, ""))
 {
 }
 
@@ -14,20 +15,22 @@ std::pair<int, int>	        Map::getHud()
   return (_hudLookAt);
 }
 
-sf::Sprite*			Map::getPlayerSprite(size_t i)
+Player*			Map::getPlayerSprite(size_t i)
 {
-  Player			*tmpPlayer;
-  std::pair<int, int>		tmpPos;
-  sf::Sprite*			currentCase = new sf::Sprite();
-
   if (players.size() - 1 < i || players.size() == 0)
-    return (NULL);
-  tmpPlayer = players[i];
-  tmpPos = tmpPlayer->getPos();
-  currentCase->SetPosition(sf::Vector2f(50 * tmpPos.first, tmpPos.second * 50));
-  currentCase->SetImage(*(tmpPlayer->getSkin()));
-  currentCase->SetSubRect(tmpPlayer->getIntRectFromOrientation());
-  return (currentCase);
+    return (NULL);  
+  return (players[i]);
+}
+
+void				Map::deleteEgg(int egg)
+{
+  for (std::vector<Egg*>::iterator i = _eggs.begin(); i != _eggs.end();)
+    {
+      if ((*i)->getId() == egg)
+	i = _eggs.erase(i);
+      else
+	i++;
+    }
 }
 
 Egg*				Map::getEgg(size_t i)
@@ -74,6 +77,16 @@ Player*				Map::getPlayerFromPos(std::pair<int, int> pos)
   return (NULL);
 }
 
+void				Map::startBroadcast(int pid, std::string)
+{
+  for (std::vector<Player*>::iterator i = players.begin(); i != players.end(); i++)
+    {
+      if ((*i)->getPid() == pid)
+	(*i)->startBroadcast();
+    }
+  
+}
+
 void				Map::movePlayer(int pid, std::pair<int ,int> pos, 
 						     t_orientation orientation)
 {
@@ -83,6 +96,14 @@ void				Map::movePlayer(int pid, std::pair<int ,int> pos,
     return ;
   tmpPlayer->setPos(pos);
   tmpPlayer->setOrientation(orientation);
+}
+
+void				Map::updatePlayers()
+{
+  for (size_t i = 0; i != players.size(); i++)
+    {
+      players[i]->update();
+    }
 }
 
 void				Map::updateInventory(int pid, 
@@ -102,6 +123,18 @@ void				Map::pexPlayer(int pid, int level)
   if (tmpPlayer == NULL)
     return ;
   tmpPlayer->setLevel(level);
+}
+
+
+void				Map::deletePlayer(int pid)
+{
+  for (std::vector<Player*>::iterator i = players.begin(); i != players.end();)
+    {
+      if ((*i)->getPid() == pid)
+	i = players.erase(i);
+      else
+	i++;
+    }
 }
 
 void				Map::addPlayer(int pid, std::pair<int, int> pos,
@@ -151,4 +184,14 @@ void			        Map::updateCase(std::pair<int, int> pos,
     }
   _cases.push_back(new Case(pos));
   _cases.back()->setRessources(res);
+}
+
+std::pair<bool, std::string>	Map::getGameOver()
+{
+  return (_gameOver);
+}
+
+void				Map::gameOver(std::string winTeam)
+{
+  _gameOver = std::make_pair(true, winTeam);
 }

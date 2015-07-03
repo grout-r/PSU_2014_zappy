@@ -46,10 +46,15 @@ private:
   void				execPPO(Event);  
   void				execPLV(Event);
   void				execPIN(Event);
+  void				execPBC(Event);
   void				execENW(Event);
+  void				execSEG(Event);
+  void				execEBO(Event);
+  void				execPDI(Event);
+  void				execEHT(Event);
   void				execNOTHING(Event);
   void				execCHFOCUS(Event);
-  
+ 
 private:
   void				execKEYMOVE(Event);
 

@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue May 26 14:53:56 2015 Oscar Morizet
-** Last update Sun Jun 21 07:21:14 2015 Oscar
+** Last update Tue Jun 23 08:39:44 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -48,8 +48,7 @@ void		map_spawn_items(t_game *game)
 	      j = (rand() % 4) + 1;
 	      while (i != j)
 		{
-		  add_map_case_element(&(game->map[y][x]),
-				       get_random_item());
+		  add_map_case_element(&(game->map[y][x]), get_random_item());
 		  ++i;
 		}
 	    }

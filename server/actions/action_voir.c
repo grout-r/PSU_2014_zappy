@@ -1,15 +1,16 @@
 /*
-1;2802;0c** action_voir.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
+** action_voir.c for Zappy in /home/oscar/rendu/PSU_2014_zappy/server/actions
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:15 2015 Oscar Morizet
-** Last update Sun Jun 21 07:29:27 2015 Oscar
+** Last update Tue Jun 23 08:58:47 2015 Oscar
 */
 
 #include		<stdlib.h>
 #include		<string.h>
+#include		<unistd.h>
 #include		"server.h"
 
 char			*dump_line(int index, t_game *data,
@@ -45,12 +46,10 @@ char			*dump_line(int index, t_game *data,
 char			*read_perpendicular(t_coords *coords, int index,
 					    t_player *player_data, t_game *data)
 {
-  int			i;
   t_coords		coords_tmp;
   t_orientation		orientation;
   char			*dump;
 
-  i = 0;
   coords_tmp = *coords;
   orientation = player_data->orientation;
   get_perpendicular_begin(&coords_tmp, index, orientation);
@@ -60,8 +59,7 @@ char			*read_perpendicular(t_coords *coords, int index,
   return (dump);
 }
 
-char			*trace_route(t_game *data, t_map_case ***map,
-				     t_player *player_data)
+char			*trace_route(t_game *data, t_player *player_data)
 {
   int			i;
   char			*vision;
@@ -79,9 +77,8 @@ char			*trace_route(t_game *data, t_map_case ***map,
       if ((dumped_line = read_perpendicular(&coords, i,
 					    player_data, data)) == NULL)
 	return (NULL);
-      vision = realloc(vision, sizeof(char) * (strlen(vision)
-					       + strlen(dumped_line) + 2));
-      if (!vision)
+      if ((vision = realloc(vision, sizeof(char) *
+			    (strlen(vision) + strlen(dumped_line) + 2))) == NULL)
 	return (NULL);
       strcat(vision, dumped_line);
       ++i;
@@ -96,7 +93,8 @@ int			action_voir(t_game *data, t_player *player_data, char *arg)
   char			*vision;
   char			*final;
 
-  if ((vision = trace_route(data, data->map, player_data)) == NULL)
+  (void) arg;
+  if ((vision = trace_route(data, player_data)) == NULL)
     return (-1);
   if ((final = malloc(sizeof(char) * (strlen(vision) + 4))) == NULL)
     return (-1);

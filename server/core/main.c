@@ -1,15 +1,11 @@
 /*
-** main.c for zappy in /home/oscar/rendu/PSU_2014_zappy/server
+** main.c for Zappy in /home/oscar/Projets/PSU_2014_zappy/server/core
 ** 
-** Made by Oscar Morizet
+** Made by Oscar
 ** Login   <oscar@epitech.net>
 ** 
-** Started on  Tue Apr 28 18:48:21 2015 Oscar Morizet
-<<<<<<< HEAD
-** Last update Sun Jun 21 14:05:38 2015 Oscar
-=======
-** Last update Sat Jun  6 11:21:07 2015 Oscar
->>>>>>> 3141335fa5c789223ce696fe9cbab98a99a514f8
+** Started on  Tue Jun 23 08:41:57 2015 Oscar
+** Last update Tue Jun 23 08:41:58 2015 Oscar
 */
 
 #include		<stdio.h>

@@ -5,28 +5,54 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:04:03 2015 Oscar
-** Last update Mon Jun 22 08:04:33 2015 Oscar
+** Last update Tue Jun 23 08:32:03 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<strings.h>
+#include	<string.h>
+#include	<unistd.h>
 #include	"server.h"
+
+int		gfx_pdi(t_game *data, t_graphix *client, int fd)
+{
+  char		end[56];
+
+  (void) data;
+  bzero(end, 56);
+  sprintf(end, "pdi %d\n", fd);
+  write(client->fd, end, strlen(end));
+  return (0);
+}
 
 int		gfx_enw(t_game *data, t_graphix *client, char *arg)
 {
+  (void) data;
+  (void) client;
+  (void) arg;
+  return (0);
 }
 
 int		gfx_eht(t_game *data, t_graphix *client, char *arg)
 {
+  (void) data;
+  (void) client;
+  (void) arg;
+  return (0);
 }
 
 int		gfx_ebo(t_game *data, t_graphix *client, char *arg)
 {
+  (void) data;
+  (void) client;
+  (void) arg;
+  return (0);
 }
 
 int		gfx_edi(t_game *data, t_graphix *client, char *arg)
 {
-}
-
-int		gfx_sgt(t_game *data, t_graphix *client, char *arg)
-{
+  (void) data;
+  (void) client;
+  (void) arg;
+  return (0);
 }

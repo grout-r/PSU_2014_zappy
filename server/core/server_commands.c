@@ -1,11 +1,11 @@
 /*
-1;2802;0c1;2802;0c** server_commands.c for server_commands.c in /home/oscar/rendu/PSU_2014_zappy/server
+** server_commands.c for server_commands.c in /home/oscar/rendu/PSU_2014_zappy/server
 ** 
 ** Made by Oscar Morizet
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:00:41 2015 Oscar Morizet
-** Last update Mon Jun 22 07:42:07 2015 Oscar
+** Last update Tue Jun 23 08:41:33 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -62,7 +62,6 @@ void		init_command_duration(t_game *game_data)
   game_data->command_duration[FORK] = 42;
   game_data->command_duration[CONNECT_NBR] = 0;
 }
-
 
 t_command	get_command(t_game *game_data, char *cmd)
 {

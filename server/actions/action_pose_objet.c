@@ -5,13 +5,30 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:23:08 2015 Oscar Morizet
-** Last update Fri Jun 19 18:20:29 2015 Oscar
+** Last update Tue Jun 23 08:35:35 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	"server.h"
 
-int		action_pose_objet(t_game *data, t_player *player_data, char *arg)
+int		get_less_food_mult(t_game *game, t_player *player)
+{
+  if (player->cycles_to_die <= FOOD_CONSUMING_CYCLE)
+    {
+      if (player_dies(game, player) == -1)
+	return (-1);
+    }
+  else
+    {
+      while ((player->cycles_to_die % 126) != 0)
+	--player->cycles_to_die;
+    }
+  return (0);
+}
+
+int		action_pose_objet(t_game *data,
+				  t_player *player_data, char *arg)
 {
   t_object     	object;
 
@@ -23,8 +40,14 @@ int		action_pose_objet(t_game *data, t_player *player_data, char *arg)
     }
   if (check_object_presence_in_inventory(player_data, arg))
     {
-      add_map_case_element(&(data->map[player_data->y][player_data->x]), object);
+      add_map_case_element(&(data->map[player_data->y]
+			     [player_data->x]), object);
       change_item_qt(player_data, arg, '-');
+      if (object == NOURRITURE)
+	{
+	  if (get_less_food_mult(data, player_data) == -1)
+	    return (-1);
+	}
       write(player_data->fd, "ok\n", 3);
       return (0);
     }

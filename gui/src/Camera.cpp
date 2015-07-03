@@ -15,18 +15,18 @@ Camera::Camera(int ac, char **av)
   _bindExecFuncPtr[ENW] = &Camera::execENW;
   _bindExecFuncPtr[PIN] = &Camera::execPIN;
   _bindExecFuncPtr[PEX] = &Camera::execNOTHING;
-  _bindExecFuncPtr[PBC] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PBC] = &Camera::execPBC;
   _bindExecFuncPtr[PIC] = &Camera::execNOTHING;
   _bindExecFuncPtr[PIE] = &Camera::execNOTHING;
   _bindExecFuncPtr[PFK] = &Camera::execNOTHING;
   _bindExecFuncPtr[PDR] = &Camera::execNOTHING;
   _bindExecFuncPtr[PGT] = &Camera::execNOTHING;
-  _bindExecFuncPtr[PDI] = &Camera::execNOTHING;
-  _bindExecFuncPtr[EHT] = &Camera::execNOTHING;
-  _bindExecFuncPtr[EBO] = &Camera::execNOTHING;
+  _bindExecFuncPtr[PDI] = &Camera::execPDI;
+  _bindExecFuncPtr[EHT] = &Camera::execEHT;
+  _bindExecFuncPtr[EBO] = &Camera::execEBO;
   _bindExecFuncPtr[EDI] = &Camera::execNOTHING;
   _bindExecFuncPtr[SGT] = &Camera::execNOTHING;
-  _bindExecFuncPtr[SEG] = &Camera::execNOTHING;
+  _bindExecFuncPtr[SEG] = &Camera::execSEG;
   _bindExecFuncPtr[SMG] = &Camera::execNOTHING;
 
   _bindExecFuncPtr[KEYLEFT] = &Camera::execKEYMOVE;  
@@ -81,7 +81,7 @@ void				Camera::loop()
 
 void				Camera::updateGame()
 {
-  
+  _map->updatePlayers();
 }
 
 void				Camera::execNOTHING(Event)
@@ -121,9 +121,34 @@ void				Camera::execPIN(Event event)
   _map->updateInventory(event.playerId, event.ressources);
 }
 
+void				Camera::execPBC(Event event)
+{
+  _map->startBroadcast(event.playerId, event.message);
+}
+
+void				Camera::execEBO(Event event)
+{
+  _map->deleteEgg(event.eggId);
+}
+
+void				Camera::execEHT(Event event)
+{
+  _map->deleteEgg(event.eggId);
+}
+
+void				Camera::execPDI(Event event)
+{
+  _map->deletePlayer(event.playerId);
+}
+
 void				Camera::execENW(Event event)
 {
   _map->addEgg(event.eggId, event.playerId, std::make_pair(event.posX, event.posY));
+}
+
+void				Camera::execSEG(Event event)
+{
+  _map->gameOver(event.teamName);
 }
 
 void				Camera::execKEYMOVE(Event event)
