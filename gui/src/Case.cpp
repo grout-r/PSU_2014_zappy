@@ -42,7 +42,7 @@ void						Case::startIncant()
 
 void						Case::update()
 {
-  if (_status == PROCESS || _status == PASSED || _status == FAILED)
+  if (_status == PASSED || _status == FAILED)
     if (_timer.GetElapsedTime() > 2)
       _status = NO;
 }
