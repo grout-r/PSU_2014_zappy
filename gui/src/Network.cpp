@@ -17,6 +17,7 @@ Network::Network(std::string ip, std::string port)
   _commandMapping["pin"] = &Network::fillPIN;
   _commandMapping["pex"] = &Network::fillPEX;
   _commandMapping["pbc"] = &Network::fillPBC;
+  _commandMapping["pic"] = &Network::fillPIC;
   _commandMapping["pie"] = &Network::fillPIE;
   _commandMapping["pfk"] = &Network::fillPFK;
   _commandMapping["pdr"] = &Network::fillPDR;
@@ -138,10 +139,8 @@ Event					Network::fillMSZ(std::string command)
     return event;
   iss >> sub;
   iss >> event.posX;
-  if (event.posX <= 0)
-    return event;
   iss >> event.posY;
-  if (event.posY <= 0)
+  if (event.posX <= 0 || event.posY <= 0 || event.posX > 250 || event.posY > 250)
     return event;
   event.eventName = MSZ;
   return event;
@@ -280,6 +279,22 @@ Event					Network::fillPBC(std::string command)
   if (event.message.size() == 0)
     return event;
   event.eventName = PBC;
+  return event;
+}
+
+Event					Network::fillPIC(std::string command)
+{
+  std::istringstream			iss(command);
+  std::string				sub;
+  Event					event;
+
+  iss >> sub;
+  iss >> event.posX;
+  iss >> event.posY;
+  iss >> event.level;
+  if (event.posX < 0 || event.posY < 0 || event.level < 0)
+    return event;
+  event.eventName = PIC;
   return event;
 }
 
@@ -487,7 +502,7 @@ Event					Network::fillSUC(std::string)
 {
   Event					event;
 
-  event.eventName = NOSUCH; /* NOSUCH a verifier */
+  event.eventName = NOSUCH;
   return event;
 }
 
@@ -495,6 +510,6 @@ Event					Network::fillSBP(std::string)
 {
   Event					event;
 
-  event.eventName = NOSUCH; /* changer de valeur. SBP = mauvais parametre pour la commande */
+  event.eventName = NOSUCH;
   return event;
 }
