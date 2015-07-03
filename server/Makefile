@@ -18,7 +18,7 @@ CFLAGS		=	-W -Wall -Wextra -Werror
 
 NAME 		= 	server
 
-LNAME		=	../server_zappy
+LNAME		=	../zappy_server
 
 SERVER_ACTIONS	=	actions
 
@@ -94,7 +94,7 @@ OBJ 		= 	$(SRC:.c=.o)
 all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
-			$(CC) $(OBJ) -o $(NAME)
+			$(CC) $(OBJ) -lm -o $(NAME)
 			ln -sf $$PWD/$(NAME) $(LNAME)
 
 %.o:			%.c
