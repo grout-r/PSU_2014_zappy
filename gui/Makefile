@@ -8,7 +8,7 @@
 ## Last update Wed Jul  1 17:32:56 2015 grout_r
 ##
 
-CC		= 	g++ -g3
+CC		= 	g++
 
 INCLUDES	=	-I includes/
 
@@ -20,7 +20,7 @@ SFML_LDFLAGS    =       -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
 NAME 		= 	zappy_gui
 
-LNAME		=	../gui_zappy
+ROOTNAME	=	../zappy_gui
 
 SRC		=	src/main.cpp \
 			src/Graphics.cpp \
@@ -39,7 +39,7 @@ all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
 			$(CC)  $(OBJ) -o $(NAME) $(SFML_LDFLAGS)
-			ln -s $$PWD/$(NAME) $(LNAME)
+			cp $$PWD/$(NAME) $(ROOTNAME)
 
 %.o:			%.cpp
 			$(CC) $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
@@ -48,7 +48,7 @@ clean:
 
 fclean:			clean
 			$(RM) $(NAME)
-			$(RM) $(LNAME)
+			$(RM) $(ROOTNAME)
 
 re:			fclean all
 

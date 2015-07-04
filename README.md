@@ -21,7 +21,7 @@ Car avant on ne reconnaissait pas un client graphique, même si la partie joueur
 De nombreux patchs apportés, au niveaux d'erreurs Valgrind entre autre, et de la compilation avec les flags.
 Correctifs apportés pour la commande 'voir'
 
-Au niveau des cmmandes réalisées : Casiment toutes, sauf Broadcast.
+Au niveau des cmmandes réalisées : Casiment toutes, sauf Broadcast et Incantation et Fork.
 Reste à faire : Ponte des oeufs.
 
 Questions : 
@@ -42,6 +42,4 @@ Implémentation de tout les objects, possibilité de cliquer sur une case de la 
 Possibilité de déplacer la caméra.
 Reçois les commandes de base (cf RFC) destinées à un client graphique
 
-Ah oui et l'histoire du # devant les commandes, j'ai pas trop compris.
 
-Désolé de pas être la, Solidays m'attend. Bisous baveux <3

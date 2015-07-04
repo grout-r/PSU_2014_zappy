@@ -18,7 +18,7 @@ CFLAGS		=	-W -Wall -Wextra -Werror
 
 NAME 		= 	server
 
-LNAME		=	../zappy_server
+ROOTNAME	=	../zappy_server
 
 SERVER_ACTIONS	=	actions
 
@@ -97,7 +97,7 @@ all: 	     		$(NAME)
 
 $(NAME):		$(OBJ)
 			$(CC) $(OBJ) -lm -o $(NAME)
-			ln -sf $$PWD/$(NAME) $(LNAME)
+			cp $$PWD/$(NAME) $(ROOTNAME)
 
 %.o:			%.c
 			$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
@@ -106,7 +106,7 @@ clean:
 
 fclean:			clean
 			$(RM) $(NAME)
-			$(RM) $(LNAME)
+			$(RM) $(ROOTNAME)
 
 re:			fclean all
 

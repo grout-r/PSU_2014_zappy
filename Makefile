@@ -12,18 +12,11 @@ SERVER	=	server/
 
 GUI	=	gui/
 
-CLIENT	=	client/
-
-NAME_C	=	zappy_ai
-
 NAME_G	=	zappy_gui
 
 NAME_S	=	zappy_server
 
-all:		$(NAME_C) $(NAME_S) $(NAME_G)
-
-$(NAME_C):
-	cd $(CLIENT) && $(MAKE)
+all:		$(NAME_S) $(NAME_G)
 
 $(NAME_G):
 	cd $(GUI) && $(MAKE)
@@ -32,12 +25,10 @@ $(NAME_S):
 	cd $(SERVER) && $(MAKE)
 
 clean:
-	cd $(CLIENT) && $(MAKE) $@
 	cd $(SERVER) && $(MAKE) $@
 	cd $(GUI) && $(MAKE) $@
 
 fclean: clean
-	cd $(CLIENT) && $(MAKE) $@
 	cd $(SERVER) && $(MAKE) $@
 	cd $(GUI) && $(MAKE) $@
 
