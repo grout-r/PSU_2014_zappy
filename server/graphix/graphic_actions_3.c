@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:03:01 2015 Oscar
-** Last update Tue Jun 23 15:08:13 2015 Oscar
+** Last update Sun Jul  5 15:17:02 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -25,18 +25,26 @@ int		gfx_pfk(t_game *data, t_graphix *client, int fd)
   return (0);
 }
 
-int		gfx_pdr(t_game *data, t_graphix *client, char *arg)
+int		gfx_pdr(t_game *data, t_graphix *client,
+			int fd, int res)
 {
+  char		end[56];
+
   (void) data;
-  (void) client;
-  (void) arg;
+  bzero(end, 56);
+  sprintf(end, "pdr %d %d\n", fd, res);
+  write(client->fd, end, strlen(end));
   return (0);
 }
 
-int		gfx_pgt(t_game *data, t_graphix *client, char *arg)
+int		gfx_pgt(t_game *data, t_graphix *client,
+			int fd, int res)
 {
+  char		end[56];
+
   (void) data;
-  (void) client;
-  (void) arg;
+  bzero(end, 56);
+  sprintf(end, "pgt %d %d\n", fd, res);
+  write(client->fd, end, strlen(end));
   return (0);
 }

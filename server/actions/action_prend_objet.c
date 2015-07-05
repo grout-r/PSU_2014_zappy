@@ -5,12 +5,24 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:49 2015 Oscar Morizet
-** Last update Tue Jun 23 08:35:47 2015 Oscar
+** Last update Sun Jul  5 15:24:22 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
 #include	"server.h"
+
+void		pgt_to_all(t_game *data, t_player *player, t_object obj)
+{
+  t_graphix    	*tmp;
+
+  tmp = data->cameras;
+  while (tmp != NULL)
+    {
+      gfx_pgt(data, tmp, player->fd, ((int) obj) - 1);
+      tmp = tmp->next;
+    }
+}
 
 int		action_prend_objet(t_game *data, t_player *player_data, char *arg)
 {
@@ -31,6 +43,7 @@ int		action_prend_objet(t_game *data, t_player *player_data, char *arg)
       change_item_qt(player_data, arg, '+');
       if (object == NOURRITURE)
 	player_data->cycles_to_die += FOOD_CONSUMING_CYCLE;
+      pgt_to_all(data, player_data, object);
       write(player_data->fd, "ok\n", 3);
       return (0);
     }

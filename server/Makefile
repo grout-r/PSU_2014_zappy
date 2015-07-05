@@ -5,7 +5,7 @@
 ## Login   <oscar@epitech.net>
 ## 
 ## Started on  Tue Jun 16 22:28:04 2015 Oscar Morizet
-## Last update Tue Jun 23 12:26:32 2015 Oscar
+## Last update Sun Jul  5 15:29:35 2015 Oscar
 ##
 
 CC		= 	gcc -g3
@@ -29,8 +29,6 @@ COMPONENTS	=	components
 INIT		=	init
 
 TOOLS		=	tools
-
-TEST		=	test
 
 CORE		=	core
 
@@ -88,8 +86,7 @@ SRC		=	$(CORE)/main.c \
 			$(GRAPHIX)/graphic_actions_3.c \
 			$(GRAPHIX)/graphic_actions_4.c \
 			$(GRAPHIX)/graphic_actions_5.c \
-			$(GRAPHIX)/graphic_actions_tools.c \
-			$(TEST)/dump_tools.c \
+			$(GRAPHIX)/graphic_actions_tools.c
 
 OBJ 		= 	$(SRC:.c=.o)
 

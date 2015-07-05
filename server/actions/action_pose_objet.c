@@ -5,12 +5,24 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:23:08 2015 Oscar Morizet
-** Last update Tue Jun 23 08:35:35 2015 Oscar
+** Last update Sun Jul  5 15:28:11 2015 Oscar
 */
 
 #include	<stdlib.h>
 #include	<unistd.h>
 #include	"server.h"
+
+void		pdr_to_all(t_game *data, t_player *player, t_object obj)
+{
+  t_graphix    	*tmp;
+
+  tmp = data->cameras;
+  while (tmp != NULL)
+    {
+      gfx_pdr(data, tmp, player->fd, ((int) obj) - 1);
+      tmp = tmp->next;
+    }
+}
 
 int		get_less_food_mult(t_game *game, t_player *player)
 {
@@ -48,6 +60,7 @@ int		action_pose_objet(t_game *data,
 	  if (get_less_food_mult(data, player_data) == -1)
 	    return (-1);
 	}
+      pdr_to_all(data, player_data, object);
       write(player_data->fd, "ok\n", 3);
       return (0);
     }
