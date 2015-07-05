@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 23 11:30:05 2015 Oscar
-** Last update Tue Jun 23 15:27:50 2015 Oscar
+** Last update Sun Jul  5 16:08:15 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -89,7 +89,8 @@ void		use_egg(t_game *game, int team_id)
   t_egg		*tofree;
   t_egg		*tmp;
 
-  tmp = game->eggs;
+  if ((tmp = game->eggs) == NULL)
+    return ;
   if (game->eggs->team_id == team_id)
     {
       ebo_to_all(game, game->eggs->id);

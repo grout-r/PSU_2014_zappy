@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:21:49 2015 Oscar Morizet
-** Last update Sun Jul  5 15:24:22 2015 Oscar
+** Last update Sun Jul  5 16:16:52 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -22,6 +22,8 @@ void		pgt_to_all(t_game *data, t_player *player, t_object obj)
       gfx_pgt(data, tmp, player->fd, ((int) obj) - 1);
       tmp = tmp->next;
     }
+  pin_to_all(data, player);
+  bct_to_all(data, player);
 }
 
 int		action_prend_objet(t_game *data, t_player *player_data, char *arg)

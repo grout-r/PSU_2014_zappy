@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Sun Jun 21 12:32:53 2015 Oscar
-** Last update Sun Jul  5 15:32:50 2015 Oscar
+** Last update Sun Jul  5 16:11:05 2015 Oscar
 */
 
 #include	<string.h>
@@ -53,12 +53,12 @@ int		introduce_as_player(t_game *data, char *arg, int fd)
   if ((team_id = get_team_id(data, arg)) == 0)
     {
       err_ko(fd);
-      close(fd);
+      return (close(fd));
     }
   if ((free_slots = team_get_free_slots(data, team_id)) == 0)
     {
       err_ko(fd);
-      close(fd);
+      return (close(fd));
     }
   if ((player = add_client_to_players(data, fd)) == NULL)
     return (-1);

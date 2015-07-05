@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Tue Jun 16 22:37:12 2015 Oscar
-** Last update Sun Jul  5 15:17:23 2015 Oscar
+** Last update Sun Jul  5 16:05:47 2015 Oscar
 */
 
 #ifndef			SERVER_H_
@@ -302,7 +302,10 @@ void			dump_case_for_gfx(t_game *game_data, char *str, int x, int y);
 void			init_gfx_command_names(t_game *game);
 void			init_gfx_command_action(t_game *game);
 void			make_round(t_coords *coords, int xmax, int ymax);
+void			dump_inventory(t_player *player, char *str);
+void			bct_to_all(t_game *data, t_player *player);
 void			trace_move(t_coords *coords, t_orientation orientation);
+void			pin_to_all(t_game *data, t_player *player);
 void			move_perpendicular(t_coords *coords,
 					   t_orientation orientation);
 void			ppo_to_all(t_game *data, t_player *player);

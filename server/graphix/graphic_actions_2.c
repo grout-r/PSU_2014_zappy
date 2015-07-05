@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun 22 08:02:13 2015 Oscar
-** Last update Sun Jul  5 15:29:14 2015 Oscar
+** Last update Sun Jul  5 15:47:59 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -68,10 +68,30 @@ int		gfx_plv(t_game *data, t_graphix *client, char *arg)
 
 int		gfx_pin(t_game *data, t_graphix *client, char *arg)
 {
-  (void) data;
-  (void) client;
-  (void) arg;
-  return (0);
+  char		end[56];
+  char		dump[56];
+  int		player_fd;
+  t_player	*player;
+
+  if (!check_if_num(arg) || *arg == 0)
+    return (gfx_sbp(data, client, arg));
+  player_fd = atoi(arg);
+  player = data->players;
+  while (player != NULL)
+    {
+      if (player->fd == player_fd)
+	{
+	  bzero(end, 56);
+	  bzero(dump, 56);
+	  dump_inventory(player, dump);
+	  sprintf(end, "pin %d %d %d%s\n",
+		  player_fd, player->x, player->y, dump);
+	  write(client->fd, end, strlen(end));
+	  return (0);
+	}
+      player = player->next;
+    }
+  return (gfx_sbp(data, client, arg));
 }
 
 int		gfx_pbc(t_game *data, t_graphix *client,

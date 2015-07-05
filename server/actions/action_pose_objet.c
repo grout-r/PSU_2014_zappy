@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:23:08 2015 Oscar Morizet
-** Last update Sun Jul  5 15:28:11 2015 Oscar
+** Last update Sun Jul  5 16:20:21 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -22,6 +22,8 @@ void		pdr_to_all(t_game *data, t_player *player, t_object obj)
       gfx_pdr(data, tmp, player->fd, ((int) obj) - 1);
       tmp = tmp->next;
     }
+  pin_to_all(data, player);
+  bct_to_all(data, player);
 }
 
 int		get_less_food_mult(t_game *game, t_player *player)

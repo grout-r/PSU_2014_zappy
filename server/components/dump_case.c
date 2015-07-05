@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon Jun  1 13:26:03 2015 Oscar Morizet
-** Last update Tue Jun 23 08:38:28 2015 Oscar
+** Last update Sun Jul  5 15:52:37 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -72,5 +72,20 @@ void		dump_case_for_gfx(t_game *game_data, char *str, int x, int y)
       sprintf(char_item_count, " %d", item_count);
       strcat(str, char_item_count);
       ++item;
+    }
+}
+
+void		dump_inventory(t_player *player, char *str)
+{
+  char		dump[5];
+  t_item	*tmp;
+
+  tmp = player->inventory;
+  bzero(dump, 5);
+  while (tmp != NULL)
+    {
+      sprintf(dump, " %d", tmp->qt);
+      strcat(str, dump);
+      tmp = tmp->next;
     }
 }
