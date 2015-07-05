@@ -5,16 +5,18 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May 11 16:20:58 2015 Oscar Morizet
-** Last update Tue Jun 23 15:04:21 2015 Oscar
+** Last update Sun Jul  5 15:11:30 2015 Oscar
 */
 
 #include	<stdlib.h>
+#include	<unistd.h>
 #include	"server.h"
 
-int		action_expulse(t_game *data, t_player *player_data, char *arg)
+int		action_expulse(t_game *data,
+			       t_player *player_data, char *arg)
 {
-  (void) data;
-  (void) player_data;
   (void) arg;
+  (void) data;
+  write(player_data->fd, "ko\n", 3);
   return (0);
 }
