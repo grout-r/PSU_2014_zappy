@@ -5,7 +5,7 @@
 ** Login   <oscar@epitech.net>
 ** 
 ** Started on  Mon May  4 23:42:32 2015 Oscar Morizet
-** Last update Tue Jun 23 08:42:40 2015 Oscar
+** Last update Sun Jul  5 15:31:08 2015 Oscar
 */
 
 #include	<stdlib.h>
@@ -19,6 +19,7 @@ int		execute_player_request(t_game *game_data,
 
   if ((cm = get_command(game_data, buffer)) == INVALID)
     {
+      err_ko(player_data->fd);
       return (1);
     }
   extra = get_command_argument(buffer);
